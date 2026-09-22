@@ -45,13 +45,16 @@
         "Haese"
       ],
       "next": [
-        "2.16 Modulus functions & equations",
-        "3.1-3.2 3D geometry, sine & cosine rules",
-        "3.4-3.5 Radians, arcs, unit circle",
-        "3.6-3.8 Identities, trig functions & equations",
-        "3.9-3.11 Reciprocal trig, compound & double angle",
-        "1.12-1.14 Complex numbers: polar form, De Moivre",
-        "5.1-5.4 Limits, derivatives, tangents"
+        "Trig 3.1–3.3: sine & cosine rules, 3D geometry, bearings",
+        "Trig 3.4–3.5: radians, arcs & sectors, unit circle, exact values",
+        "Trig 3.6–3.8: identities, trig functions & graphs, trig equations",
+        "Trig 3.9–3.11 (HL): reciprocal & inverse trig, compound & double angle",
+        "Functions 2.1–2.11: domain/range, composite & inverse, transformations",
+        "Functions 2.12–2.16 (HL): polynomials, rational, modulus, inequalities",
+        "Statistics 4.1–4.9: data, probability, binomial & normal",
+        "Calculus 5.1–5.11: limits, differentiation, integration intro",
+        "Binomial expansion 1.9–1.10",
+        "Proofs 1.6 & 1.15: induction, contradiction, counterexample"
       ],
       "topics": [
         {
@@ -60,7 +63,7 @@
         },
         {
           "name": "Sequences & series",
-          "status": "new"
+          "status": "taught"
         },
         {
           "name": "The binomial theorem",
@@ -131,7 +134,7 @@
           "status": "new"
         },
         {
-          "name": "Limits, continuity & l\u2019H\u00f4pital",
+          "name": "Limits, continuity & l’Hôpital",
           "status": "new"
         },
         {
@@ -158,6 +161,17 @@
           "name": "Differential equations",
           "status": "new"
         }
+      ],
+      "courseOrder": [
+        "Diagnostic",
+        "Seq. & Series",
+        "Exp. & Logs",
+        "Trigonometry",
+        "Functions",
+        "Stats",
+        "Calc AB",
+        "Bin. Exp.",
+        "Proofs"
       ]
     },
     "phys": {
@@ -344,7 +358,7 @@
           "status": "new"
         },
         {
-          "name": "R1.2 Energy cycles (Hess\u2019s law)",
+          "name": "R1.2 Energy cycles (Hess’s law)",
           "status": "new"
         },
         {
@@ -515,7 +529,7 @@
           "status": "new"
         },
         {
-          "name": "Paper 2: works \u2014 themes & evidence bank",
+          "name": "Paper 2: works — themes & evidence bank",
           "status": "new"
         },
         {
@@ -534,7 +548,7 @@
     },
     "port": {
       "name": "Portuguese A Lit SL",
-      "short": "Portugu\u00eas",
+      "short": "Português",
       "color": "#dc2626",
       "kind": "language",
       "grade": 5,
@@ -543,15 +557,15 @@
         "Criteria card"
       ],
       "next": [
-        "Ler a obra 15-20 p\u00e1ginas; 3 cita\u00e7\u00f5es no banco, com quest\u00e3o global"
+        "Ler a obra 15-20 páginas; 3 citações no banco, com questão global"
       ],
       "topics": [
         {
-          "name": "Paper 1: an\u00e1lise orientada de prosa",
+          "name": "Paper 1: análise orientada de prosa",
           "status": "new"
         },
         {
-          "name": "Paper 1: an\u00e1lise orientada de poesia",
+          "name": "Paper 1: análise orientada de poesia",
           "status": "new"
         },
         {
@@ -563,19 +577,19 @@
           "status": "new"
         },
         {
-          "name": "Paper 2: obras \u2014 temas e evid\u00eancias",
+          "name": "Paper 2: obras — temas e evidências",
           "status": "new"
         },
         {
-          "name": "Oral Individual: quest\u00e3o global e trechos",
+          "name": "Oral Individual: questão global e trechos",
           "status": "new"
         },
         {
-          "name": "Oral Individual: pr\u00e1tica de apresenta\u00e7\u00e3o",
+          "name": "Oral Individual: prática de apresentação",
           "status": "new"
         },
         {
-          "name": "Recursos liter\u00e1rios e crit\u00e9rios de avalia\u00e7\u00e3o",
+          "name": "Recursos literários e critérios de avaliação",
           "status": "new"
         }
       ]
@@ -681,18 +695,18 @@
         "subject": "pre",
         "title": "Pre-learn tomorrow",
         "steps": [
-          "Math 2.16 modulus \u00b7 Nikolaidis \u00b7 15 min",
-          "Econ 2.6 PES \u00b7 Kognity \u00b7 15 min",
-          "English \u00b7 15 pages \u00b7 3 quotes to bank"
+          "Math · Trig 3.1–3.2 sine & cosine rules · Nikolaidis · 15 min",
+          "Econ 2.6 PES · Kognity · 15 min",
+          "English · 15 pages · 3 quotes to bank"
         ]
       },
       {
         "slot": "EVE",
         "subject": "phys",
-        "title": "Physics ramp \u22122",
+        "title": "Physics ramp −2",
         "steps": [
           "Redo every logged A.2 error, cold",
-          "Still wrong \u2192 3-line rule card",
+          "Still wrong → 3-line rule card",
           "Send the nightly report"
         ]
       }
@@ -704,7 +718,7 @@
         "title": "Portuguese lab",
         "steps": [
           "Bring the essay",
-          "Ask for a mark per criterion A\u2013D",
+          "Ask for a mark per criterion A–D",
           "Ask which paragraph to fix first"
         ]
       },
@@ -713,15 +727,15 @@
         "subject": "pre",
         "title": "Pre-learn tomorrow",
         "steps": [
-          "Chem \u00b7 next Kognity section \u00b7 15 min",
-          "Physics \u00b7 A.2 momentum \u00b7 Kognity \u00b7 15 min",
-          "Portugu\u00eas \u00b7 reler trecho da obra \u00b7 15 min"
+          "Chem · next Kognity section · 15 min",
+          "Physics · A.2 momentum · Kognity · 15 min",
+          "Português · reler trecho da obra · 15 min"
         ]
       },
       {
         "slot": "S2",
         "subject": "phys",
-        "title": "Physics ramp \u22121",
+        "title": "Physics ramp −1",
         "steps": [
           "Rule cards, read once",
           "One brain dump per A.2 subtopic",
@@ -745,7 +759,7 @@
         "steps": [
           "Redraft only the paragraphs named, 30 min",
           "Read the criteria card once",
-          "Nightly report \u00b7 lights out 22:45"
+          "Nightly report · lights out 22:45"
         ]
       }
     ],
@@ -755,9 +769,9 @@
         "subject": "pre",
         "title": "Pre-learn Monday",
         "steps": [
-          "Math 3.1\u20133.2 sine & cosine rules \u00b7 15 min",
-          "Econ 2.6 PES finish \u00b7 Kognity \u00b7 15 min",
-          "English \u00b7 15 pages \u00b7 3 quotes"
+          "Math · Trig 3.4–3.5 radians & unit circle · 15 min",
+          "Econ 2.6 PES finish · Kognity · 15 min",
+          "English · 15 pages · 3 quotes"
         ]
       },
       {
@@ -773,7 +787,7 @@
       {
         "slot": "S3",
         "subject": "econ",
-        "title": "Kognity Econ 2.5 \u00b7 part 1",
+        "title": "Kognity Econ 2.5 · part 1",
         "steps": [
           "Read all PED sections",
           "Do every section question",
@@ -804,7 +818,7 @@
       {
         "slot": "SAT2",
         "subject": "econ",
-        "title": "Kognity Econ 2.5 \u00b7 part 2",
+        "title": "Kognity Econ 2.5 · part 2",
         "steps": [
           "YED sections + all questions",
           "Done = every 2.5 section ticked"
@@ -818,7 +832,7 @@
         "title": "SAT",
         "steps": [
           "Review mistakes from the last practice test, 30 min",
-          "One timed Reading & Writing module \u00b7 Bluebook"
+          "One timed Reading & Writing module · Bluebook"
         ]
       },
       {
@@ -826,8 +840,8 @@
         "subject": "math",
         "title": "Mini-diagnostics",
         "steps": [
-          "Math: 12 mixed questions, 25 min timed \u00b7 RV",
-          "Econ: units 1\u20132.5, 25 min timed",
+          "Math: 12 mixed questions, 25 min timed · RV",
+          "Econ: units 1–2.5, 25 min timed",
           "Mark with schemes, score per topic"
         ]
       },
@@ -846,7 +860,7 @@
         "subject": "all",
         "title": "Sunday review",
         "steps": [
-          "Capture list \u2192 Claude",
+          "Capture list → Claude",
           "Week rates, next 5 days, ramps",
           "Weekend + one change"
         ]
