@@ -1,0 +1,13 @@
+{
+  "name": "ib45",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Eduardo's IB 45 planner: state -> dashboard + device wallpapers",
+  "scripts": {
+    "build": "node src/build.js",
+    "test": "node --test src/test.js"
+  },
+  "devDependencies": {
+    "playwright": "^1.49.0"
+  }
+}
