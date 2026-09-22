@@ -1,0 +1,759 @@
+{
+  "version": 1,
+  "tz": "America/Sao_Paulo",
+  "student": {
+    "name": "Eduardo",
+    "goal": "IB 45",
+    "phase": {
+      "name": "Ignition",
+      "start": "2026-09-22",
+      "weeks": 3
+    }
+  },
+  "rotation": {
+    "anchorDate": "2026-09-22",
+    "anchorType": 1,
+    "holidays": [],
+    "classes": {
+      "1": [
+        "eng",
+        "econ",
+        "math"
+      ],
+      "2": [
+        "chem",
+        "port",
+        "phys"
+      ]
+    }
+  },
+  "sleep": {
+    "hardStop": "21:15",
+    "lightsOut": "22:45",
+    "wake": "07:00"
+  },
+  "subjects": {
+    "math": {
+      "name": "Math AA HL",
+      "short": "Math",
+      "color": "#1d4ed8",
+      "kind": "practice",
+      "grade": 5,
+      "resources": [
+        "Nikolaidis notes",
+        "Revision Village",
+        "Haese"
+      ],
+      "next": [
+        "2.16 Modulus functions & equations",
+        "3.1-3.2 3D geometry, sine & cosine rules",
+        "3.4-3.5 Radians, arcs, unit circle",
+        "3.6-3.8 Identities, trig functions & equations",
+        "3.9-3.11 Reciprocal trig, compound & double angle",
+        "1.12-1.14 Complex numbers: polar form, De Moivre",
+        "5.1-5.4 Limits, derivatives, tangents"
+      ],
+      "topics": [
+        {
+          "name": "Exponents & logarithms",
+          "status": "taught"
+        },
+        {
+          "name": "Sequences & series",
+          "status": "new"
+        },
+        {
+          "name": "The binomial theorem",
+          "status": "new"
+        },
+        {
+          "name": "Counting principles & permutations",
+          "status": "new"
+        },
+        {
+          "name": "Proof: induction & contradiction",
+          "status": "new"
+        },
+        {
+          "name": "Complex numbers",
+          "status": "new"
+        },
+        {
+          "name": "Polynomials, factor & remainder theorems",
+          "status": "new"
+        },
+        {
+          "name": "Functions: composition & inverses",
+          "status": "new"
+        },
+        {
+          "name": "Transformations of graphs",
+          "status": "new"
+        },
+        {
+          "name": "Quadratics & inequalities",
+          "status": "new"
+        },
+        {
+          "name": "Rational functions",
+          "status": "new"
+        },
+        {
+          "name": "Trigonometric identities & equations",
+          "status": "new"
+        },
+        {
+          "name": "Trigonometric functions & modelling",
+          "status": "new"
+        },
+        {
+          "name": "Vectors & the scalar/vector product",
+          "status": "new"
+        },
+        {
+          "name": "Vector lines & planes",
+          "status": "new"
+        },
+        {
+          "name": "Descriptive & bivariate statistics",
+          "status": "new"
+        },
+        {
+          "name": "Probability & conditional probability",
+          "status": "new"
+        },
+        {
+          "name": "Binomial distribution",
+          "status": "new"
+        },
+        {
+          "name": "The normal distribution",
+          "status": "new"
+        },
+        {
+          "name": "Limits, continuity & l’Hôpital",
+          "status": "new"
+        },
+        {
+          "name": "Differentiation rules & implicit differentiation",
+          "status": "new"
+        },
+        {
+          "name": "Optimisation & related rates",
+          "status": "new"
+        },
+        {
+          "name": "Maclaurin series",
+          "status": "new"
+        },
+        {
+          "name": "Integration techniques",
+          "status": "new"
+        },
+        {
+          "name": "Areas, volumes & kinematics (calculus)",
+          "status": "new"
+        },
+        {
+          "name": "Differential equations",
+          "status": "new"
+        }
+      ]
+    },
+    "phys": {
+      "name": "Physics HL",
+      "short": "Physics",
+      "color": "#7c3aed",
+      "kind": "practice",
+      "grade": 4,
+      "resources": [
+        "Kognity",
+        "Revision Village",
+        "Grade Gorilla"
+      ],
+      "next": [
+        "A.2 Momentum & impulse",
+        "A.2 Circular motion",
+        "A.3 Work, energy & power",
+        "A.4 Rigid body mechanics",
+        "B.1 Thermal energy transfers",
+        "B.2 Greenhouse effect",
+        "B.3 Gas laws"
+      ],
+      "topics": [
+        {
+          "name": "A.1 Kinematics",
+          "status": "taught"
+        },
+        {
+          "name": "A.2 Forces & momentum",
+          "status": "learning"
+        },
+        {
+          "name": "A.3 Work, energy & power",
+          "status": "new"
+        },
+        {
+          "name": "A.4 Rigid body mechanics",
+          "status": "new"
+        },
+        {
+          "name": "A.5 Galilean & special relativity",
+          "status": "new"
+        },
+        {
+          "name": "B.1 Thermal energy transfers",
+          "status": "new"
+        },
+        {
+          "name": "B.2 Greenhouse effect",
+          "status": "new"
+        },
+        {
+          "name": "B.3 Gas laws",
+          "status": "new"
+        },
+        {
+          "name": "B.4 Thermodynamics",
+          "status": "new"
+        },
+        {
+          "name": "B.5 Current & circuits",
+          "status": "new"
+        },
+        {
+          "name": "C.1 Simple harmonic motion",
+          "status": "new"
+        },
+        {
+          "name": "C.2 Wave model",
+          "status": "new"
+        },
+        {
+          "name": "C.3 Wave phenomena",
+          "status": "new"
+        },
+        {
+          "name": "C.4 Standing waves & resonance",
+          "status": "new"
+        },
+        {
+          "name": "C.5 Doppler effect",
+          "status": "new"
+        },
+        {
+          "name": "D.1 Gravitational fields",
+          "status": "new"
+        },
+        {
+          "name": "D.2 Electric & magnetic fields",
+          "status": "new"
+        },
+        {
+          "name": "D.3 Motion in electromagnetic fields",
+          "status": "new"
+        },
+        {
+          "name": "D.4 Induction",
+          "status": "new"
+        },
+        {
+          "name": "E.1 Structure of the atom",
+          "status": "new"
+        },
+        {
+          "name": "E.2 Quantum physics",
+          "status": "new"
+        },
+        {
+          "name": "E.3 Radioactive decay",
+          "status": "new"
+        },
+        {
+          "name": "E.4 Fission",
+          "status": "new"
+        },
+        {
+          "name": "E.5 Fusion & stars",
+          "status": "new"
+        }
+      ]
+    },
+    "chem": {
+      "name": "Chemistry SL",
+      "short": "Chem",
+      "color": "#059669",
+      "kind": "practice",
+      "grade": 6,
+      "resources": [
+        "Kognity",
+        "Revision Village",
+        "ibchem.com"
+      ],
+      "next": [
+        "Confirm current unit with teacher (Wed lab)",
+        "S1.4 Counting particles: the mole",
+        "S1.5 Ideal gases",
+        "R2.1 Amount of chemical change",
+        "S3.1 Periodicity",
+        "S2.1 Ionic model"
+      ],
+      "topics": [
+        {
+          "name": "S1.1 Particulate nature of matter",
+          "status": "new"
+        },
+        {
+          "name": "S1.2 The nuclear atom",
+          "status": "new"
+        },
+        {
+          "name": "S1.3 Electron configurations",
+          "status": "new"
+        },
+        {
+          "name": "S1.4 Counting particles: the mole",
+          "status": "new"
+        },
+        {
+          "name": "S1.5 Ideal gases",
+          "status": "new"
+        },
+        {
+          "name": "S2.1 The ionic model",
+          "status": "new"
+        },
+        {
+          "name": "S2.2 The covalent model",
+          "status": "new"
+        },
+        {
+          "name": "S2.3 The metallic model",
+          "status": "new"
+        },
+        {
+          "name": "S3.1 The periodic table & periodicity",
+          "status": "new"
+        },
+        {
+          "name": "S3.2 Functional groups & nomenclature",
+          "status": "new"
+        },
+        {
+          "name": "R1.1 Enthalpy changes",
+          "status": "new"
+        },
+        {
+          "name": "R1.2 Energy cycles (Hess’s law)",
+          "status": "new"
+        },
+        {
+          "name": "R1.3 Energy from fuels",
+          "status": "new"
+        },
+        {
+          "name": "R2.1 Amount of chemical change",
+          "status": "new"
+        },
+        {
+          "name": "R2.2 Rate of reaction",
+          "status": "new"
+        },
+        {
+          "name": "R2.3 Chemical equilibrium",
+          "status": "new"
+        },
+        {
+          "name": "R3.1 Acids & bases (proton transfer)",
+          "status": "new"
+        },
+        {
+          "name": "R3.2 Redox (electron transfer)",
+          "status": "new"
+        }
+      ]
+    },
+    "econ": {
+      "name": "Economics HL",
+      "short": "Econ",
+      "color": "#d97706",
+      "kind": "hybrid",
+      "grade": 7,
+      "resources": [
+        "Kognity",
+        "EconplusDal",
+        "Revision Village"
+      ],
+      "next": [
+        "2.5 Elasticities: PED & YED (Kognity, all sections)",
+        "2.6 PES & primary commodities",
+        "2.7 Government intervention: taxes, subsidies, price controls",
+        "2.7 HL calculations: revenue, expenditure, welfare loss",
+        "2.8 Externalities",
+        "2.9 Public goods",
+        "2.10 Asymmetric information (HL)"
+      ],
+      "topics": [
+        {
+          "name": "Scarcity, choice & the economic problem",
+          "status": "taught"
+        },
+        {
+          "name": "Economic models: PPC & circular flow",
+          "status": "taught"
+        },
+        {
+          "name": "Demand & its determinants",
+          "status": "taught"
+        },
+        {
+          "name": "Supply & its determinants",
+          "status": "taught"
+        },
+        {
+          "name": "Market equilibrium & allocative efficiency",
+          "status": "taught"
+        },
+        {
+          "name": "Elasticities: PED & YED",
+          "status": "learning"
+        },
+        {
+          "name": "Elasticity of supply (PES)",
+          "status": "new"
+        },
+        {
+          "name": "Government intervention: taxes, subsidies & price controls",
+          "status": "new"
+        },
+        {
+          "name": "Market failure: externalities",
+          "status": "new"
+        },
+        {
+          "name": "Market failure: public goods & common pool resources",
+          "status": "new"
+        },
+        {
+          "name": "Market power: monopoly & oligopoly (HL)",
+          "status": "new"
+        },
+        {
+          "name": "Behavioural economics & rational choice (HL)",
+          "status": "new"
+        },
+        {
+          "name": "Measuring economic activity: GDP & GNI",
+          "status": "new"
+        },
+        {
+          "name": "Aggregate demand & aggregate supply",
+          "status": "new"
+        },
+        {
+          "name": "Macroeconomic objectives: growth, unemployment & inflation",
+          "status": "new"
+        },
+        {
+          "name": "Inequality & poverty",
+          "status": "new"
+        },
+        {
+          "name": "Demand-side policies: fiscal & monetary",
+          "status": "new"
+        },
+        {
+          "name": "Supply-side policies",
+          "status": "new"
+        },
+        {
+          "name": "International trade & comparative advantage",
+          "status": "new"
+        },
+        {
+          "name": "Trade protection: tariffs, quotas & subsidies",
+          "status": "new"
+        },
+        {
+          "name": "Exchange rates & the balance of payments",
+          "status": "new"
+        },
+        {
+          "name": "Economic development: measures & strategies",
+          "status": "new"
+        }
+      ]
+    },
+    "eng": {
+      "name": "English A Lit SL",
+      "short": "English",
+      "color": "#db2777",
+      "kind": "language",
+      "grade": 6,
+      "resources": [
+        "Set works",
+        "Criteria card"
+      ],
+      "next": [
+        "Read set work 15-20 pages; 3 quotes into bank, tagged with a global issue"
+      ],
+      "topics": [
+        {
+          "name": "Paper 1: guided analysis of unseen prose",
+          "status": "new"
+        },
+        {
+          "name": "Paper 1: guided analysis of unseen poetry",
+          "status": "new"
+        },
+        {
+          "name": "Paper 1: thesis & structure under time",
+          "status": "new"
+        },
+        {
+          "name": "Paper 2: comparative essay planning",
+          "status": "new"
+        },
+        {
+          "name": "Paper 2: works — themes & evidence bank",
+          "status": "new"
+        },
+        {
+          "name": "Individual Oral: global issue & extract choice",
+          "status": "new"
+        },
+        {
+          "name": "Individual Oral: 10-minute delivery practice",
+          "status": "new"
+        },
+        {
+          "name": "Literary devices & assessment criteria",
+          "status": "new"
+        }
+      ]
+    },
+    "port": {
+      "name": "Portuguese A Lit SL",
+      "short": "Português",
+      "color": "#dc2626",
+      "kind": "language",
+      "grade": 5,
+      "resources": [
+        "Obras",
+        "Criteria card"
+      ],
+      "next": [
+        "Ler a obra 15-20 páginas; 3 citações no banco, com questão global"
+      ],
+      "topics": [
+        {
+          "name": "Paper 1: análise orientada de prosa",
+          "status": "new"
+        },
+        {
+          "name": "Paper 1: análise orientada de poesia",
+          "status": "new"
+        },
+        {
+          "name": "Paper 1: tese e estrutura sob tempo",
+          "status": "new"
+        },
+        {
+          "name": "Paper 2: planejamento de ensaio comparativo",
+          "status": "new"
+        },
+        {
+          "name": "Paper 2: obras — temas e evidências",
+          "status": "new"
+        },
+        {
+          "name": "Oral Individual: questão global e trechos",
+          "status": "new"
+        },
+        {
+          "name": "Oral Individual: prática de apresentação",
+          "status": "new"
+        },
+        {
+          "name": "Recursos literários e critérios de avaliação",
+          "status": "new"
+        }
+      ]
+    },
+    "sat": {
+      "name": "SAT",
+      "short": "SAT",
+      "color": "#0891b2",
+      "kind": "practice",
+      "grade": null,
+      "resources": [
+        "Bluebook",
+        "SAT Mastery"
+      ],
+      "next": [
+        "Review mistakes from the last practice test, then one timed module"
+      ],
+      "topics": []
+    }
+  },
+  "assessments": [
+    {
+      "id": "port-test-0925",
+      "subject": "port",
+      "type": "test",
+      "title": "Portuguese test",
+      "date": "2026-09-25",
+      "ramp": "language"
+    },
+    {
+      "id": "phys-test-0925",
+      "subject": "phys",
+      "type": "test",
+      "title": "Physics test (A.2 forces)",
+      "date": "2026-09-25",
+      "ramp": "science"
+    },
+    {
+      "id": "chem-report-1004",
+      "subject": "chem",
+      "type": "report",
+      "title": "Chem lab report due",
+      "date": "2026-10-04",
+      "ramp": "report"
+    },
+    {
+      "id": "math-test-0922",
+      "subject": "math",
+      "type": "test",
+      "title": "Math test (exp & logs)",
+      "date": "2026-09-22",
+      "ramp": "science",
+      "result": null,
+      "redo": true
+    },
+    {
+      "id": "econ-test-pending",
+      "subject": "econ",
+      "type": "test",
+      "title": "Econ test (pending mark)",
+      "date": "2026-09-18",
+      "ramp": "science",
+      "result": null
+    }
+  ],
+  "assignments": {
+    "2026-09-22": [
+      {
+        "slot": "S3",
+        "subject": "port",
+        "task": "Write the Portuguese practice essay (75 min timed). Send tonight with the 4-line note: task+criteria, one thing you tried, two criterion questions, ask for a mark per criterion."
+      },
+      {
+        "slot": "EVE",
+        "subject": "phys",
+        "task": "Retrieval: 6 A.2 forces problems cold (Kognity/RV). Log every error: what I did / what the scheme wanted / fix rule. Then send the nightly report."
+      }
+    ],
+    "2026-09-23": [
+      {
+        "slot": "LAB",
+        "subject": "chem",
+        "task": "Chem lab: ask which unit you are in now, and what the lab report (due Oct 4) must contain. Write both down."
+      },
+      {
+        "slot": "S1",
+        "subject": "pre",
+        "task": "Pre-learn Thu (Day 1): Math 2.16 modulus (Nikolaidis, 15 min) · Econ 2.6 PES on Kognity (15) · English: read 15-20 pages (15)"
+      },
+      {
+        "slot": "EVE",
+        "subject": "phys",
+        "task": "Physics ramp day -2: redo every logged A.2 error cold. Still wrong -> write a 3-line rule card. Send report."
+      }
+    ],
+    "2026-09-24": [
+      {
+        "slot": "LAB",
+        "subject": "port",
+        "task": "Portuguese lab: bring the essay. Ask for one mark per criterion (A-D) and which paragraph to fix first."
+      },
+      {
+        "slot": "S1",
+        "subject": "pre",
+        "task": "Pre-learn Fri (Day 2): Chem next section on Kognity (15) · Physics A.2 momentum on Kognity (15) · Portuguese: reler trecho da obra (15)"
+      },
+      {
+        "slot": "S2",
+        "subject": "phys",
+        "task": "Physics ramp day -1: rule cards + one brain dump per A.2 subtopic from memory. Nothing new. Stop at 18:50."
+      },
+      {
+        "slot": "TUTOR",
+        "subject": "phys",
+        "task": "Physics tutor: bring the A.2 error log, not open questions. Work through the starred (high-confidence) errors first."
+      },
+      {
+        "slot": "EVE",
+        "subject": "port",
+        "task": "Redraft only the paragraphs the teacher named (30 min). Read the criteria card once. Send report. Lights out 22:45."
+      }
+    ],
+    "2026-09-25": [
+      {
+        "slot": "S1",
+        "subject": "pre",
+        "task": "Pre-learn Mon (Day 1): Math 3.1-3.2 sine & cosine rules (15) · Econ 2.6 PES finish on Kognity (15) · English: read 15-20 pages (15)"
+      },
+      {
+        "slot": "S2",
+        "subject": "math",
+        "task": "Redo the Math test (exp & logs) cold, timed. Log every lost mark: concept / method / algebra slip / misread."
+      },
+      {
+        "slot": "S3",
+        "subject": "econ",
+        "task": "Kognity Econ 2.5 Elasticities, part 1: read PED sections + do every section question."
+      },
+      {
+        "slot": "TUTOR",
+        "subject": "math",
+        "task": "Math tutor: bring the redone test + error log. Ask only about the errors you could not fix yourself."
+      }
+    ],
+    "2026-09-26": [
+      {
+        "slot": "SAT1",
+        "subject": "eng",
+        "task": "Redo the English test: rewrite the weakest answer to top-band criteria. Log feedback rows (criterion / what I did / what examiner wants / fix rule)."
+      },
+      {
+        "slot": "SAT2",
+        "subject": "port",
+        "task": "Redo the Portuguese test the same way. Then Kognity Econ 2.5 part 2: YED sections + all questions. Done = every 2.5 section ticked."
+      }
+    ],
+    "2026-09-27": [
+      {
+        "slot": "SATBLK",
+        "subject": "sat",
+        "task": "SAT: review mistakes from the last practice test (30 min), then one timed Reading & Writing module (Bluebook)."
+      },
+      {
+        "slot": "DIAG",
+        "subject": "math",
+        "task": "Mini-diagnostics: Math, 12 mixed questions on everything taught so far, 25 min timed (RV). Then Econ units 1-2.5, 25 min. Mark with schemes, score per topic."
+      },
+      {
+        "slot": "FLEX",
+        "subject": "chem",
+        "task": "Chem lab report skeleton: sections, data tables, what is missing. Draft to teacher by Wed Sep 30."
+      },
+      {
+        "slot": "REVIEW",
+        "subject": "all",
+        "task": "Sunday review with Claude: capture list, week rates, next 5 days, ramps, weekend, one change."
+      }
+    ]
+  },
+  "log": []
+}
