@@ -131,7 +131,7 @@
           "status": "new"
         },
         {
-          "name": "Limits, continuity & l’Hôpital",
+          "name": "Limits, continuity & l\u2019H\u00f4pital",
           "status": "new"
         },
         {
@@ -344,7 +344,7 @@
           "status": "new"
         },
         {
-          "name": "R1.2 Energy cycles (Hess’s law)",
+          "name": "R1.2 Energy cycles (Hess\u2019s law)",
           "status": "new"
         },
         {
@@ -515,7 +515,7 @@
           "status": "new"
         },
         {
-          "name": "Paper 2: works — themes & evidence bank",
+          "name": "Paper 2: works \u2014 themes & evidence bank",
           "status": "new"
         },
         {
@@ -534,7 +534,7 @@
     },
     "port": {
       "name": "Portuguese A Lit SL",
-      "short": "Português",
+      "short": "Portugu\u00eas",
       "color": "#dc2626",
       "kind": "language",
       "grade": 5,
@@ -543,15 +543,15 @@
         "Criteria card"
       ],
       "next": [
-        "Ler a obra 15-20 páginas; 3 citações no banco, com questão global"
+        "Ler a obra 15-20 p\u00e1ginas; 3 cita\u00e7\u00f5es no banco, com quest\u00e3o global"
       ],
       "topics": [
         {
-          "name": "Paper 1: análise orientada de prosa",
+          "name": "Paper 1: an\u00e1lise orientada de prosa",
           "status": "new"
         },
         {
-          "name": "Paper 1: análise orientada de poesia",
+          "name": "Paper 1: an\u00e1lise orientada de poesia",
           "status": "new"
         },
         {
@@ -563,19 +563,19 @@
           "status": "new"
         },
         {
-          "name": "Paper 2: obras — temas e evidências",
+          "name": "Paper 2: obras \u2014 temas e evid\u00eancias",
           "status": "new"
         },
         {
-          "name": "Oral Individual: questão global e trechos",
+          "name": "Oral Individual: quest\u00e3o global e trechos",
           "status": "new"
         },
         {
-          "name": "Oral Individual: prática de apresentação",
+          "name": "Oral Individual: pr\u00e1tica de apresenta\u00e7\u00e3o",
           "status": "new"
         },
         {
-          "name": "Recursos literários e critérios de avaliação",
+          "name": "Recursos liter\u00e1rios e crit\u00e9rios de avalia\u00e7\u00e3o",
           "status": "new"
         }
       ]
@@ -609,7 +609,7 @@
       "id": "phys-test-0925",
       "subject": "phys",
       "type": "test",
-      "title": "Physics test (A.2 forces)",
+      "title": "Physics test",
       "date": "2026-09-25",
       "ramp": "science"
     },
@@ -619,13 +619,14 @@
       "type": "report",
       "title": "Chem lab report due",
       "date": "2026-10-04",
-      "ramp": "report"
+      "ramp": "report",
+      "earlyDraft": "2026-09-30"
     },
     {
       "id": "math-test-0922",
       "subject": "math",
       "type": "test",
-      "title": "Math test (exp & logs)",
+      "title": "Math test",
       "date": "2026-09-22",
       "ramp": "science",
       "result": null,
@@ -646,112 +647,209 @@
       {
         "slot": "S3",
         "subject": "port",
-        "task": "Write the Portuguese practice essay (75 min timed). Send tonight with the 4-line note: task+criteria, one thing you tried, two criterion questions, ask for a mark per criterion."
+        "title": "Portuguese essay",
+        "steps": [
+          "Write the practice essay, 75 min timed",
+          "Run the 12-point self-check",
+          "Send tonight with the 4-line note"
+        ]
       },
       {
         "slot": "EVE",
         "subject": "phys",
-        "task": "Retrieval: 6 A.2 forces problems cold (Kognity/RV). Log every error: what I did / what the scheme wanted / fix rule. Then send the nightly report."
+        "title": "Physics retrieval",
+        "steps": [
+          "6 A.2 forces problems, cold",
+          "Log every error: did / wanted / fix rule",
+          "Send the nightly report"
+        ]
       }
     ],
     "2026-09-23": [
       {
         "slot": "LAB",
         "subject": "chem",
-        "task": "Chem lab: ask which unit you are in now, and what the lab report (due Oct 4) must contain. Write both down."
+        "title": "Chem lab",
+        "steps": [
+          "Ask which unit we are in now",
+          "Ask what the lab report (Oct 4) must contain",
+          "Write both down before leaving"
+        ]
       },
       {
         "slot": "S1",
         "subject": "pre",
-        "task": "Pre-learn Thu (Day 1): Math 2.16 modulus (Nikolaidis, 15 min) · Econ 2.6 PES on Kognity (15) · English: read 15-20 pages (15)"
+        "title": "Pre-learn tomorrow",
+        "steps": [
+          "Math 2.16 modulus \u00b7 Nikolaidis \u00b7 15 min",
+          "Econ 2.6 PES \u00b7 Kognity \u00b7 15 min",
+          "English \u00b7 15 pages \u00b7 3 quotes to bank"
+        ]
       },
       {
         "slot": "EVE",
         "subject": "phys",
-        "task": "Physics ramp day -2: redo every logged A.2 error cold. Still wrong -> write a 3-line rule card. Send report."
+        "title": "Physics ramp \u22122",
+        "steps": [
+          "Redo every logged A.2 error, cold",
+          "Still wrong \u2192 3-line rule card",
+          "Send the nightly report"
+        ]
       }
     ],
     "2026-09-24": [
       {
         "slot": "LAB",
         "subject": "port",
-        "task": "Portuguese lab: bring the essay. Ask for one mark per criterion (A-D) and which paragraph to fix first."
+        "title": "Portuguese lab",
+        "steps": [
+          "Bring the essay",
+          "Ask for a mark per criterion A\u2013D",
+          "Ask which paragraph to fix first"
+        ]
       },
       {
         "slot": "S1",
         "subject": "pre",
-        "task": "Pre-learn Fri (Day 2): Chem next section on Kognity (15) · Physics A.2 momentum on Kognity (15) · Portuguese: reler trecho da obra (15)"
+        "title": "Pre-learn tomorrow",
+        "steps": [
+          "Chem \u00b7 next Kognity section \u00b7 15 min",
+          "Physics \u00b7 A.2 momentum \u00b7 Kognity \u00b7 15 min",
+          "Portugu\u00eas \u00b7 reler trecho da obra \u00b7 15 min"
+        ]
       },
       {
         "slot": "S2",
         "subject": "phys",
-        "task": "Physics ramp day -1: rule cards + one brain dump per A.2 subtopic from memory. Nothing new. Stop at 18:50."
+        "title": "Physics ramp \u22121",
+        "steps": [
+          "Rule cards, read once",
+          "One brain dump per A.2 subtopic",
+          "Nothing new. Stop at 18:50"
+        ]
       },
       {
         "slot": "TUTOR",
         "subject": "phys",
-        "task": "Physics tutor: bring the A.2 error log, not open questions. Work through the starred (high-confidence) errors first."
+        "title": "Physics tutor",
+        "steps": [
+          "Bring the A.2 error log",
+          "Starred errors first",
+          "No open-ended questions"
+        ]
       },
       {
         "slot": "EVE",
         "subject": "port",
-        "task": "Redraft only the paragraphs the teacher named (30 min). Read the criteria card once. Send report. Lights out 22:45."
+        "title": "Portuguese redraft",
+        "steps": [
+          "Redraft only the paragraphs named, 30 min",
+          "Read the criteria card once",
+          "Nightly report \u00b7 lights out 22:45"
+        ]
       }
     ],
     "2026-09-25": [
       {
         "slot": "S1",
         "subject": "pre",
-        "task": "Pre-learn Mon (Day 1): Math 3.1-3.2 sine & cosine rules (15) · Econ 2.6 PES finish on Kognity (15) · English: read 15-20 pages (15)"
+        "title": "Pre-learn Monday",
+        "steps": [
+          "Math 3.1\u20133.2 sine & cosine rules \u00b7 15 min",
+          "Econ 2.6 PES finish \u00b7 Kognity \u00b7 15 min",
+          "English \u00b7 15 pages \u00b7 3 quotes"
+        ]
       },
       {
         "slot": "S2",
         "subject": "math",
-        "task": "Redo the Math test (exp & logs) cold, timed. Log every lost mark: concept / method / algebra slip / misread."
+        "title": "Redo the Math test",
+        "steps": [
+          "Exp & logs test, cold, timed",
+          "Log every lost mark by type",
+          "Concept / method / slip / misread"
+        ]
       },
       {
         "slot": "S3",
         "subject": "econ",
-        "task": "Kognity Econ 2.5 Elasticities, part 1: read PED sections + do every section question."
+        "title": "Kognity Econ 2.5 \u00b7 part 1",
+        "steps": [
+          "Read all PED sections",
+          "Do every section question",
+          "Tick each section when done"
+        ]
       },
       {
         "slot": "TUTOR",
         "subject": "math",
-        "task": "Math tutor: bring the redone test + error log. Ask only about the errors you could not fix yourself."
+        "title": "Math tutor",
+        "steps": [
+          "Bring the redone test + error log",
+          "Ask only about errors you could not fix"
+        ]
       }
     ],
     "2026-09-26": [
       {
         "slot": "SAT1",
         "subject": "eng",
-        "task": "Redo the English test: rewrite the weakest answer to top-band criteria. Log feedback rows (criterion / what I did / what examiner wants / fix rule)."
+        "title": "Redo the English test",
+        "steps": [
+          "Rewrite the weakest answer to top band",
+          "Log feedback rows: criterion / did / wanted / fix",
+          "Then redo the Portuguese test the same way"
+        ]
       },
       {
         "slot": "SAT2",
-        "subject": "port",
-        "task": "Redo the Portuguese test the same way. Then Kognity Econ 2.5 part 2: YED sections + all questions. Done = every 2.5 section ticked."
+        "subject": "econ",
+        "title": "Kognity Econ 2.5 \u00b7 part 2",
+        "steps": [
+          "YED sections + all questions",
+          "Done = every 2.5 section ticked"
+        ]
       }
     ],
     "2026-09-27": [
       {
         "slot": "SATBLK",
         "subject": "sat",
-        "task": "SAT: review mistakes from the last practice test (30 min), then one timed Reading & Writing module (Bluebook)."
+        "title": "SAT",
+        "steps": [
+          "Review mistakes from the last practice test, 30 min",
+          "One timed Reading & Writing module \u00b7 Bluebook"
+        ]
       },
       {
         "slot": "DIAG",
         "subject": "math",
-        "task": "Mini-diagnostics: Math, 12 mixed questions on everything taught so far, 25 min timed (RV). Then Econ units 1-2.5, 25 min. Mark with schemes, score per topic."
+        "title": "Mini-diagnostics",
+        "steps": [
+          "Math: 12 mixed questions, 25 min timed \u00b7 RV",
+          "Econ: units 1\u20132.5, 25 min timed",
+          "Mark with schemes, score per topic"
+        ]
       },
       {
         "slot": "FLEX",
         "subject": "chem",
-        "task": "Chem lab report skeleton: sections, data tables, what is missing. Draft to teacher by Wed Sep 30."
+        "title": "Chem report skeleton",
+        "steps": [
+          "Sections and data tables",
+          "List what is missing",
+          "Early draft to teacher by Wed 30 for feedback"
+        ]
       },
       {
         "slot": "REVIEW",
         "subject": "all",
-        "task": "Sunday review with Claude: capture list, week rates, next 5 days, ramps, weekend, one change."
+        "title": "Sunday review",
+        "steps": [
+          "Capture list \u2192 Claude",
+          "Week rates, next 5 days, ramps",
+          "Weekend + one change"
+        ]
       }
     ]
   },

@@ -100,7 +100,7 @@ function rampTask(a, rampDay, state) {
     return L[String(rampDay)] ? `${s} ramp ${rampDay}: ${L[String(rampDay)]}` : null;
   }
   if (a.ramp === 'report') {
-    const R = { '-7': 'report skeleton: sections, data tables, what is missing', '-4': 'full draft to teacher', '-2': 'apply feedback, final formatting', '-1': 'proofread, submit' };
+    const R = { '-7': 'skeleton: sections, data tables, what is missing', '-5': 'early draft to teacher for feedback', '-4': 'early draft to teacher for feedback (if not sent)', '-2': 'apply the feedback, final formatting', '-1': 'proofread, submit' };
     return R[String(rampDay)] ? `${s} report ${rampDay}: ${R[String(rampDay)]}` : null;
   }
   const S = { '-14': 'diagnose cold: 10-12 mixed questions timed, score by topic, rank red/amber/green', '-13': 'red topics: re-explain from memory, 30 min problems, log errors', '-12': 'red topics: problems + error log', '-11': 'red topics: problems + error log', '-10': 'red + one amber topic interleaved', '-9': 'red + one amber topic interleaved', '-8': 'mixed set across all topics, strict mark scheme', '-7': 'mixed set across all topics', '-6': 'mixed set, weighted to red', '-5': 'mixed set, timed', '-4': 'full timed past paper under exam conditions', '-3': 'mark it; every lost mark into the error log', '-2': 'error-only pass: redo every logged error cold; still wrong -> 3-line rule card', '-1': 'rule cards + one brain dump per topic. Stop by 21:00.' };
@@ -143,6 +143,23 @@ function defaultTask(state, iso, block, cds) {
   return { subject: 'all', task: 'Free' };
 }
 
+function defaultTitle(state, block, subject, task) {
+  const s = state.subjects[subject];
+  const T = { LAB: s ? `${s.short} lab` : 'Support lab', TUTOR: s ? `${s.short} tutor` : 'Tutor', S1: 'Pre-learn tomorrow', EVE: 'Retrieval + report', SATBLK: 'SAT', DIAG: 'Mini-diagnostics', REVIEW: 'Sunday review', SOCCER: 'Soccer', FLEX: 'Flex block' };
+  if (T[block.slot] && !(block.slot === 'FLEX' && /ramp|report/.test(task))) return T[block.slot];
+  const m = task.match(/^(\S+ (?:ramp|report) -\d+)/); if (m) return m[1].replace(' -', ' −');
+  if (s && s.kind === 'language') return `${s.short} reading`;
+  if (/mixed set/.test(task)) return `${s.short} mixed set`;
+  if (/Paper 1/.test(task)) return `${s.short} timed essay`;
+  return s ? `${s.short} practice` : 'Study';
+}
+
+function defaultSteps(task) {
+  let parts = task.includes(' · ') ? task.split(' · ') : task.split(/(?<=[.!?])\s+(?=[A-ZÀ-Ú])/);
+  parts = parts.map(x => x.replace(/^[A-Za-zÀ-ú]+ (?:ramp|report) -\d+: /, '').replace(/[.]$/, '').trim()).filter(Boolean);
+  return parts.slice(0, 4);
+}
+
 function blocksFor(state, iso) {
   const wd = weekday(iso);
   const tpl = TEMPLATE[wd] || [];
@@ -150,10 +167,13 @@ function blocksFor(state, iso) {
   const overrides = (state.assignments || {})[iso] || [];
   return tpl.map(b => {
     const d = defaultTask(state, iso, b, cds);
-    const o = overrides.find(x => x.slot === b.slot);
-    const subject = (o && o.subject) || d.subject;
+    const o = overrides.find(x => x.slot === b.slot) || {};
+    const subject = o.subject || d.subject;
     const s = state.subjects[subject];
-    return { slot: b.slot, start: b.start, end: b.end, kind: b.kind, where: b.where || null, subject, subjectShort: s ? s.short : (subject === 'pre' ? 'Pre-learn' : ''), color: s ? s.color : '#334155', task: (o && o.task) || d.task };
+    const task = o.task || (o.steps ? o.steps.join(' · ') : d.task);
+    const steps = o.steps || defaultSteps(task);
+    const title = o.title || defaultTitle(state, b, subject, task);
+    return { slot: b.slot, start: b.start, end: b.end, kind: b.kind, where: b.where || null, subject, subjectShort: s ? s.short : (subject === 'pre' ? 'Pre-learn' : ''), color: s ? s.color : '#334155', title, task, steps };
   });
 }
 

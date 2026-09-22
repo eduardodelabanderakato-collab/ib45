@@ -71,3 +71,30 @@ test('rates: rolling 7 days, no streaks', () => {
   assert.equal(r.errorsClosed, 1);
   assert.ok(!('streak' in r));
 });
+
+test('blocks carry a title and 1-4 steps; overrides win', () => {
+  const b = P.blocksFor(state, '2026-09-23');
+  const lab = b.find(x => x.slot === 'LAB');
+  assert.equal(lab.title, 'Chem lab');
+  assert.equal(lab.steps.length, 3);
+  const def = P.blocksFor(state, '2026-10-06'); // Tuesday, no overrides
+  for (const x of def) { assert.ok(x.title.length > 0); assert.ok(x.steps.length >= 1 && x.steps.length <= 4, x.slot); }
+  assert.equal(def.find(x => x.slot === 'S1').title, 'Pre-learn tomorrow');
+});
+
+test('report ramp includes an early draft for feedback', () => {
+  const c = P.countdowns(state, '2026-09-29').find(x => x.id === 'chem-report-1004');
+  assert.equal(c.daysLeft, 5);
+  assert.match(c.task, /early draft/);
+});
+
+test('build: writes html and three PNGs at exact sizes', async () => {
+  const { execSync } = require('node:child_process');
+  execSync('node src/build.js', { cwd: __dirname + '/..', env: { ...process.env, IB45_DATE: '2026-09-23' }, stdio: 'pipe' });
+  const fs = require('fs'); const site = __dirname + '/../site/';
+  assert.match(fs.readFileSync(site + 'index.html', 'utf8'), /Wednesday 23 Sep/);
+  const dims = f => { const b = fs.readFileSync(site + f); return [b.readUInt32BE(16), b.readUInt32BE(20)]; };
+  assert.deepEqual(dims('wp-iphone.png'), [1206, 2622]);
+  assert.deepEqual(dims('wp-ipad.png'), [2752, 2752]);
+  assert.deepEqual(dims('wp-mac.png'), [2560, 1664]);
+});
