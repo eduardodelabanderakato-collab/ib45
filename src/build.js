@@ -30,8 +30,16 @@ async function main() {
   const browser = await chromium.launch(launch);
   for (const [name, d] of Object.entries(DEVICES)) {
     const page = await browser.newPage({ viewport: { width: d.w, height: d.h }, deviceScaleFactor: d.scale });
-    await page.setContent(R.wallpaperHTML(plan, d), { waitUntil: 'networkidle' });
-    await page.evaluate(() => document.fonts.ready);
+    // Auto-fit: shrink the layout until the band holds everything (no clipping on busy days).
+    let mul = 1;
+    for (const m of [1, 0.93, 0.86, 0.8, 0.74, 0.68, 0.62, 0.56]) {
+      mul = m;
+      await page.setContent(R.wallpaperHTML(plan, d, m), { waitUntil: 'networkidle' });
+      await page.evaluate(() => document.fonts.ready);
+      const fits = await page.evaluate(() => { const w = document.querySelector('.wrap'); return w.scrollHeight <= w.clientHeight + 1; });
+      if (fits) break;
+    }
+    if (mul < 1) console.log(`  ${name}: fitted at ${mul}`);
     await page.screenshot({ path: path.join(OUT, `wp-${name}.png`), fullPage: false });
     await page.close();
   }
