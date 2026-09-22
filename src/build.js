@@ -17,7 +17,7 @@ function todayISO() {
 const DEVICES = {
   iphone: { w: 402, h: 874, scale: 3, pad: { top: 300, bottom: 120, side: 20 }, u: 1, center: false, expandAll: false },          // 1206x2622; clock zone left empty
   ipad:   { w: 1376, h: 1376, scale: 2, pad: { top: 300, bottom: 220, side: 100 }, u: 1.3, maxWidth: 720, center: true, expandAll: true },  // 2752x2752 square, centre-safe
-  mac:    { w: 1280, h: 832, scale: 2, pad: { top: 60, bottom: 80, side: 100 }, u: 1.05, maxWidth: 600, center: true, expandAll: true }    // 2560x1664 MacBook Air
+  mac:    { w: 1280, h: 832, scale: 2, pad: { top: 90, bottom: 90, side: 100 }, u: 1.05, maxWidth: 600, center: true, expandAll: true }    // 2560x1664 MacBook Air
 };
 
 async function main() {

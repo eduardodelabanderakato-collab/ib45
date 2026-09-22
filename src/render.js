@@ -15,13 +15,13 @@ const RULES = [
 // Shared glass CSS. `u` is the unit scale (1 = iPhone points).
 function glassCSS(u) {
   return `
-:root{--ink:#0e1220;--dim:rgba(14,18,32,.52);--tint:rgba(255,255,255,.55);--r:${26 * u}px}
+:root{--ink:#111418;--dim:rgba(17,20,24,.5);--tint:rgba(255,255,255,.6);--r:${26 * u}px}
 *{box-sizing:border-box}
-body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;color:var(--ink);background:linear-gradient(180deg,#f6f8fc 0%,#eef3fb 60%,#e8eef9 100%);-webkit-font-smoothing:antialiased}
+body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;color:var(--ink);background:linear-gradient(180deg,#f7f8fa 0%,#eef1f5 60%,#e9edf2 100%);-webkit-font-smoothing:antialiased}
 .orbs{position:fixed;inset:0;pointer-events:none;z-index:0}.orbs i{position:absolute;border-radius:50%;filter:blur(${70 * u}px)}
-.orbs i:nth-child(1){left:-30%;top:5%;width:80%;height:40%;background:#cfe0ff}
-.orbs i:nth-child(2){right:-30%;top:40%;width:80%;height:45%;background:#e3d6ff}
-.orbs i:nth-child(3){left:20%;bottom:-20%;width:80%;height:40%;background:#d7f3f5}
+.orbs i:nth-child(1){left:-30%;top:5%;width:80%;height:40%;background:#d7dfe9}
+.orbs i:nth-child(2){right:-30%;top:40%;width:80%;height:45%;background:#e3e8ee}
+.orbs i:nth-child(3){left:20%;bottom:-20%;width:80%;height:40%;background:#dde3ea}
 .g{flex:0 0 auto;position:relative;background:var(--tint);backdrop-filter:blur(${22 * u}px) saturate(160%);-webkit-backdrop-filter:blur(${22 * u}px) saturate(160%);border-radius:var(--r);box-shadow:inset 0 1px 0 rgba(255,255,255,.75),inset 0 -1px 0 rgba(255,255,255,.15),inset 1px 0 0 rgba(255,255,255,.35),0 ${10 * u}px ${30 * u}px rgba(20,30,60,.07);overflow:hidden}
 .g:before{content:'';position:absolute;inset:0;border-radius:var(--r);padding:1px;background:linear-gradient(135deg,rgba(255,255,255,.8),rgba(255,255,255,.1) 40%,rgba(255,255,255,.4));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
 .g:after{content:'';position:absolute;left:-30%;top:-60%;width:90%;height:90%;background:radial-gradient(closest-side,rgba(255,255,255,.4),transparent);pointer-events:none}
