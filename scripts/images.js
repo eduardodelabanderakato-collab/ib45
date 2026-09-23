@@ -12,7 +12,7 @@ async function lookup(name) {
     try {
       const r = await fetch('https://en.wikipedia.org/api/rest_v1/page/summary/' + encodeURIComponent(q), { headers: { 'User-Agent': 'ib45-brief/1.0 (personal study planner)' } });
       if (!r.ok) continue; const j = await r.json(); const img = j.originalimage || j.thumbnail; if (!img) continue;
-      const url = (j.originalimage && j.originalimage.width > 1400 && j.thumbnail) ? j.thumbnail.source.replace(/\/\d+px-/, '/1200px-') : img.source;
+      const clean = u => u.split('?')[0]; const url = (j.originalimage && j.originalimage.width <= 2600) ? clean(j.originalimage.source) : (j.thumbnail ? clean(j.thumbnail.source) : clean(img.source));
       cache[name] = { url, title: j.title, credit: 'Wikimedia Commons', page: j.content_urls && j.content_urls.desktop && j.content_urls.desktop.page }; return cache[name];
     } catch (e) {}
   }

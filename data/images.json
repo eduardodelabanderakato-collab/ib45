@@ -1,53 +1,58 @@
 {
-  "Hanamaki": {
-    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/%E8%8A%B1%E5%B7%BB%E6%B8%A9%E6%B3%89_%E3%83%90%E3%83%A9%E5%9C%92%E3%81%A8%E3%83%9B%E3%83%86%E3%83%AB3%E9%A4%A8.jpg/1200px-%E8%8A%B1%E5%B7%BB%E6%B8%A9%E6%B3%89_%E3%83%90%E3%83%A9%E5%9C%92%E3%81%A8%E3%83%9B%E3%83%86%E3%83%AB3%E9%A4%A8.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-    "title": "Hanamaki, Iwate",
-    "credit": "Wikimedia Commons",
-    "page": "https://en.wikipedia.org/wiki/Hanamaki%2C_Iwate",
-    "slug": "hanamaki"
-  },
   "Sapporo": {
-    "url": "https://upload.wikimedia.org/wikipedia/commons/5/54/SapporoCity_Skylines2020.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/5/54/SapporoCity_Skylines2020.jpg",
     "title": "Sapporo",
     "credit": "Wikimedia Commons",
-    "page": "https://en.wikipedia.org/wiki/Sapporo"
+    "page": "https://en.wikipedia.org/wiki/Sapporo",
+    "slug": "sapporo"
+  },
+  "Sendai": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/1/1d/SendaiCity_Skylines_from_Mukaiyama2018.jpg",
+    "title": "Sendai",
+    "credit": "Wikimedia Commons",
+    "page": "https://en.wikipedia.org/wiki/Sendai",
+    "slug": "sendai"
   },
   "Monbetsu": {
-    "url": "https://upload.wikimedia.org/wikipedia/commons/d/d0/Monbetsu_panorama.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/d/d0/Monbetsu_panorama.jpg",
     "title": "Monbetsu, Hokkaido",
     "credit": "Wikimedia Commons",
-    "page": "https://en.wikipedia.org/wiki/Monbetsu%2C_Hokkaido"
+    "page": "https://en.wikipedia.org/wiki/Monbetsu%2C_Hokkaido",
+    "slug": "monbetsu"
   },
   "Tokyo": {
-    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b2/Skyscrapers_of_Shinjuku_2009_January.jpg/1200px-Skyscrapers_of_Shinjuku_2009_January.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/b/b2/Skyscrapers_of_Shinjuku_2009_January.jpg",
     "title": "Tokyo",
     "credit": "Wikimedia Commons",
-    "page": "https://en.wikipedia.org/wiki/Tokyo"
+    "page": "https://en.wikipedia.org/wiki/Tokyo",
+    "slug": "tokyo"
   },
   "Seoul": {
-    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/30/%EC%A4%91%ED%99%94%EC%A0%84%EC%9D%98_%EB%82%AE.jpg/1200px-%EC%A4%91%ED%99%94%EC%A0%84%EC%9D%98_%EB%82%AE.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/30/%EC%A4%91%ED%99%94%EC%A0%84%EC%9D%98_%EB%82%AE.jpg/330px-%EC%A4%91%ED%99%94%EC%A0%84%EC%9D%98_%EB%82%AE.jpg",
     "title": "Seoul",
     "credit": "Wikimedia Commons",
-    "page": "https://en.wikipedia.org/wiki/Seoul"
+    "page": "https://en.wikipedia.org/wiki/Seoul",
+    "slug": "seoul"
   },
   "São Paulo": {
-    "url": "https://upload.wikimedia.org/wikipedia/commons/7/73/Marginal_Pinheiros_e_Jockey_Club.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/7/73/Marginal_Pinheiros_e_Jockey_Club.jpg",
     "title": "São Paulo",
     "credit": "Wikimedia Commons",
-    "page": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo"
+    "page": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo",
+    "slug": "sao-paulo"
   },
   "Stanford": {
-    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4d/Stanford_University_Main_Quad_-_7_June_2009.jpg/1200px-Stanford_University_Main_Quad_-_7_June_2009.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4d/Stanford_University_Main_Quad_-_7_June_2009.jpg/330px-Stanford_University_Main_Quad_-_7_June_2009.jpg",
     "title": "Main Quad (Stanford University)",
     "credit": "Wikimedia Commons",
     "page": "https://en.wikipedia.org/wiki/Main_Quad_(Stanford_University)",
     "slug": "stanford"
   },
-  "Sendai": {
-    "url": "https://upload.wikimedia.org/wikipedia/commons/1/1d/SendaiCity_Skylines_from_Mukaiyama2018.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
-    "title": "Sendai",
+  "Hanamaki": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/5/50/%E8%8A%B1%E5%B7%BB%E6%B8%A9%E6%B3%89_%E3%83%90%E3%83%A9%E5%9C%92%E3%81%A8%E3%83%9B%E3%83%86%E3%83%AB3%E9%A4%A8.jpg",
+    "title": "Hanamaki, Iwate",
     "credit": "Wikimedia Commons",
-    "page": "https://en.wikipedia.org/wiki/Sendai",
-    "slug": "sendai"
+    "page": "https://en.wikipedia.org/wiki/Hanamaki%2C_Iwate",
+    "slug": "hanamaki"
   }
 }
