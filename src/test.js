@@ -76,7 +76,7 @@ test('blocks carry a title and 1-5 steps; overrides win', () => {
   const b = P.blocksFor(state, '2026-09-23');
   const lab = b.find(x => x.slot === 'LAB');
   assert.equal(lab.title, 'Library · Friday prep');
-  assert.equal(lab.steps.length, 3);
+  assert.equal(lab.steps.length, 4);
   const def = P.blocksFor(state, '2026-10-06'); // Tuesday, no overrides
   for (const x of def) { assert.ok(x.title.length > 0); assert.ok(x.steps.length >= 1 && x.steps.length <= 5, x.slot); }
   assert.equal(def.find(x => x.slot === 'S1').title, 'Pre-learn tomorrow');
