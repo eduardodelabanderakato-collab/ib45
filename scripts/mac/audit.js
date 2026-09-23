@@ -17,7 +17,14 @@ const minutes = flights.reduce((a, f) => a + (f.minutes || 0), 0);
 const sprint1 = planned[0] && (flown[0].flight != null || flights.length > 0);
 const flownMap = Object.fromEntries(flown.filter(x => x.flight).map(x => [x.slot, x.flight]));
 const entry = { date: day, started: !!sprint1, flown: flownMap, sprintsDone: flown.filter(x => x.flight).length, sprintsPlanned: planned.length, focusMinutes: minutes, flights: flights.map(f => `${f.start} ${f.from}→${f.to} ${f.minutes}m`), currentAirport: log.currentAirport, source: 'focusflight' };
-if (!dry) { state.log = (state.log || []).filter(r => r.date !== day); state.log.push(entry); state.currentAirport = log.currentAirport || state.currentAirport; fs.writeFileSync(SP, JSON.stringify(state, null, 2)); }
+if (!dry) {
+  state.log = (state.log || []).filter(r => r.date !== day); state.log.push(entry); state.currentAirport = log.currentAirport || state.currentAirport;
+  const F = require(path.join(ROOT, 'src/flights.js')); const t = state.tour || (state.tour = { at: 'HND', visited: ['HND'], kmTotal: 0, minutesTotal: 0, legs: [] });
+  t.legs = (t.legs || []).filter(l => l.date !== day);
+  for (const f of flights) { if (!f.from || !f.to) continue; const a = F.BY[f.from], b = F.BY[f.to]; const kmv = a && b ? Math.round(F.km(a, b)) : 0; t.legs.push({ date: day, from: f.from, to: f.to, km: kmv, min: f.minutes || 0 }); if (t.visited[t.visited.length - 1] !== f.to) t.visited.push(f.to); }
+  t.kmTotal = t.legs.reduce((x, l) => x + l.km, 0) + 1180; t.minutesTotal = t.legs.reduce((x, l) => x + l.min, 0); t.at = log.currentAirport || t.at;
+  fs.writeFileSync(SP, JSON.stringify(state, null, 2));
+}
 const tomorrow = P.addDays(day, 1); const tp = P.planFor(state, tomorrow); const first = tp.blocks.find(b => ['sprint', 'retrieval'].includes(b.kind));
 const verdict = entry.started ? `Started ✓ · ${entry.sprintsDone}/${entry.sprintsPlanned} blocks flown · ${minutes} min in the air · now in ${log.currentAirport}` : `Not started ✗ · 0 flights logged today`;
 const missed = flown.filter(x => !x.flight).map(x => `${x.start} ${x.title}`);

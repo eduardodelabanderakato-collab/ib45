@@ -981,5 +981,24 @@
     ]
   },
   "log": [],
-  "currentAirport": "HND"
+  "currentAirport": "HND",
+  "tour": {
+    "at": "HND",
+    "visited": [
+      "GRU",
+      "GMP",
+      "HND"
+    ],
+    "kmTotal": 1180,
+    "minutesTotal": 104,
+    "legs": [
+      {
+        "date": "2026-09-22",
+        "from": "GMP",
+        "to": "HND",
+        "km": 1180,
+        "min": 104
+      }
+    ]
+  }
 }

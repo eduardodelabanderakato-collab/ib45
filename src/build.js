@@ -43,6 +43,15 @@ async function main() {
     await page.screenshot({ path: path.join(OUT, `wp-${name}.png`), fullPage: false });
     await page.close();
   }
+  // Route map for the briefing email (visited airports + current position)
+  try {
+    const F = require('./flights.js'); const t = state.tour || { visited: ['HND'], at: 'HND' };
+    const vis = (t.visited || []).filter(c => F.BY[c]); const markers = vis.map(c => ({ name: c, coords: [F.BY[c].la, F.BY[c].lo] })); const lines = []; for (let i = 1; i < vis.length; i++) lines.push({ from: vis[i - 1], to: vis[i] });
+    const mp = await browser.newPage({ viewport: { width: 1200, height: 560 }, deviceScaleFactor: 2 });
+    await mp.setContent(`<!doctype html><html><head><meta charset="utf-8"><script src="https://cdnjs.cloudflare.com/ajax/libs/jsvectormap/1.5.3/js/jsvectormap.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jsvectormap/1.5.3/maps/world.js"></script><style>html,body{margin:0;background:#fff}#m{width:1200px;height:560px}</style></head><body><div id="m"></div><script>new jsVectorMap({selector:'#m',map:'world',zoomButtons:false,zoomOnScroll:false,backgroundColor:'transparent',regionStyle:{initial:{fill:'#E6E8EC',stroke:'#fff',strokeWidth:.6}},markers:${JSON.stringify(markers)},lines:${JSON.stringify(lines)},markerStyle:{initial:{fill:'#8C1515',stroke:'#fff',strokeWidth:2,r:5}},lineStyle:{stroke:'#8C1515',strokeWidth:2,strokeDasharray:'5 4'},labels:{markers:{render:m=>m.name}},markerLabelStyle:{initial:{fontFamily:'Menlo, monospace',fontSize:12,fill:'#111'}}});</script></body></html>`, { waitUntil: 'networkidle' });
+    await mp.waitForTimeout(400); await mp.screenshot({ path: path.join(OUT, 'map.png') }); await mp.close();
+  } catch (e) { console.warn('map skipped:', e.message); }
+  try { const { execFileSync } = require('child_process'); const r = JSON.parse(execFileSync('node', [path.join(ROOT, 'scripts/brief.js'), iso, '--out', OUT]).toString()); fs.copyFileSync(r.html, path.join(OUT, 'brief.html')); } catch (e) { console.warn('brief skipped:', e.message); }
   await browser.close();
   console.log(`built ${iso} (${plan.dayLabel}): ${plan.blocks.length} blocks, ${plan.countdowns.length} countdowns -> site/`);
 }
