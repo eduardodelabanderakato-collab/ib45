@@ -1046,5 +1046,13 @@
       "pages": 15,
       "note": "flexible: only when the night allows; never at the cost of sleep"
     }
-  ]
+  ],
+  "studyGuides": {
+    "where": "Google Drive (school account), organized by category",
+    "done": [
+      "phys",
+      "port"
+    ],
+    "rule": "Every study day opens with 5 minutes on the relevant study guide."
+  }
 }

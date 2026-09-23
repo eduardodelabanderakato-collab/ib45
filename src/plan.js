@@ -175,6 +175,7 @@ function blocksFor(state, iso) {
   const tpl = TEMPLATE[wd] || [];
   const cds = countdowns(state, iso);
   const overrides = (state.assignments || {})[iso] || [];
+  let firstSprintDone = false;
   return tpl.map(b => {
     const d = defaultTask(state, iso, b, cds);
     const o = overrides.find(x => x.slot === b.slot) || {};
@@ -183,7 +184,8 @@ function blocksFor(state, iso) {
     const task = o.task || (o.steps ? o.steps.join(' · ') : d.task);
     const steps = o.steps || defaultSteps(task);
     const title = o.title || defaultTitle(state, b, subject, task);
-    return { slot: b.slot, start: b.start, end: b.end, kind: b.kind, where: b.where || null, subject, subjectShort: s ? s.short : (subject === 'pre' ? 'Pre-learn' : ''), color: s ? s.color : '#334155', title, task, steps };
+    let steps2 = steps; if (!firstSprintDone && ['sprint', 'lab'].includes(b.kind) && state.studyGuides) { firstSprintDone = true; steps2 = ['Study guide first: open today\'s guides in Drive, add what you learn (5 min)', ...steps]; }
+    return { slot: b.slot, start: b.start, end: b.end, kind: b.kind, where: b.where || null, subject, subjectShort: s ? s.short : (subject === 'pre' ? 'Pre-learn' : ''), color: s ? s.color : '#334155', title, task, steps: steps2 };
   });
 }
 
