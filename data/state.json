@@ -52,7 +52,7 @@
         "Unit circle & exact values (3.5)",
         "Trigonometric equations (3.8)",
         "Trigonometric functions & graphs (3.7)",
-        "Identities (3.6) · HL: reciprocal & inverse trig, compound & double angle (3.9–3.11)",
+        "Identities (3.6) \u00b7 HL: reciprocal & inverse trig, compound & double angle (3.9\u20133.11)",
         "Functions: linear/quadratic, composition, inverse, transformations (Sem 2 per diary)"
       ],
       "topics": [
@@ -133,7 +133,7 @@
           "status": "new"
         },
         {
-          "name": "Limits, continuity & l’Hôpital",
+          "name": "Limits, continuity & l\u2019H\u00f4pital",
           "status": "new"
         },
         {
@@ -172,7 +172,7 @@
         "Bin. Exp.",
         "Proofs"
       ],
-      "teacherNote": "Teacher's 2025-26 diary (docs/research/math-class-diary-2025-26.pdf): Trig/Geometry Part A = 3D geometry → sine/cosine rule → applications → arcs & sectors → RV List 1; Part B = unit circle → trig equations → trig functions → RV List 2 → Test Paper 1 (~32 marks/35-40 min, no GDC) + Paper 2 (~36 marks/40 min). Last year the trig test fell on Oct 27. Tests are preceded by an RV (Revision Village) list. Sem 2: Functions → Stats → Calculus → cumulative year-end test (40% calc) → IA proposal.",
+      "teacherNote": "Teacher's 2025-26 diary (docs/research/math-class-diary-2025-26.pdf): Trig/Geometry Part A = 3D geometry \u2192 sine/cosine rule \u2192 applications \u2192 arcs & sectors \u2192 RV List 1; Part B = unit circle \u2192 trig equations \u2192 trig functions \u2192 RV List 2 \u2192 Test Paper 1 (~32 marks/35-40 min, no GDC) + Paper 2 (~36 marks/40 min). Last year the trig test fell on Oct 27. Tests are preceded by an RV (Revision Village) list. Sem 2: Functions \u2192 Stats \u2192 Calculus \u2192 cumulative year-end test (40% calc) \u2192 IA proposal.",
       "testFormat": "Two short papers: Paper 1 no-GDC ~32 marks/35-40 min; Paper 2 GDC ~36 marks/40 min. RV list assigned ~1 week before."
     },
     "phys": {
@@ -358,7 +358,7 @@
           "status": "new"
         },
         {
-          "name": "R1.2 Energy cycles (Hess’s law)",
+          "name": "R1.2 Energy cycles (Hess\u2019s law)",
           "status": "new"
         },
         {
@@ -386,7 +386,7 @@
           "status": "new"
         }
       ],
-      "teacherNote": "Follows the Oxford IB Chemistry (2023) textbook order: Structure 1 → 2 → 3 → Tools → Reactivity 1 → 2 → 3. Test Oct 9 on Structure 1 (S1.1–S1.5). Lab report due Oct 4.",
+      "teacherNote": "Follows the Oxford IB Chemistry (2023) textbook order: Structure 1 \u2192 2 \u2192 3 \u2192 Tools \u2192 Reactivity 1 \u2192 2 \u2192 3. Test Oct 9 on Structure 1 (S1.1\u2013S1.5). Lab report due Oct 4.",
       "textbook": "Oxford IB Chemistry 2023 (answers: oxfordsecondary.com/ib-science-support)"
     },
     "econ": {
@@ -399,10 +399,10 @@
         "Kognity",
         "EconplusDal",
         "Revision Village",
-        "The Economist (subscription) → one real-world example card per week"
+        "The Economist (subscription) \u2192 one real-world example card per week"
       ],
       "next": [
-        "2.5 PED: determinants, revenue & PED, tax incidence (Kognity) + one Economist article on a price change → example card (what, when, a number, the mechanism)",
+        "2.5 PED: determinants, revenue & PED, tax incidence (Kognity) + one Economist article on a price change \u2192 example card (what, when, a number, the mechanism)",
         "2.5 YED: normal/inferior, primary vs manufactured vs services (Kognity)",
         "2.6 PES & primary commodities",
         "2.7 Government intervention: taxes, subsidies, price controls",
@@ -511,12 +511,12 @@
         "Criteria card"
       ],
       "next": [
-        "Persepolis ch 6–11 (checkpoint Thu 24) · 3 quotes, each tagged with a global issue",
-        "Persepolis ch 12–17 (checkpoint Mon 28) · 3 quotes tagged",
-        "Persepolis ch 18–23 (checkpoint Wed 30) · 3 quotes tagged",
-        "Persepolis ch 24–28 (checkpoint Fri Oct 2) · 3 quotes tagged",
-        "Persepolis ch 29–33 (checkpoint Tue Oct 6) · 3 quotes tagged",
-        "Persepolis ch 34–38 (checkpoint Thu Oct 8) · 3 quotes tagged"
+        "Persepolis ch 6\u201311 (checkpoint Thu 24) \u00b7 3 quotes, each tagged with a global issue",
+        "Persepolis ch 12\u201317 (checkpoint Mon 28) \u00b7 3 quotes tagged",
+        "Persepolis ch 18\u201323 (checkpoint Wed 30) \u00b7 3 quotes tagged",
+        "Persepolis ch 24\u201328 (checkpoint Fri Oct 2) \u00b7 3 quotes tagged",
+        "Persepolis ch 29\u201333 (checkpoint Tue Oct 6) \u00b7 3 quotes tagged",
+        "Persepolis ch 34\u201338 (checkpoint Thu Oct 8) \u00b7 3 quotes tagged"
       ],
       "topics": [
         {
@@ -536,7 +536,7 @@
           "status": "new"
         },
         {
-          "name": "Paper 2: works — themes & evidence bank",
+          "name": "Paper 2: works \u2014 themes & evidence bank",
           "status": "new"
         },
         {
@@ -588,7 +588,7 @@
     },
     "port": {
       "name": "Portuguese A Lit SL",
-      "short": "Português",
+      "short": "Portugu\u00eas",
       "color": "#dc2626",
       "kind": "language",
       "grade": 5,
@@ -597,16 +597,16 @@
         "Criteria card"
       ],
       "next": [
-        "Cartum: análise verbal-visual (Duke / Carol Ito) — banco de recursos: enquadramento, traço, balões, ironia, intertexto",
-        "Ler a próxima obra (a confirmar com a professora)"
+        "Cartum: an\u00e1lise verbal-visual (Duke / Carol Ito) \u2014 banco de recursos: enquadramento, tra\u00e7o, bal\u00f5es, ironia, intertexto",
+        "Ler a pr\u00f3xima obra (a confirmar com a professora)"
       ],
       "topics": [
         {
-          "name": "Paper 1: análise orientada de prosa",
+          "name": "Paper 1: an\u00e1lise orientada de prosa",
           "status": "new"
         },
         {
-          "name": "Paper 1: análise orientada de poesia",
+          "name": "Paper 1: an\u00e1lise orientada de poesia",
           "status": "new"
         },
         {
@@ -618,24 +618,24 @@
           "status": "new"
         },
         {
-          "name": "Paper 2: obras — temas e evidências",
+          "name": "Paper 2: obras \u2014 temas e evid\u00eancias",
           "status": "new"
         },
         {
-          "name": "Oral Individual: questão global e trechos",
+          "name": "Oral Individual: quest\u00e3o global e trechos",
           "status": "new"
         },
         {
-          "name": "Oral Individual: prática de apresentação",
+          "name": "Oral Individual: pr\u00e1tica de apresenta\u00e7\u00e3o",
           "status": "new"
         },
         {
-          "name": "Recursos literários e critérios de avaliação",
+          "name": "Recursos liter\u00e1rios e crit\u00e9rios de avalia\u00e7\u00e3o",
           "status": "new"
         }
       ],
       "work": {
-        "title": "Cartum (Duke, Carol Ito) — Paper 1 guided analysis",
+        "title": "Cartum (Duke, Carol Ito) \u2014 Paper 1 guided analysis",
         "note": "Fri Sep 25 test: unseen cartum; question: 'Como a autora combina os elementos verbais e visuais para construir significados no texto?' Eduardo says it is sorted (essay sent, redraft Thu)."
       }
     },
@@ -663,16 +663,16 @@
       "id": "port-test-0925",
       "subject": "port",
       "type": "test",
-      "title": "Português · Paper 1 (cartum)",
+      "title": "Portugu\u00eas \u00b7 Paper 1 (cartum)",
       "date": "2026-09-25",
       "ramp": "language",
-      "note": "Guided analysis of an unseen cartum (Duke / Carol Ito). Question: verbal + visual elements → meaning."
+      "note": "Guided analysis of an unseen cartum (Duke / Carol Ito). Question: verbal + visual elements \u2192 meaning."
     },
     {
       "id": "phys-test-0925",
       "subject": "phys",
       "type": "test",
-      "title": "Physics test · A.2 forces only",
+      "title": "Physics test \u00b7 A.2 forces only",
       "date": "2026-09-25",
       "ramp": "science"
     },
@@ -708,7 +708,7 @@
       "id": "math-trig-test-proj",
       "subject": "math",
       "type": "test",
-      "title": "Math test · Trig & Geometry (PROJECTED, confirm)",
+      "title": "Math test \u00b7 Trig & Geometry (PROJECTED, confirm)",
       "date": "2026-11-03",
       "ramp": "science",
       "projected": true,
@@ -718,10 +718,10 @@
       "id": "chem-test-1009",
       "subject": "chem",
       "type": "test",
-      "title": "Chem test · Structure 1",
+      "title": "Chem test \u00b7 Structure 1",
       "date": "2026-10-09",
       "ramp": "science",
-      "note": "Teacher-predicted date; covers S1.1–S1.5."
+      "note": "Teacher-predicted date; covers S1.1\u2013S1.5."
     },
     {
       "id": "eng-cp-2026-09-24",
@@ -799,10 +799,10 @@
       {
         "slot": "LAB",
         "subject": "phys",
-        "title": "Library · Friday prep",
+        "title": "Library \u00b7 Friday prep",
         "steps": [
           "Physics: redo every logged A.2 error, cold (35 min)",
-          "Português: 20-min plan-only on a fresh cartum (tese + 3 escolhas)",
+          "Portugu\u00eas: 20-min plan-only on a fresh cartum (tese + 3 escolhas)",
           "Write down the Chem unit question for tomorrow"
         ]
       },
@@ -811,18 +811,18 @@
         "subject": "pre",
         "title": "Pre-learn tomorrow",
         "steps": [
-          "Math · Trig: 3D geometry + sine & cosine rules · Nikolaidis · 15 min",
-          "Econ · 2.5 PED determinants & revenue · Kognity · 15 min",
-          "English · Persepolis ch 6–11 (checkpoint tomorrow) · 3 quotes tagged"
+          "Math \u00b7 Trig: 3D geometry + sine & cosine rules \u00b7 Nikolaidis \u00b7 15 min",
+          "Econ \u00b7 2.5 PED determinants & revenue \u00b7 Kognity \u00b7 15 min",
+          "English \u00b7 Persepolis ch 6\u201311 (checkpoint tomorrow) \u00b7 3 quotes tagged"
         ]
       },
       {
         "slot": "EVE",
         "subject": "phys",
-        "title": "Physics ramp −2",
+        "title": "Physics ramp \u22122",
         "steps": [
           "Redo every logged A.2 error, cold",
-          "Still wrong → 3-line rule card",
+          "Still wrong \u2192 3-line rule card",
           "Send the nightly report"
         ]
       }
@@ -834,7 +834,7 @@
         "title": "Portuguese lab",
         "steps": [
           "Bring the essay",
-          "Ask for a mark per criterion A–D",
+          "Ask for a mark per criterion A\u2013D",
           "Ask which paragraph to fix first"
         ]
       },
@@ -843,15 +843,15 @@
         "subject": "pre",
         "title": "Pre-learn tomorrow",
         "steps": [
-          "Chem · S1.5 ideal gases: finish + Kognity questions · 15 min",
-          "Physics · A.2 momentum · Kognity · 15 min",
-          "Português · reler a obra (cartum) · 15 min"
+          "Chem \u00b7 S1.5 ideal gases: finish + Kognity questions \u00b7 15 min",
+          "Physics \u00b7 A.2 momentum \u00b7 Kognity \u00b7 15 min",
+          "Portugu\u00eas \u00b7 reler a obra (cartum) \u00b7 15 min"
         ]
       },
       {
         "slot": "S2",
         "subject": "phys",
-        "title": "Physics ramp −1",
+        "title": "Physics ramp \u22121",
         "steps": [
           "Rule cards, read once",
           "One brain dump per A.2 subtopic",
@@ -875,7 +875,7 @@
         "steps": [
           "Redraft only the paragraphs named, 30 min",
           "Read the criteria card once",
-          "Nightly report · lights out 22:45"
+          "Nightly report \u00b7 lights out 22:45"
         ]
       }
     ],
@@ -885,9 +885,9 @@
         "subject": "pre",
         "title": "Pre-learn Monday",
         "steps": [
-          "Math · Trig: applications of 3D geometry, bearings · 15 min",
-          "Econ · 2.5 YED · Kognity · 15 min",
-          "English · Persepolis ch 12–17 (checkpoint Mon) · 3 quotes tagged"
+          "Math \u00b7 Trig: applications of 3D geometry, bearings \u00b7 15 min",
+          "Econ \u00b7 2.5 YED \u00b7 Kognity \u00b7 15 min",
+          "English \u00b7 Persepolis ch 12\u201317 (checkpoint Mon) \u00b7 3 quotes tagged"
         ]
       },
       {
@@ -903,7 +903,7 @@
       {
         "slot": "S3",
         "subject": "econ",
-        "title": "Kognity Econ 2.5 · part 1",
+        "title": "Kognity Econ 2.5 \u00b7 part 1",
         "steps": [
           "Read all PED sections",
           "Do every section question",
@@ -920,27 +920,6 @@
         ]
       }
     ],
-    "2026-09-26": [
-      {
-        "slot": "SAT1",
-        "subject": "eng",
-        "title": "Redo the English test",
-        "steps": [
-          "Rewrite the weakest answer to top band",
-          "Log feedback rows: criterion / did / wanted / fix",
-          "Then redo the Portuguese test the same way"
-        ]
-      },
-      {
-        "slot": "SAT2",
-        "subject": "econ",
-        "title": "Kognity Econ 2.5 · part 2",
-        "steps": [
-          "YED sections + all questions",
-          "Done = every 2.5 section ticked"
-        ]
-      }
-    ],
     "2026-09-27": [
       {
         "slot": "SATBLK",
@@ -948,7 +927,7 @@
         "title": "SAT",
         "steps": [
           "Review mistakes from the last practice test, 30 min",
-          "One timed Reading & Writing module · Bluebook"
+          "One timed Reading & Writing module \u00b7 Bluebook"
         ]
       },
       {
@@ -956,8 +935,8 @@
         "subject": "math",
         "title": "Mini-diagnostics",
         "steps": [
-          "Math: 12 mixed questions, 25 min timed · RV",
-          "Econ: units 1–2.5, 25 min timed",
+          "Math: 12 mixed questions, 25 min timed \u00b7 RV",
+          "Econ: units 1\u20132.5, 25 min timed",
           "Mark with schemes, score per topic"
         ]
       },
@@ -976,9 +955,32 @@
         "subject": "all",
         "title": "Sunday review",
         "steps": [
-          "Capture list → Claude",
+          "Capture list \u2192 Claude",
           "Week rates, next 5 days, ramps",
           "Weekend + one change"
+        ]
+      }
+    ],
+    "2026-09-28": [
+      {
+        "slot": "S2",
+        "subject": "eng",
+        "title": "Redo the English & Portuguese tests",
+        "steps": [
+          "English: rewrite the weakest answer to top band (25 min)",
+          "Portugu\u00eas: idem, com as tr\u00eas regras anti-ENEM (25 min)",
+          "Log feedback rows: criterion / did / wanted / fix"
+        ]
+      }
+    ],
+    "2026-09-29": [
+      {
+        "slot": "S3",
+        "subject": "econ",
+        "title": "Kognity Econ 2.5 \u00b7 part 2",
+        "steps": [
+          "YED sections + all questions",
+          "Done = every 2.5 section ticked"
         ]
       }
     ]
@@ -1006,6 +1008,6 @@
   },
   "focus": {
     "until": "2026-09-25",
-    "text": "This week's focus: Friday's tests, Português Paper 1 and Physics A.2 forces. Everything else is maintenance."
+    "text": "This week's focus: Friday's tests, Portugu\u00eas Paper 1 and Physics A.2 forces. Everything else is maintenance."
   }
 }
