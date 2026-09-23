@@ -86,16 +86,16 @@ input,select,textarea{font:inherit;color:var(--ink);background:var(--glass2);bor
   .ms{grid-template-columns:20px 1fr;grid-template-areas:"ck t" "ck meta";gap:4px 10px}.ms .t{grid-area:t}.ms .d{grid-area:meta}.ms .cat{grid-area:meta;justify-self:end}
 }
 /* hologram guide */
-.holo{position:fixed;right:22px;bottom:22px;z-index:6;width:150px;display:flex;flex-direction:column;align-items:center;cursor:pointer;user-select:none}
-.holo img{width:150px;height:auto;filter:drop-shadow(0 0 18px rgba(95,212,255,.55));animation:hover 4.5s ease-in-out infinite}
-.holo .beam{position:absolute;left:50%;bottom:-6px;width:190px;height:70px;transform:translateX(-50%);background:radial-gradient(closest-side,rgba(95,212,255,.45),rgba(95,212,255,0));pointer-events:none}
+.holo{position:fixed;right:22px;bottom:22px;z-index:6;display:flex;flex-direction:column;align-items:center;cursor:pointer;user-select:none}
+.holo img{height:300px;width:auto;filter:drop-shadow(0 0 18px rgba(95,212,255,.55));animation:hover 4.5s ease-in-out infinite}
+.holo .beam{position:absolute;left:50%;bottom:-10px;width:150px;height:60px;transform:translateX(-50%);background:radial-gradient(closest-side,rgba(95,212,255,.45),rgba(95,212,255,0));pointer-events:none}
 @keyframes hover{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-.bubble{position:fixed;right:170px;bottom:120px;z-index:6;max-width:300px;background:rgba(6,22,51,.92);border:1px solid rgba(95,212,255,.45);color:var(--ink);border-radius:16px 16px 4px 16px;padding:12px 14px;font-size:14px;line-height:1.4;box-shadow:0 0 30px rgba(95,212,255,.18);backdrop-filter:blur(12px)}
+.bubble{position:fixed;right:110px;bottom:150px;z-index:6;max-width:300px;background:rgba(6,22,51,.92);border:1px solid rgba(95,212,255,.45);color:var(--ink);border-radius:16px 16px 4px 16px;padding:12px 14px;font-size:14px;line-height:1.4;box-shadow:0 0 30px rgba(95,212,255,.18);backdrop-filter:blur(12px)}
 .bubble b{color:var(--accent)}.bubble .x{position:absolute;top:6px;right:9px;color:var(--dim);cursor:pointer;font-size:14px}
 .ask{position:fixed;right:22px;bottom:22px;z-index:7;width:min(380px,calc(100vw - 32px));background:rgba(6,22,51,.96);border:1px solid rgba(95,212,255,.45);border-radius:20px;box-shadow:0 0 40px rgba(95,212,255,.2);padding:16px;backdrop-filter:blur(16px)}
 .ask .log{max-height:40vh;overflow:auto;display:flex;flex-direction:column;gap:8px;margin:10px 0;font-size:14px;line-height:1.45}.ask .me{align-self:flex-end;background:rgba(95,212,255,.15);border-radius:12px 12px 2px 12px;padding:8px 11px}.ask .him{align-self:flex-start;background:var(--glass);border-radius:12px 12px 12px 2px;padding:8px 11px;border:1px solid var(--line)}
 .ask form{display:flex;gap:8px}.ask input{flex:1}
-@media (max-width:860px){.holo{right:12px;bottom:calc(92px + env(safe-area-inset-bottom,0px));width:96px}.holo img{width:96px}.holo .beam{width:120px;height:44px}.bubble{right:112px;bottom:calc(150px + env(safe-area-inset-bottom,0px));max-width:calc(100vw - 130px)}.ask{bottom:calc(92px + env(safe-area-inset-bottom,0px))}}
+@media (max-width:860px){.holo{right:10px;bottom:calc(92px + env(safe-area-inset-bottom,0px))}.holo img{height:190px}.holo .beam{width:100px;height:40px}.bubble{right:64px;bottom:calc(150px + env(safe-area-inset-bottom,0px));max-width:calc(100vw - 130px)}.ask{bottom:calc(92px + env(safe-area-inset-bottom,0px))}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 <div class="orbs"><i></i><i></i><i></i></div>
