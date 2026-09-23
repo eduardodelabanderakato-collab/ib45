@@ -21,7 +21,7 @@ const DOW = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', '
 const d0 = new Date(day + 'T12:00:00Z'); const dateLine = `${DOW[d0.getUTCDay()]}, ${d0.getUTCDate()} ${MONTHS[d0.getUTCMonth()]} ${d0.getUTCFullYear()}`;
 const testTomorrow = cds.find(c => c.daysLeft === 1), testToday = cds.find(c => c.daysLeft === 0);
 const edTitle = testToday ? 'test day' : testTomorrow ? 'the day before' : near.length ? 'on the ramp' : nFlights >= 3 ? 'a full itinerary' : 'one more leg';
-const intro = [`bom dia.`, plan.dayType ? `it's day ${plan.dayType}.` : `no school today.`,
+const intro = [`good morning.`, plan.dayType ? `it's day ${plan.dayType}.` : `no school today.`,
   nFlights ? `${['no', 'one', 'two', 'three', 'four', 'five'][nFlights] || nFlights} flight${nFlights === 1 ? '' : 's'}, ${minutesToday} minutes in the air, first wheels up at ${flyable[0].start}.` : `no flights scheduled.`,
   testToday ? `${testToday.title.toLowerCase()} is today. you did the work; the plan for today is light.` : testTomorrow ? `${testTomorrow.title.toLowerCase()} is tomorrow: nothing new today, only what's already yours.` : near[0] ? `${near[0].subjectShort.toLowerCase()} is ${near[0].daysLeft} days out and you're on ramp day ${near[0].rampDay}.` : `nothing is due within two weeks. this is when the lead is built.`,
   `that's the whole job.`].join(' ');
