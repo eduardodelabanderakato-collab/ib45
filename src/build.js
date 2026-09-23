@@ -26,6 +26,7 @@ async function main() {
   fs.writeFileSync(path.join(OUT, 'index.html'), R.dashboardHTML(plan, state));
   fs.writeFileSync(path.join(OUT, 'plan.json'), JSON.stringify(plan, null, 2));
   fs.writeFileSync(path.join(OUT, '.nojekyll'), '');
+  try { const A = path.join(ROOT, 'app/assets'); for (const f of fs.readdirSync(A)) if (!/source/.test(f)) fs.copyFileSync(path.join(A, f), path.join(OUT, f)); } catch (e) {}
   const launch = process.env.CI ? {} : { channel: 'chrome' };
   const browser = await chromium.launch(launch);
   for (const [name, d] of Object.entries(DEVICES)) {
