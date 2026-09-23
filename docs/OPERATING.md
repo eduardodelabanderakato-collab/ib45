@@ -1,6 +1,6 @@
 # Operating the IB45 system (for Claude)
 
-**The app ('Flight Deck', a Claude Artifact):** https://claude.ai/artifact/1yfwsi3bMVerDih52BtTSD — source `app/template.html`, build `node app/build-app.js "<name>"` → `app/index.html`, republish with the Artifact tool (same path keeps the URL). Data lives in the artifact DB (ArtifactData tool): `state/{subjects,assessments,tour,stanford}`, `plan/<date>` (one per day, from `app/seed/plan/*.json`), `days/<date>` (his ticks/starts/report), `audit/<date>` (nightly, from Focus Flight), `errors/<id>`, `stanford/progress`, `contract/main`. Weekly: regenerate seeds (`node -e` script in git history / rerun the seed step), batch-set `plan/*` for the next 14 days.
+**The app ('Life', a Claude Artifact):** https://claude.ai/artifact/1yfwsi3bMVerDih52BtTSD — source `app/template.html`, build `node app/build-app.js "<name>"` → `app/index.html`, republish with the Artifact tool (same path keeps the URL). Data lives in the artifact DB (ArtifactData tool): `state/{subjects,assessments,tour,stanford}`, `plan/<date>` (one per day, from `app/seed/plan/*.json`), `days/<date>` (his ticks/starts/report), `audit/<date>` (nightly, from Focus Flight), `errors/<id>`, `stanford/progress`, `contract/main`. Weekly: regenerate seeds (`node -e` script in git history / rerun the seed step), batch-set `plan/*` for the next 14 days.
 
 
 Source of truth: `data/state.json`. Only Claude edits it. Eduardo reports in chat; he never operates a tool.
