@@ -15,7 +15,8 @@ const planned = plan.blocks.filter(b => ['sprint', 'retrieval'].includes(b.kind)
 const flown = planned.map(b => { const s = toMin(b.start), e = toMin(b.end); const hit = flights.find(f => { const fs_ = toMin(f.start), fe = f.end ? toMin(f.end) : fs_ + f.minutes; return Math.min(e, fe) - Math.max(s, fs_) >= 10; }); return { slot: b.slot, title: b.title, start: b.start, flight: hit ? `${hit.from}→${hit.to} ${hit.minutes}m` : null }; });
 const minutes = flights.reduce((a, f) => a + (f.minutes || 0), 0);
 const sprint1 = planned[0] && (flown[0].flight != null || flights.length > 0);
-const entry = { date: day, started: !!sprint1, sprintsDone: flown.filter(x => x.flight).length, sprintsPlanned: planned.length, focusMinutes: minutes, flights: flights.map(f => `${f.start} ${f.from}→${f.to} ${f.minutes}m`), currentAirport: log.currentAirport, source: 'focusflight' };
+const flownMap = Object.fromEntries(flown.filter(x => x.flight).map(x => [x.slot, x.flight]));
+const entry = { date: day, started: !!sprint1, flown: flownMap, sprintsDone: flown.filter(x => x.flight).length, sprintsPlanned: planned.length, focusMinutes: minutes, flights: flights.map(f => `${f.start} ${f.from}→${f.to} ${f.minutes}m`), currentAirport: log.currentAirport, source: 'focusflight' };
 if (!dry) { state.log = (state.log || []).filter(r => r.date !== day); state.log.push(entry); state.currentAirport = log.currentAirport || state.currentAirport; fs.writeFileSync(SP, JSON.stringify(state, null, 2)); }
 const tomorrow = P.addDays(day, 1); const tp = P.planFor(state, tomorrow); const first = tp.blocks.find(b => ['sprint', 'retrieval'].includes(b.kind));
 const verdict = entry.started ? `Started ✓ · ${entry.sprintsDone}/${entry.sprintsPlanned} blocks flown · ${minutes} min in the air · now in ${log.currentAirport}` : `Not started ✗ · 0 flights logged today`;
@@ -23,4 +24,5 @@ const missed = flown.filter(x => !x.flight).map(x => `${x.start} ${x.title}`);
 console.log(`${plan.pretty}: ${verdict}`);
 if (missed.length) console.log(`Missed: ${missed.join(' · ')}`);
 if (first) console.log(`Tomorrow's first flight: ${first.start} ${first.title} — ${first.steps[0]}`);
-console.log(JSON.stringify({ entry, missed, tomorrowFirst: first ? { start: first.start, title: first.title, step: first.steps[0] } : null }));
+fs.mkdirSync(path.join(ROOT, 'app/out'), { recursive: true }); fs.writeFileSync(path.join(ROOT, 'app/out', `audit-${day}.json`), JSON.stringify(entry));
+console.log(JSON.stringify({ entry, missed, auditFile: path.join(ROOT, 'app/out', `audit-${day}.json`), tomorrowFirst: first ? { start: first.start, title: first.title, step: first.steps[0] } : null }));
