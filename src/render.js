@@ -9,7 +9,7 @@ const RULES = [
   'Pre-learn tomorrow. Class is your first retrieval, not first exposure.',
   'Every wrong answer gets a line: what I did, what the scheme wanted, the fix rule.',
   'Drafts reach the teacher early. Early delivery is how you get feedback.',
-  'Hard stop 21:15. Read. Lights out 22:45. Sleep is the frame.'
+  'Hard stop 21:15. Read. Lights out 22:30. Sleep is the frame.'
 ];
 
 // Shared glass CSS. `u` is the unit scale (1 = iPhone points).
