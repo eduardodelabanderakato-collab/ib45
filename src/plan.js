@@ -141,10 +141,10 @@ function defaultTask(state, iso, block, cds) {
     const id = HL_ROTATION[wd] || 'math'; const s = state.subjects[id];
     return { subject: id, task: `${s.short} problem set: 8 questions on the current topic (${s.resources[1] || s.resources[0]}), errors logged` };
   }
-  if (block.slot === 'S3') { const id = wd === 2 ? 'eng' : 'port'; const s = state.subjects[id]; return { subject: id, task: s.next[0] }; }
+  if (block.slot === 'S3') { if (wd === 5 && iso <= '2026-11-07') return { subject: 'sat', task: 'SAT Math: 22 questions timed (35 min, Bluebook or SAT Mastery) · review every miss · log the error type' }; const id = wd === 2 ? 'eng' : 'port'; const s = state.subjects[id]; return { subject: id, task: s.next[0] }; }
   if (block.slot === 'SAT1') { const id = ['math', 'phys', 'econ'][isoWeek(iso) % 3]; const s = state.subjects[id]; return { subject: id, task: `${s.short} mixed set: 12 questions, half current unit, half older units, shuffled. 90 min. Errors logged.` }; }
   if (block.slot === 'SAT2') { const id = isoWeek(iso) % 2 === 0 ? 'port' : 'eng'; const s = state.subjects[id]; return { subject: id, task: `${s.short}: timed Paper 1 (75 min). Send to teacher tonight with the 4-line note.` }; }
-  if (block.slot === 'SATBLK') return { subject: 'sat', task: state.subjects.sat.next[0] };
+  if (block.slot === 'SATBLK') return { subject: 'sat', task: iso <= '2026-11-07' ? 'SAT Reading & Writing: one timed module (32 min) · review every miss · 20 min on the weakest question type' : state.subjects.sat.next[0] };
   if (block.slot === 'DIAG') return { subject: 'all', task: 'Mini-diagnostics: two subjects, 25 min each, timed, mark-scheme marked, score per topic.' };
   if (block.slot === 'FLEX') { const econ = 'The Economist: one article on this week\'s Econ topic → example card (what, when, a number, the mechanism)'; return live[0] ? { subject: live[0].subject, task: live[0].task + ' · ' + econ } : { subject: 'econ', task: 'Flex: close open errors from this week (two spaced reattempts each) · ' + econ }; }
   return { subject: 'all', task: 'Free' };

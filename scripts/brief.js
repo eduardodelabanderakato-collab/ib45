@@ -7,7 +7,7 @@ const P = require(path.join(ROOT, 'src/plan.js')), F = require(path.join(ROOT, '
 const state = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/state.json'), 'utf8'));
 const args = process.argv.slice(2); const day = args.find(a => /^\d{4}-\d{2}-\d{2}$/.test(a)) || new Intl.DateTimeFormat('en-CA', { timeZone: state.tz }).format(new Date());
 const outDir = args.includes('--out') ? args[args.indexOf('--out') + 1] : path.join(ROOT, 'app/out');
-const APP_URL = 'https://claude.ai/artifact/1yfwsi3bMVerDih52BtTSD'; const SITE = 'https://eduardodelabanderakato-collab.github.io/ib45';
+const APP_URL = 'https://eduardodelabanderakato-collab.github.io/ib45/'; const SITE = 'https://eduardodelabanderakato-collab.github.io/ib45';
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const plan = P.planFor(state, day); const t = state.tour || {}; const at = t.at || state.currentAirport || 'HND'; const city = F.BY[at] ? F.BY[at].c : at;
 const flyable = plan.blocks.filter(b => ['sprint', 'retrieval'].includes(b.kind)); const it = F.itinerary(at, flyable); const legByStart = Object.fromEntries(it.legs.map(l => [l.start, l.flight]));

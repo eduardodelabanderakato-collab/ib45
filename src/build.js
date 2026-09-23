@@ -23,7 +23,7 @@ const DEVICES = {
 async function main() {
   const iso = todayISO(); const plan = P.planFor(state, iso);
   fs.mkdirSync(OUT, { recursive: true });
-  fs.writeFileSync(path.join(OUT, 'index.html'), R.dashboardHTML(plan, state));
+  fs.writeFileSync(path.join(OUT, 'deck.html'), R.dashboardHTML(plan, state));
   fs.writeFileSync(path.join(OUT, 'plan.json'), JSON.stringify(plan, null, 2));
   fs.writeFileSync(path.join(OUT, '.nojekyll'), '');
   try { const A = path.join(ROOT, 'app/assets'); for (const f of fs.readdirSync(A)) if (!/source/.test(f)) fs.copyFileSync(path.join(A, f), path.join(OUT, f)); } catch (e) {}
@@ -62,6 +62,14 @@ async function main() {
     const names = [...new Set([...it.legs.filter(l => l.flight).map(l => l.flight.city), F.BY[it.endsAt] ? F.BY[it.endsAt].c : '', 'Stanford'])].filter(Boolean);
     execFileSync('node', [path.join(ROOT, 'scripts/images.js'), ...names, '--download', path.join(OUT, 'photos')], { stdio: 'ignore' }); } catch (e) { console.warn('photos skipped:', e.message); }
   try { const { execFileSync } = require('child_process'); const r = JSON.parse(execFileSync('node', [path.join(ROOT, 'scripts/brief.js'), iso, '--out', OUT]).toString()); fs.copyFileSync(r.html, path.join(OUT, 'brief.html')); } catch (e) { console.warn('brief skipped:', e.message); }
+  // Life app (static): regenerate 14 days of plan seeds from the current position, then build app/index.html into the site root
+  try { const { execFileSync } = require('child_process'); const F = require('./flights.js'); let at = (state.tour && state.tour.at) || 'HND'; const seedDir = path.join(ROOT, 'app/seed/plan'); fs.mkdirSync(seedDir, { recursive: true }); for (const f of fs.readdirSync(seedDir)) fs.unlinkSync(path.join(seedDir, f));
+    for (let d = iso, i = 0; i < 14; d = P.addDays(d, 1), i++) { const p = P.planFor(state, d); const fly = p.blocks.filter(b => ['sprint', 'retrieval'].includes(b.kind)); const it = F.itinerary(at, fly); const by = Object.fromEntries(it.legs.map(l => [l.start, l.flight]));
+      fs.writeFileSync(path.join(seedDir, d + '.json'), JSON.stringify({ date: d, label: p.prettyLong, dayLabel: p.dayLabel, phase: p.phase, at, endsAt: it.endsAt, blocks: p.blocks.map(b => ({ slot: b.slot, start: b.start, end: b.end, title: b.title, kind: b.kind, subject: b.subject, subjectShort: b.subjectShort, color: b.color, where: b.where, steps: b.steps, flight: by[b.start] || null })), countdowns: p.countdowns.filter(c => c.daysLeft <= 21).map(c => ({ id: c.id, title: c.title, date: c.date, daysLeft: c.daysLeft, subject: c.subjectShort, task: c.task, type: c.type })) })); at = it.endsAt; }
+    const subjects = Object.entries(state.subjects).filter(([id]) => id !== 'sat').map(([id, s]) => ({ id, name: s.name, short: s.short, color: s.color, kind: s.kind, grade: s.grade, target: 7, next: s.next.slice(0, 4), teacherNote: s.teacherNote || '', resources: s.resources, topicsTotal: s.topics.length, topicsTaught: s.topics.filter(t => t.status !== 'new').length, work: s.work || null }));
+    fs.writeFileSync(path.join(ROOT, 'app/seed/subjects.json'), JSON.stringify({ subjects })); fs.writeFileSync(path.join(ROOT, 'app/seed/assessments.json'), JSON.stringify({ items: state.assessments.filter(a => a.date >= iso) })); fs.writeFileSync(path.join(ROOT, 'app/seed/focus.json'), JSON.stringify(state.focus || null));
+    const t = state.tour || {}; const codes = [...new Set([...F.TOUR, ...(t.visited || [])])]; fs.writeFileSync(path.join(ROOT, 'app/seed/tour.json'), JSON.stringify({ at: t.at || 'HND', home: 'GRU', visited: t.visited || ['HND'], kmTotal: t.kmTotal || 0, minutesTotal: t.minutesTotal || 0, cities: new Set(t.visited || []).size, waypoints: F.TOUR, coords: Object.fromEntries(codes.filter(c => F.BY[c]).map(c => [c, { la: F.BY[c].la, lo: F.BY[c].lo, c: F.BY[c].c }])) }));
+    execFileSync('node', [path.join(ROOT, 'app/build-app.js'), 'Life'], { stdio: 'ignore' }); fs.copyFileSync(path.join(ROOT, 'app/index.html'), path.join(OUT, 'index.html')); } catch (e) { console.warn('app skipped:', e.message); }
   await browser.close();
   console.log(`built ${iso} (${plan.dayLabel}): ${plan.blocks.length} blocks, ${plan.countdowns.length} countdowns -> site/`);
 }

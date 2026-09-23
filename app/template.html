@@ -119,6 +119,21 @@ input,select,textarea{font:inherit;color:var(--ink);background:var(--glass2);bor
 <div class="bubble" id="bubble" hidden></div>
 <div class="ask" id="ask" hidden></div>
 <script>
+// Local fallback: on GitHub Pages there is no window.claude, so a tiny localStorage store stands in for the artifact database.
+if(!window.claude){
+  const KEY='life-db'; let store={}; try{ store=JSON.parse(localStorage.getItem(KEY)||'{}'); }catch(e){}
+  const listeners=[]; const save=()=>{ try{ localStorage.setItem(KEY,JSON.stringify(store)); }catch(e){} listeners.forEach(f=>{ try{ f(); }catch(e){} }); };
+  const snap=(path)=>({ id:path.split('/').pop(), exists:path in store, data:()=>store[path], metadata:{fromCache:false,hasPendingWrites:false} });
+  const docRef=(path)=>({ id:path.split('/').pop(), path, get:async()=>snap(path), set:async(d)=>{ store[path]=JSON.parse(JSON.stringify(d)); save(); }, update:async(d)=>{ store[path]=Object.assign({},store[path]||{},d); save(); }, delete:async()=>{ delete store[path]; save(); }, onSnapshot:(fn)=>{ const h=()=>fn(snap(path)); listeners.push(h); setTimeout(h,0); return ()=>{ const i=listeners.indexOf(h); if(i>=0) listeners.splice(i,1); }; }, collection:(sub)=>colRef(path+'/'+sub) });
+  const colRef=(path,q={where:[],order:null,limit:null})=>({ path, doc:(id)=>docRef(path+'/'+(id||('d'+Date.now().toString(36)))), add:async(d)=>{ const r=docRef(path+'/d'+Date.now().toString(36)); await r.set(d); return r; },
+    where:(f,op,v)=>colRef(path,{...q,where:[...q.where,[f,op,v]]}), orderBy:(f,dir)=>colRef(path,{...q,order:[f,dir||'asc']}), limit:(n)=>colRef(path,{...q,limit:n}),
+    _run:()=>{ let docs=Object.keys(store).filter(k=>k.startsWith(path+'/')&&k.slice(path.length+1).indexOf('/')<0).map(k=>snap(k)); for(const [f,op,v] of q.where){ docs=docs.filter(d=>{ const x=(d.data()||{})[f]; return op==='=='?x===v:op==='!='?x!==v:op==='>='?x>=v:op==='<='?x<=v:op==='>'?x>v:op==='<'?x<v:true; }); } if(q.order){ const [f,dir]=q.order; docs.sort((a,b)=>{ const x=(a.data()||{})[f],y=(b.data()||{})[f]; return (x<y?-1:x>y?1:0)*(dir==='desc'?-1:1); }); } if(q.limit) docs=docs.slice(0,q.limit); return { docs, size:docs.length, empty:!docs.length, docChanges:()=>[], metadata:{fromCache:false,hasPendingWrites:false} }; },
+    get:async function(){ return this._run(); }, onSnapshot:function(fn){ const h=()=>fn(this._run()); listeners.push(h); setTimeout(h,0); return ()=>{ const i=listeners.indexOf(h); if(i>=0) listeners.splice(i,1); }; } });
+  const LocalDB={ doc:docRef, collection:(p)=>colRef(p) }; const LocalUser={ id:async()=>'me', can:async()=>true, isOwner:()=>true, canEdit:()=>true };
+  window.claude={ use: async(name)=> name==='db'?LocalDB : name==='user'?LocalUser : null, local:true };
+}
+</script>
+<script>
 const SEED = /*__SEED__*/{};
 const APP = { name: "__TITLE__", student: "Eduardo", initials: "EK", classOf: "Class of 2032", avatar: null, holo: null };
 const ICONS = {
@@ -225,7 +240,7 @@ function weekRates(){
   const minutes=S.auditWeek.reduce((a,r)=>a+(r.focusMinutes||0),0);
   return { daysStarted: wk.filter(r=>r.started||Object.keys(r.started||{}).length>0).length, schoolDaysSoFar, blocksFlown:flown, blocksPlanned:planned, minutes, errorsAdded:sum('errorsAdded'), errorsClosed:sum('errorsClosed') };
 }
-S.auditWeek=[];
+S.auditWeek=(SEED.audit||[]); if(SEED.audit&&SEED.audit.length&&!S.week.length){ S.week=SEED.audit.map(a=>({date:a.date,started:a.started,report:{sprintsDone:a.sprintsDone,sprintsPlanned:a.sprintsPlanned}})); }
 
 // ---------- overview ----------
 function renderAll_(){
@@ -323,7 +338,7 @@ const askLog=[];
 function openAsk(){ const a=$('#ask'); a.hidden=false; $('#bubble').hidden=true; a.innerHTML=`<div style="display:flex;justify-content:space-between;align-items:center"><b style="font-family:var(--display);font-size:16px">Ask him</b><span style="cursor:pointer;color:var(--dim)" id="askx">×</span></div><div class="log" id="asklog">${askLog.map(m=>`<div class="${m.role==='user'?'me':'him'}">${esc(m.content)}</div>`).join('')||'<div class="him">Captain speaking. I have today\'s plan, the countdowns, your subjects and the Stanford track. What do you need?</div>'}</div><form id="askf"><input id="askq" placeholder="What should I do first tonight?" autocomplete="off"><button class="btn" type="submit">Ask</button></form>`;
   $('#askx').addEventListener('click',()=>{ a.hidden=true; holoDismissed=false; renderHolo(); }); $('#askq').focus();
   $('#askf').addEventListener('submit',async e=>{ e.preventDefault(); const q=$('#askq').value.trim(); if(!q) return; $('#askq').value=''; askLog.push({role:'user',content:q}); const log=$('#asklog'); log.insertAdjacentHTML('beforeend',`<div class="me">${esc(q)}</div><div class="him" id="pending">…</div>`); log.scrollTop=log.scrollHeight;
-    const sample=await claude.use('sample'); const pend=$('#pending'); if(!sample){ pend.textContent='I can only answer when the page is opened on claude.ai, signed in.'; return; }
+    const sample=await claude.use('sample'); const pend=$('#pending'); if(!sample){ const ctx=JSON.stringify(ctxForClaude()); const url='https://claude.ai/new?q='+encodeURIComponent(`You are Eduardo's hologram guide (calm airline captain, max 4 sentences). Context: ${ctx}\n\nQuestion: ${q}`); window.open(url,'_blank'); pend.textContent='Opened in Claude. Answer arrives there.'; pend.id=''; return; }
     const sys=`You are Eduardo's hologram guide inside his app 'Life' (IB 45, then Stanford). Voice: a calm airline captain. Unhurried, precise, reassuring, short sentences, light aviation language (wheels up, on the ramp, cleared). Max 4 sentences, always concrete. Never invent facts beyond the context; if unsure, say what to check with Claude in the IB45 chat. Context JSON: ${JSON.stringify(ctxForClaude())}`;
     try{ const turns=[{role:'user',content:sys+'\n\nConversation so far:\n'+askLog.slice(-6).map(m=>`${m.role}: ${m.content}`).join('\n')+'\n\nAnswer the last user message.'}]; const r=await sample(turns,{modelTier:'default',onText:({text})=>{ pend.textContent=text; log.scrollTop=log.scrollHeight; }}); pend.textContent=r.text; pend.id=''; askLog.push({role:'assistant',content:r.text}); }catch(err){ pend.textContent=err.code==='not_granted'?'You declined; ask Claude in the chat instead.':'Could not answer right now.'; } });
 }
