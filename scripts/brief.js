@@ -15,6 +15,9 @@ const yday = P.addDays(day, -1); const y = (state.log || []).find(r => r.date ==
 const cds = plan.countdowns.filter(c => c.type !== 'checkpoint'); const near = cds.filter(c => c.daysLeft <= 14); const cps = plan.countdowns.filter(c => c.type === 'checkpoint').slice(0, 1);
 const stanfordAll = JSON.parse(fs.readFileSync(path.join(ROOT, 'app/seed/stanford.json'), 'utf8')).milestones; const stanford = stanfordAll.filter(m => m.date >= day && P.addDays(day, 21) >= m.date).slice(0, 3);
 let IMG = {}; try { IMG = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/images.json'), 'utf8')); } catch (e) {}
+let BR = { reading: {}, tests: {} }; try { BR = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/briefs.json'), 'utf8')); } catch (e) {}
+const nextBrief = (BR.reading.eng || []).find(b => b.by >= day); const portBrief = (BR.reading.port || []).find(b => b.by >= day);
+const focus = state.focus && state.focus.until >= day ? state.focus.text : null;
 const photo = (name, cap) => { const im = IMG[name]; if (!im) return ''; const src = im.slug ? `${SITE}/photos/${im.slug}.jpg` : im.url; return im ? `<img src="${src}" data-fallback="${im.url}" width="564" alt="${esc(name)}" style="width:100%;height:auto;max-height:320px;object-fit:cover;border-radius:10px;display:block"><div style="text-align:center;font-size:12px;color:#6B6B6B;margin:6px 0 16px">(${esc(cap || name)} · Image: ${esc(im.credit)})</div>` : ''; };
 const wk = plan.rates; const minutesToday = it.legs.reduce((a, l) => a + (l.flight ? l.flight.minutes : 0), 0); const nFlights = it.legs.filter(l => l.flight).length;
 const DOW = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY']; const MONTHS = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER'];
@@ -62,6 +65,7 @@ const html = `<!doctype html><html><head><meta charset="utf-8"><meta name="viewp
 <tr><td align="center" style="padding:0 0 16px;${font};font-size:12px;letter-spacing:2px;color:${C.dim};text-transform:uppercase">${esc(wd)}, ${d0.getUTCDate()} ${MONTHS[d0.getUTCMonth()].charAt(0) + MONTHS[d0.getUTCMonth()].slice(1).toLowerCase()} ${d0.getUTCFullYear()} &nbsp;•&nbsp; reading time: 2 minutes</td></tr>
 <tr><td align="center" style="padding:0 0 12px;${font};font-size:28px;font-weight:800;color:${C.ink};letter-spacing:-.5px">${esc(edTitle)}</td></tr>
 ${P_(esc(intro))}
+${focus ? box(`<b>Focus of the week.</b> ${esc(focus)}`) : ''}
 ${dots}
 ${label('priorities')}
 ${priorities.map((x, i) => P_(`${hi(String(i + 1) + '.')} &nbsp;${x}`)).join('')}
@@ -75,10 +79,11 @@ ${nextDest ? photoRow(nextDest, `Tonight you land in ${nextDest}`) : ''}
 ${P_(`${y ? (y.started ? `Yesterday you flew <b>${y.sprintsDone} of ${y.sprintsPlanned}</b> blocks, ${y.focusMinutes || 0} minutes in the air, and landed in ${esc(y.currentAirport || at)}.` : `Yesterday no flights were logged.`) : `No audit yet for ${P.pretty(yday)}.`} You're in <b>${esc(city)}</b>${t.kmTotal ? `, ${(t.kmTotal).toLocaleString('en-US')} km into the tour` : ''}. Started <b>${wk.daysStarted} of ${wk.schoolDaysSoFar}</b> school days this week.`)}
 ${plan.blocks.map(blockRows).join('')}
 ${box(`<b>Under the hood…</b> the audit reads your Focus Flight log at 21:20. Only flights count. A block with no flight is a missed block.`)}
-${near.length ? dots + label('ramps') + H(near.length === 1 ? `${near[0].subjectShort}: day ${near[0].rampDay} of the ramp` : `${near.length} tests inside the 14-day window`) + near.map(c => P_(`<b>${esc(c.title)}</b> · ${c.daysLeft === 0 ? 'today' : c.daysLeft === 1 ? 'tomorrow' : `in ${c.daysLeft} days`}${c.task ? `<br>${esc(c.task.replace(/^\S+ (ramp|report) -\d+: /, ''))}` : ''}`)).join('') + box(`<b>Remembering:</b> a test announced two weeks out is a finishing sprint, not a learning sprint. The base keeps running underneath.`) : ''}
+${near.length ? dots + label('ramps') + H(near.length === 1 ? `${near[0].subjectShort}: day ${near[0].rampDay} of the ramp` : `${near.length} tests inside the 14-day window`) + near.map(c => { const tb = BR.tests[c.id]; return P_(`<b>${esc(c.title)}</b> · ${c.daysLeft === 0 ? 'today' : c.daysLeft === 1 ? 'tomorrow' : `in ${c.daysLeft} days`}${c.task ? `<br>${esc(c.task.replace(/^\S+ (ramp|report) -\d+: /, ''))}` : ''}`) + (tb ? box(`<b>What to expect:</b> ${esc(tb.expect)}<br><b>Traps:</b> ${esc(tb.traps)}<br><b>Do:</b> ${esc(tb.do)}`) : ''); }).join('') + box(`<b>Remembering:</b> a test announced two weeks out is a finishing sprint, not a learning sprint. The base keeps running underneath.`) : ''}
 ${cds.length > near.length ? dots + label('countdowns') + P_(cds.slice(0, 6).map(c => `<b style="color:${c.daysLeft <= 3 ? '#c0392b' : C.ink}">${c.daysLeft}d</b> &nbsp;${esc(c.title)}`).join('<br>')) : ''}
 ${stanford.length ? dots + label('stanford · class of 2032') + H(`${Math.round((new Date('2027-11-01T12:00:00Z') - new Date(day + 'T12:00:00Z')) / 86400000)} days to Restrictive Early Action`) + photoRow('Stanford', 'Main Quad, Stanford University') + P_(stanford.map(m => `<b>${m.date.slice(5)}</b> &nbsp;${esc(m.title)} <span style="color:${C.dim}">· ${esc(m.owner)}</span>`).join('<br>')) : ''}
-${cps.length ? dots + label('reading') + P_(`📚 <b>${esc(cps[0].title)}</b> · ${cps[0].daysLeft === 0 ? 'today' : `in ${cps[0].daysLeft} days`}`) : ''}
+${nextBrief ? dots + label('reading · persepolis') + H(`Chapters ${nextBrief.chapters} by ${P.pretty(nextBrief.by)}`) + photoRow('Marjane Satrapi', 'Marjane Satrapi, author of Persepolis') + P_(`<b>${esc(nextBrief.titles)}</b>`) + P_(`<b>What to expect.</b> ${esc(nextBrief.expect)}`) + P_(`<b>Watch for.</b> ${esc(nextBrief.watch)}`) + P_(`<b>Two questions to read with.</b> ${esc(nextBrief.questions)}`) + box(`<b>Global issues to tag:</b> ${esc(nextBrief.globalIssues)}<br><b>Quotes to look for:</b> ${esc(nextBrief.quotes)}`) : ''}
+${portBrief && near.find(c => c.subject === 'port') ? dots + label('português · prova 1') + H(portBrief.titles) + P_(`<b>O que esperar.</b> ${esc(portBrief.expect)}`) + P_(`<b>Observar.</b> ${esc(portBrief.watch)}`) + box(`${esc(portBrief.quotes)}`) : ''}
 ${dots}
 ${label('tonight')}
 ${P_(`<b>21:15</b> hard stop. <b>Report</b> in Life or the chat: blocks flown, errors added and closed, retrieval, one line on what the plan got wrong. <b>${esc(state.sleep.lightsOut)}</b> lights out.`)}

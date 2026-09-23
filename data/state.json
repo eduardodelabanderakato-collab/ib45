@@ -795,12 +795,12 @@
     "2026-09-23": [
       {
         "slot": "LAB",
-        "subject": "chem",
-        "title": "Chem lab",
+        "subject": "phys",
+        "title": "Library · Friday prep",
         "steps": [
-          "Ask which unit we are in now",
-          "Ask what the lab report (Oct 4) must contain",
-          "Write both down before leaving"
+          "Physics: redo every logged A.2 error, cold (35 min)",
+          "Português: 20-min plan-only on a fresh cartum (tese + 3 escolhas)",
+          "Write down the Chem unit question for tomorrow"
         ]
       },
       {
@@ -1000,5 +1000,9 @@
         "min": 104
       }
     ]
+  },
+  "focus": {
+    "until": "2026-09-25",
+    "text": "This week's focus: Friday's tests, Português Paper 1 and Physics A.2 forces. Everything else is maintenance."
   }
 }

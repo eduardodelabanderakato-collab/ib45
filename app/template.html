@@ -140,7 +140,7 @@ const daysBetween = (a,b) => Math.round((new Date(b+'T12:00:00') - new Date(a+'T
 const pretty = iso => new Date(iso+'T12:00:00').toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'});
 
 // ---------- state ----------
-const S = { date: todayISO(), plan: null, day: null, audit: null, subjects: SEED.subjects, assessments: SEED.assessments, tour: SEED.tour, stanford: SEED.stanford, stanfordDone: {}, contract: null, errors: [], week: [], db: null, uid: null, canWrite: null, view: (location.hash||'#deck').slice(1) };
+const S = { date: todayISO(), plan: null, day: null, audit: null, subjects: SEED.subjects, assessments: SEED.assessments, tour: SEED.tour, stanford: SEED.stanford, briefs: SEED.briefs||{reading:{},tests:{}}, focus: SEED.focus||null, stanfordDone: {}, contract: null, errors: [], week: [], db: null, uid: null, canWrite: null, view: (location.hash||'#deck').slice(1) };
 S.plan = (SEED.plans||{})[S.date] || null; S.plans = Object.assign({}, SEED.plans||{});
 let toastT; function toast(m){ const t=$('#toast'); t.textContent=m; t.classList.add('on'); clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove('on'),1800); }
 
@@ -181,14 +181,16 @@ function renderDeck(){
   v.innerHTML = `${reportDue?`<div class="banner"><span>The day is still open. Report before lights out.</span><button class="btn" id="bannerReport">Report now</button></div>`:''}
   <h1>${esc(p.label)} <span class="muted" style="font-weight:500">· ${esc(p.dayLabel)}</span></h1>
   <div class="sub">${esc(p.phase)} · in <span class="mono">${esc(S.tour?.at||p.at)}</span> · started ${wk.daysStarted} of ${wk.schoolDaysSoFar} this week</div>
+  ${S.focus&&S.focus.until>=S.date?`<div class="g card" style="margin-top:14px;border-left:4px solid var(--accent);padding:12px 18px;font-weight:600">${esc(S.focus.text)}</div>`:''}
   <div class="grid2" style="margin-top:18px"><div><h2 style="margin-top:0">Today</h2><div class="stack" id="blocks">${blocks}</div><div style="margin-top:14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap">${closeBtn}<span class="muted small">Closing without a report counts as a miss.</span></div><div id="reportPanel"></div></div>
-  <div><h2 style="margin-top:0">Countdowns</h2><div class="stack">${cds.map(c=>`<div class="g cd ${c.daysLeft<=3?'urgent':''}"><div class="big">${c.daysLeft}</div><div class="lbl"><b>${esc(c.title)}</b><span>${c.daysLeft===0?'today':c.daysLeft===1?'tomorrow':pretty(c.date)}${c.task?' · '+esc(c.task.replace(/^\S+ (ramp|report) -\d+: /,'')):''}</span></div></div>`).join('')||'<div class="g card muted">No tests announced. Tell Claude the moment one is.</div>'}</div>
+  <div><h2 style="margin-top:0">Countdowns</h2><div class="stack">${cds.map(c=>{const tb=(S.briefs.tests||{})[c.id]; return `<div class="g cd ${c.daysLeft<=3?'urgent':''}" ${tb?`data-tb="${c.id}" style="cursor:pointer;flex-wrap:wrap"`:''}><div class="big">${c.daysLeft}</div><div class="lbl"><b>${esc(c.title)}</b><span>${c.daysLeft===0?'today':c.daysLeft===1?'tomorrow':pretty(c.date)}${c.task?' · '+esc(c.task.replace(/^\S+ (ramp|report) -\d+: /,'')):''}</span>${tb?`<span style="color:var(--accent)">What to expect ›</span>`:''}</div>${tb&&(S.tbOpen||{})[c.id]?`<div style="flex-basis:100%;font-size:13px;line-height:1.45;margin-top:6px;color:var(--ink)"><b>Expect:</b> ${esc(tb.expect)}<br><b>Traps:</b> ${esc(tb.traps)}<br><b>Do:</b> ${esc(tb.do)}</div>`:''}</div>`;}).join('')||'<div class="g card muted">No tests announced. Tell Claude the moment one is.</div>'}</div>
   <h2>This week</h2><div class="grid3" style="grid-template-columns:1fr 1fr"><div class="g stat"><div class="big">${wk.daysStarted}<small>/${wk.schoolDaysSoFar}</small></div><div class="lbl">days started</div></div><div class="g stat"><div class="big">${wk.blocksFlown}<small>/${wk.blocksPlanned}</small></div><div class="lbl">blocks flown</div></div><div class="g stat"><div class="big">${wk.minutes}</div><div class="lbl">minutes in the air</div></div><div class="g stat"><div class="big">${wk.errorsClosed}<small>/${wk.errorsAdded}</small></div><div class="lbl">errors closed / added</div></div></div>
   ${S.db===null && S.dbTried?`<div class="g card muted small" style="margin-top:14px">Sign in on claude.ai to keep what you tick and to report. Right now nothing is saved.</div>`:''}
   </div></div>`;
   v.querySelectorAll('.step').forEach(el=>el.addEventListener('click',e=>{ e.stopPropagation(); tickStep(el.dataset.k); }));
   v.querySelectorAll('[data-start]').forEach(el=>el.addEventListener('click',e=>{ e.stopPropagation(); takeOff(el.dataset.start); }));
   v.querySelectorAll('[data-toggle]').forEach(el=>el.addEventListener('click',e=>{ if(e.target.closest('.step,button')) return; const ex=Object.assign({},S.day?.expanded||{}); ex[el.dataset.toggle]=!ex[el.dataset.toggle]; S.day=Object.assign({},S.day||{},{expanded:ex}); renderDeck(); }));
+  v.querySelectorAll('[data-tb]').forEach(el=>el.addEventListener('click',()=>{ S.tbOpen=S.tbOpen||{}; S.tbOpen[el.dataset.tb]=!S.tbOpen[el.dataset.tb]; renderDeck(); }));
   const cb=$('#closeDay'); if(cb) cb.addEventListener('click',()=>renderReport()); const br=$('#bannerReport'); if(br) br.addEventListener('click',()=>{ renderReport(); $('#reportPanel').scrollIntoView({behavior:'smooth'}); });
 }
 function renderReport(){
@@ -266,6 +268,7 @@ function renderSubjects(){
 function renderSubjectDetail(id){
   const s=(S.subjects?.subjects||[]).find(x=>x.id===id); if(!s) return; const er=S.errors.filter(e=>e.subject===id).sort((a,b)=>a.date<b.date?1:-1).slice(0,8);
   $('#subjDetail').innerHTML=`<div class="g card" style="margin-top:16px;border-top:4px solid ${s.color}"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap"><div style="font-family:var(--display);font-weight:600;font-size:22px;letter-spacing:-.025em">${esc(s.name)}</div><span class="muted small">${esc(s.teacherNote||'')}</span></div>
+  ${(S.briefs.reading||{})[id]?`<h2>Briefs · what's coming</h2>${((S.briefs.reading||{})[id]||[]).filter(b=>b.by>=S.date).slice(0,2).map(b=>`<div class="g card" style="margin-bottom:10px"><div style="font-family:var(--display);font-weight:600;font-size:17px">${esc(b.chapters)} · by ${esc(pretty(b.by))}</div><div class="muted small" style="margin:2px 0 8px">${esc(b.titles)}</div><div style="font-size:14px;line-height:1.5"><b>Expect.</b> ${esc(b.expect)}<br><b>Watch.</b> ${esc(b.watch)}<br><b>Questions.</b> ${esc(b.questions)}<br><b>Global issues.</b> ${esc(b.globalIssues)}<br><b>Quotes.</b> ${esc(b.quotes)}</div></div>`).join('')}`:''}
   <h2>Pre-learn queue</h2><ol style="margin:0;padding-left:20px">${s.next.map(n=>`<li style="margin:4px 0">${esc(n)}</li>`).join('')}</ol>
   <h2>Log an error</h2><div class="form"><label>Topic<input id="eTopic" placeholder="e.g. A.2 friction on an incline"></label><label>Type<select id="eType"><option>concept</option><option>method</option><option>algebra slip</option><option>misread</option><option>time</option><option>command term</option></select></label><label class="full">What I did → what the scheme wanted<input id="eWhat" placeholder="I used F = ma along the horizontal; scheme resolves along the incline"></label><label class="full">Fix rule (one sentence)<input id="eFix" placeholder="Always draw axes along and perpendicular to the surface first."></label></div>
   <div class="actions"><button class="btn" id="eSave">Save error</button><span class="muted small">Closes after two spaced correct reattempts.</span></div>
@@ -338,7 +341,7 @@ setInterval(()=>{ if(S.view==='deck') renderDeck(); renderHolo(); }, 60000);
   sub(db.collection('plan').where('date','>=',S.date).limit(14), s=>{ for(const d of s.docs){ const p=d.data(); S.plans[p.date]=p; } });
   sub(db.doc('days/'+S.date), s=>{ if(s.exists){ const ex=(S.day&&S.day.expanded)||{}; S.day=Object.assign({},s.data(),{expanded:ex}); } });
   sub(db.doc('audit/'+S.date), s=>{ S.audit=s.exists?s.data():null; });
-  for(const k of ['subjects','assessments','tour','stanford']) sub(db.doc('state/'+k), s=>{ if(s.exists) S[k]=s.data(); });
+  for(const k of ['subjects','assessments','tour','stanford','briefs','focus']) sub(db.doc('state/'+k), s=>{ if(s.exists) S[k]=s.data(); });
   sub(db.doc('stanford/progress'), s=>{ S.stanfordDone=s.exists?(s.data().done||{}):{}; });
   sub(db.doc('contract/main'), s=>{ S.contract=s.exists?s.data():null; });
   sub(db.collection('errors').orderBy('date','desc').limit(300), s=>{ S.errors=s.docs.map(d=>d.data()); });
