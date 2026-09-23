@@ -3,7 +3,8 @@
     "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/%E8%8A%B1%E5%B7%BB%E6%B8%A9%E6%B3%89_%E3%83%90%E3%83%A9%E5%9C%92%E3%81%A8%E3%83%9B%E3%83%86%E3%83%AB3%E9%A4%A8.jpg/1200px-%E8%8A%B1%E5%B7%BB%E6%B8%A9%E6%B3%89_%E3%83%90%E3%83%A9%E5%9C%92%E3%81%A8%E3%83%9B%E3%83%86%E3%83%AB3%E9%A4%A8.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
     "title": "Hanamaki, Iwate",
     "credit": "Wikimedia Commons",
-    "page": "https://en.wikipedia.org/wiki/Hanamaki%2C_Iwate"
+    "page": "https://en.wikipedia.org/wiki/Hanamaki%2C_Iwate",
+    "slug": "hanamaki"
   },
   "Sapporo": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/5/54/SapporoCity_Skylines2020.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
@@ -39,6 +40,14 @@
     "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4d/Stanford_University_Main_Quad_-_7_June_2009.jpg/1200px-Stanford_University_Main_Quad_-_7_June_2009.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
     "title": "Main Quad (Stanford University)",
     "credit": "Wikimedia Commons",
-    "page": "https://en.wikipedia.org/wiki/Main_Quad_(Stanford_University)"
+    "page": "https://en.wikipedia.org/wiki/Main_Quad_(Stanford_University)",
+    "slug": "stanford"
+  },
+  "Sendai": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/1/1d/SendaiCity_Skylines_from_Mukaiyama2018.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+    "title": "Sendai",
+    "credit": "Wikimedia Commons",
+    "page": "https://en.wikipedia.org/wiki/Sendai",
+    "slug": "sendai"
   }
 }

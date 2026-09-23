@@ -18,8 +18,11 @@ async function lookup(name) {
   }
   return null;
 }
+const slug = n => n.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 (async () => {
-  const names = process.argv.slice(2); const out = {};
-  for (const n of names) { const v = await lookup(n); if (v) out[n] = v; }
+  const argv = process.argv.slice(2); const di = argv.indexOf('--download'); const dir = di >= 0 ? argv[di + 1] : null; const names = argv.filter((a, i) => a !== '--download' && i !== di + 1);
+  const out = {};
+  for (const n of names) { const v = await lookup(n); if (!v) continue; v.slug = slug(n); out[n] = v;
+    if (dir) { try { fs.mkdirSync(dir, { recursive: true }); const f = path.join(dir, v.slug + '.jpg'); if (!fs.existsSync(f)) { const r = await fetch(v.url, { headers: { 'User-Agent': 'ib45-brief/1.0 (personal study planner)' } }); if (r.ok) fs.writeFileSync(f, Buffer.from(await r.arrayBuffer())); } } catch (e) {} } }
   fs.writeFileSync(CACHE, JSON.stringify(cache, null, 2)); console.log(JSON.stringify(out));
 })();

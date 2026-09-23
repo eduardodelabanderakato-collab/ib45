@@ -3,10 +3,13 @@
 const fs = require('fs'), path = require('path'), { execFileSync } = require('child_process');
 const day = process.argv[2] || new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Sao_Paulo' }).format(new Date());
 const out = JSON.parse(execFileSync('node', [path.join(__dirname, 'brief.js'), day]).toString());
-const html = fs.readFileSync(out.html, 'utf8'), text = fs.readFileSync(out.text, 'utf8');
+let html = fs.readFileSync(out.html, 'utf8'); const text = fs.readFileSync(out.text, 'utf8');
+async function fixPhotos() { const re = /<img src="([^"]+)" data-fallback="([^"]+)"/g; let m; const jobs = []; while ((m = re.exec(html))) jobs.push([m[1], m[2]]);
+  for (const [src, fb] of jobs) { try { const r = await fetch(src, { method: 'HEAD' }); if (!r.ok) html = html.split(`src="${src}"`).join(`src="${fb}"`); } catch (e) { html = html.split(`src="${src}"`).join(`src="${fb}"`); } } }
 const to = process.env.MAIL_TO; if (!to) { console.error('missing env: MAIL_TO'); process.exit(2); }
 const fromName = process.env.MAIL_FROM_NAME || 'Flight Deck';
 (async () => {
+  await fixPhotos();
   if (process.env.RESEND_API_KEY) {
     const from = process.env.MAIL_FROM || 'onboarding@resend.dev';
     const r = await fetch('https://api.resend.com/emails', { method: 'POST', headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ from: `${fromName} <${from}>`, to: [to], subject: out.subject, html, text }) });

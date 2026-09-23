@@ -15,7 +15,7 @@ const yday = P.addDays(day, -1); const y = (state.log || []).find(r => r.date ==
 const cds = plan.countdowns.filter(c => c.type !== 'checkpoint'); const near = cds.filter(c => c.daysLeft <= 14); const cps = plan.countdowns.filter(c => c.type === 'checkpoint').slice(0, 1);
 const stanfordAll = JSON.parse(fs.readFileSync(path.join(ROOT, 'app/seed/stanford.json'), 'utf8')).milestones; const stanford = stanfordAll.filter(m => m.date >= day && P.addDays(day, 21) >= m.date).slice(0, 3);
 let IMG = {}; try { IMG = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/images.json'), 'utf8')); } catch (e) {}
-const photo = (name, cap) => { const im = IMG[name]; return im ? `<img src="${im.url}" width="564" alt="${esc(name)}" style="width:100%;height:auto;max-height:320px;object-fit:cover;border-radius:10px;display:block"><div style="text-align:center;font-size:12px;color:#6B6B6B;margin:6px 0 16px">(${esc(cap || name)} · Image: ${esc(im.credit)})</div>` : ''; };
+const photo = (name, cap) => { const im = IMG[name]; if (!im) return ''; const src = im.slug ? `${SITE}/photos/${im.slug}.jpg` : im.url; return im ? `<img src="${src}" data-fallback="${im.url}" width="564" alt="${esc(name)}" style="width:100%;height:auto;max-height:320px;object-fit:cover;border-radius:10px;display:block"><div style="text-align:center;font-size:12px;color:#6B6B6B;margin:6px 0 16px">(${esc(cap || name)} · Image: ${esc(im.credit)})</div>` : ''; };
 const wk = plan.rates; const minutesToday = it.legs.reduce((a, l) => a + (l.flight ? l.flight.minutes : 0), 0); const nFlights = it.legs.filter(l => l.flight).length;
 const DOW = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY']; const MONTHS = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER'];
 const d0 = new Date(day + 'T12:00:00Z'); const dateLine = `${DOW[d0.getUTCDay()]}, ${d0.getUTCDate()} ${MONTHS[d0.getUTCMonth()]} ${d0.getUTCFullYear()}`;
@@ -25,6 +25,13 @@ const intro = [`good morning.`, plan.dayType ? `it's day ${plan.dayType}.` : `no
   nFlights ? `${['no', 'one', 'two', 'three', 'four', 'five'][nFlights] || nFlights} flight${nFlights === 1 ? '' : 's'}, ${minutesToday} minutes in the air, first wheels up at ${flyable[0].start}.` : `no flights scheduled.`,
   testToday ? `${testToday.title.toLowerCase()} is today. you did the work; the plan for today is light.` : testTomorrow ? `${testTomorrow.title.toLowerCase()} is tomorrow: nothing new today, only what's already yours.` : near[0] ? `${near[0].subjectShort.toLowerCase()} is ${near[0].daysLeft} days out and you're on ramp day ${near[0].rampDay}.` : `nothing is due within two weeks. this is when the lead is built.`,
   `that's the whole job.`].join(' ');
+const priorities = (() => { const P_ = [];
+  for (const c of near.filter(c => c.daysLeft <= 3)) P_.push(`<b>${esc(c.subjectShort)}</b> · ${c.daysLeft === 0 ? 'test today' : c.daysLeft === 1 ? 'test tomorrow' : `test in ${c.daysLeft} days`}: ${esc((c.task || '').replace(/^\S+ (ramp|report) -\d+: /, '')) || 'ramp'}`);
+  if (flyable[0]) P_.push(`<b>${flyable[0].start}</b> · ${esc(flyable[0].title)}: ${esc(flyable[0].steps[0] || '')}`);
+  for (const c of near.filter(c => c.daysLeft > 3 && c.daysLeft <= 14)) P_.push(`<b>${esc(c.subjectShort)}</b> · ${c.daysLeft} days out: ${esc((c.task || '').replace(/^\S+ (ramp|report) -\d+: /, ''))}`);
+  if (cps[0]) P_.push(`<b>Reading</b> · ${esc(cps[0].title)} ${cps[0].daysLeft === 0 ? 'today' : 'in ' + cps[0].daysLeft + ' days'}`);
+  for (const m of stanford.filter(m => P.addDays(day, 7) >= m.date)) P_.push(`<b>Stanford</b> · ${esc(m.title)} · ${P.pretty(m.date)}`);
+  return P_.slice(0, 5); })();
 const subject = `${edTitle} · ${plan.pretty}${flyable[0] ? ` · ${flyable[0].start} ${flyable[0].title}` : ''}${near[0] ? ` · ${near[0].subjectShort} in ${near[0].daysLeft}d` : ''}`;
 const yesterday = y ? (y.started ? `<b>Started ✓</b> · ${y.sprintsDone}/${y.sprintsPlanned} blocks flown · ${y.focusMinutes || 0} min in the air · landed in ${esc(y.currentAirport || at)}` : `<b>Not started ✗</b> · no flights logged`) : `no audit for ${P.pretty(yday)}`;
 
@@ -53,6 +60,9 @@ const html = `<!doctype html><html><head><meta charset="utf-8"><meta name="viewp
   <div style="text-align:center;font-size:11px;letter-spacing:.14em;color:${C.dim};text-transform:uppercase;font-weight:600">${esc(P.prettyLong ? '' : '')}${dateLine} &nbsp;•&nbsp; reading time: 2 minutes</div>
   <div style="text-align:center;font-size:26px;font-weight:800;letter-spacing:-.02em;margin:18px 0 10px">${esc(edTitle)}</div>
   ${p(esc(intro))}
+  ${dots}
+  ${label('priorities')}
+  <ol style="margin:0 0 4px;padding-left:22px;font-size:15.5px;line-height:1.7">${priorities.map(x => `<li>${x}</li>`).join('')}</ol>
   ${dots}
   ${label('quick takes')}
   <table role="presentation" cellpadding="0" cellspacing="0" style="font-size:15px;line-height:1.7">
