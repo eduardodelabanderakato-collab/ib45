@@ -86,7 +86,7 @@ ${nextBrief ? dots + label('reading · persepolis') + H(`Chapters ${nextBrief.ch
 ${portBrief && near.find(c => c.subject === 'port') ? dots + label('português · prova 1') + H(portBrief.titles) + P_(`<b>O que esperar.</b> ${esc(portBrief.expect)}`) + P_(`<b>Observar.</b> ${esc(portBrief.watch)}`) + box(`${esc(portBrief.quotes)}`) : ''}
 ${dots}
 ${label('tonight')}
-${P_(`<b>21:15</b> hard stop. <b>Report</b> in Life or the chat: blocks flown, errors added and closed, retrieval, one line on what the plan got wrong. <b>${esc(state.sleep.lightsOut)}</b> lights out.`)}
+${P_(`<b>21:15</b> hard stop. <b>Report</b> in Life or the chat: blocks flown, errors added and closed, retrieval, one line on what the plan got wrong.${P.readingTonight(state, day) ? ` <b>Then read:</b> ${esc(P.readingTonight(state, day).replace('Read tonight: ', ''))}.` : ''} <b>${esc(state.sleep.lightsOut)}</b> lights out.`)}
 <tr><td align="center" style="padding:8px 0 28px"><a href="${APP_URL}" style="display:inline-block;background:${C.navy};color:#ffffff;text-decoration:none;${font};font-weight:700;font-size:15px;padding:13px 24px">Open Life</a></td></tr>
 </table></td></tr>
 <tr><td style="background:${C.bg};padding:18px 20px;${font};font-size:12px;line-height:1.6;color:${C.dim};text-align:center">Life · edition ${editionNo} · sent every morning at 06:45 from your own plan.<br>Tests, holidays, changes: tell Claude in the IB45 chat.</td></tr>

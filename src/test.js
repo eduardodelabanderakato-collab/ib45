@@ -75,7 +75,7 @@ test('rates: rolling 7 days, no streaks', () => {
 test('blocks carry a title and 1-4 steps; overrides win', () => {
   const b = P.blocksFor(state, '2026-09-23');
   const lab = b.find(x => x.slot === 'LAB');
-  assert.equal(lab.title, 'Chem lab');
+  assert.equal(lab.title, 'Library · Friday prep');
   assert.equal(lab.steps.length, 3);
   const def = P.blocksFor(state, '2026-10-06'); // Tuesday, no overrides
   for (const x of def) { assert.ok(x.title.length > 0); assert.ok(x.steps.length >= 1 && x.steps.length <= 4, x.slot); }

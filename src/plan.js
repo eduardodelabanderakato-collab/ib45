@@ -115,6 +115,12 @@ function countdowns(state, iso) {
     .sort((x, y) => x.daysLeft - y.daysLeft);
 }
 
+function readingTonight(state, iso) {
+  const w = state.subjects.eng && state.subjects.eng.work; if (!w || !w.checkpoints) return null;
+  const next = w.checkpoints.find(([, d]) => d > iso); if (!next) return null;
+  return `Read tonight: ${w.title.split(' (')[0]} ch ${next[0]} (checkpoint ${next[1].slice(5)}), 3 quotes tagged`;
+}
+
 function defaultTask(state, iso, block, cds) {
   const wd = weekday(iso);
   const live = cds.filter(c => c.daysLeft <= 14 && c.daysLeft > 0 && c.task);
@@ -127,7 +133,7 @@ function defaultTask(state, iso, block, cds) {
     return { subject: id, task: s.kind === 'language' ? `${s.short} lab: bring this fortnight's essay draft; ask for a mark per criterion` : `${s.short} lab: bring your open error log; work the starred errors with the teacher` };
   }
   if (block.kind === 'tutor') { const s = state.subjects[block.subject]; return { subject: block.subject, task: `${s.short} tutor: bring the error log, not open questions` }; }
-  if (block.kind === 'retrieval') return { subject: 'all', task: 'Retrieval 30 min: this week\'s topics cold (2-3 problems or a brain dump each). Then the 2-minute nightly report.' };
+  if (block.kind === 'retrieval') { const rd = readingTonight(state, iso); return { subject: 'all', task: `Retrieval 30 min: this week's topics cold (2-3 problems or a brain dump each) · Then the 2-minute nightly report${rd ? ' · ' + rd : ''}` }; }
   if (block.kind === 'fixed') return { subject: 'all', task: block.task };
   if (block.slot === 'S1' && wd >= 1 && wd <= 5) return { subject: 'pre', task: preLearnTask(state, iso) };
   if (block.slot === 'S2') {
@@ -140,7 +146,7 @@ function defaultTask(state, iso, block, cds) {
   if (block.slot === 'SAT2') { const id = isoWeek(iso) % 2 === 0 ? 'port' : 'eng'; const s = state.subjects[id]; return { subject: id, task: `${s.short}: timed Paper 1 (75 min). Send to teacher tonight with the 4-line note.` }; }
   if (block.slot === 'SATBLK') return { subject: 'sat', task: state.subjects.sat.next[0] };
   if (block.slot === 'DIAG') return { subject: 'all', task: 'Mini-diagnostics: two subjects, 25 min each, timed, mark-scheme marked, score per topic.' };
-  if (block.slot === 'FLEX') { return live[0] ? { subject: live[0].subject, task: live[0].task } : { subject: 'all', task: 'Flex: close open errors from this week (two spaced reattempts each).' }; }
+  if (block.slot === 'FLEX') { const econ = 'The Economist: one article on this week\'s Econ topic → example card (what, when, a number, the mechanism)'; return live[0] ? { subject: live[0].subject, task: live[0].task + ' · ' + econ } : { subject: 'econ', task: 'Flex: close open errors from this week (two spaced reattempts each) · ' + econ }; }
   return { subject: 'all', task: 'Free' };
 }
 
@@ -205,4 +211,4 @@ function planFor(state, iso) {
   return { date: iso, pretty: pretty(iso), prettyLong: prettyLong(iso), dayType: t, dayLabel: t ? `Day ${t}` : (isWeekend(iso) ? 'Weekend' : 'No school'), phase: phaseInfo(state, iso), blocks: blocksFor(state, iso), countdowns: countdowns(state, iso), rates: rates(state, iso), readiness: readiness(state), sleep: state.sleep };
 }
 
-module.exports = { dayType, nextSchoolDay, blocksFor, countdowns, rates, readiness, planFor, addDays, pretty, TEMPLATE };
+module.exports = { dayType, nextSchoolDay, blocksFor, countdowns, rates, readiness, planFor, addDays, pretty, TEMPLATE, readingTonight };
