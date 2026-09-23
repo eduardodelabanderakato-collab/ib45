@@ -57,107 +57,55 @@
       ],
       "topics": [
         {
-          "name": "Exponents & logarithms",
+          "name": "Exponents & logarithms (Unit 1)",
           "status": "taught"
         },
         {
-          "name": "Sequences & series",
+          "name": "Sequences & series, financial applications",
           "status": "taught"
         },
         {
-          "name": "The binomial theorem",
+          "name": "3D geometry: solids, distance, angles",
+          "status": "learning"
+        },
+        {
+          "name": "Trigonometry: sine & cosine rule, applications",
+          "status": "learning"
+        },
+        {
+          "name": "Arcs & sectors, radians",
           "status": "new"
         },
         {
-          "name": "Counting principles & permutations",
+          "name": "Unit circle, trig equations, trig functions",
           "status": "new"
         },
         {
-          "name": "Proof: induction & contradiction",
+          "name": "Identities; HL: reciprocal/inverse trig, compound & double angle",
           "status": "new"
         },
         {
-          "name": "Complex numbers",
+          "name": "Functions I: linear, quadratic, exp/log, trig, composite & inverse, transformations, asymptotes",
           "status": "new"
         },
         {
-          "name": "Polynomials, factor & remainder theorems",
+          "name": "Functions II: polynomials, Vieta, rational functions, inequalities, modulus, odd/even",
           "status": "new"
         },
         {
-          "name": "Functions: composition & inverses",
+          "name": "Statistics: basics, HL statistics, bivariate data",
           "status": "new"
         },
         {
-          "name": "Transformations of graphs",
+          "name": "Calculus: limits, derivatives, product/quotient/chain, tangents & normals",
           "status": "new"
         },
         {
-          "name": "Quadratics & inequalities",
+          "name": "IA: theme, mind map, research, proposal (June)",
           "status": "new"
         },
         {
-          "name": "Rational functions",
-          "status": "new"
-        },
-        {
-          "name": "Trigonometric identities & equations",
-          "status": "new"
-        },
-        {
-          "name": "Trigonometric functions & modelling",
-          "status": "new"
-        },
-        {
-          "name": "Vectors & the scalar/vector product",
-          "status": "new"
-        },
-        {
-          "name": "Vector lines & planes",
-          "status": "new"
-        },
-        {
-          "name": "Descriptive & bivariate statistics",
-          "status": "new"
-        },
-        {
-          "name": "Probability & conditional probability",
-          "status": "new"
-        },
-        {
-          "name": "Binomial distribution",
-          "status": "new"
-        },
-        {
-          "name": "The normal distribution",
-          "status": "new"
-        },
-        {
-          "name": "Limits, continuity & l’Hôpital",
-          "status": "new"
-        },
-        {
-          "name": "Differentiation rules & implicit differentiation",
-          "status": "new"
-        },
-        {
-          "name": "Optimisation & related rates",
-          "status": "new"
-        },
-        {
-          "name": "Maclaurin series",
-          "status": "new"
-        },
-        {
-          "name": "Integration techniques",
-          "status": "new"
-        },
-        {
-          "name": "Areas, volumes & kinematics (calculus)",
-          "status": "new"
-        },
-        {
-          "name": "Differential equations",
+          "name": "Year 2: binomial, counting, proof, complex numbers, vectors, integration, probability distributions",
           "status": "new"
         }
       ],
@@ -172,7 +120,7 @@
         "Bin. Exp.",
         "Proofs"
       ],
-      "teacherNote": "Teacher's 2025-26 diary (docs/research/math-class-diary-2025-26.pdf): Trig/Geometry Part A = 3D geometry → sine/cosine rule → applications → arcs & sectors → RV List 1; Part B = unit circle → trig equations → trig functions → RV List 2 → Test Paper 1 (~32 marks/35-40 min, no GDC) + Paper 2 (~36 marks/40 min). Last year the trig test fell on Oct 27. Tests are preceded by an RV (Revision Village) list. Sem 2: Functions → Stats → Calculus → cumulative year-end test (40% calc) → IA proposal.",
+      "teacherNote": "Class diary from last year (C period, 2025-26) saved in docs/research/math-aahl-class-diary-2025-26.pdf; this year runs about one week behind it (Exp&Logs test was Sep 22 vs Sep 15-17 last year). Order: Exp&Logs → Sequences & Series → 3D Geometry + Trig (RV List 1 Geometry ~Oct 16, RV List 2 Trig ~Oct 30, test P1+P2 ~Nov 3) → semester exams Dec 3-8 → Sem 2: Functions (Paper 3 investigation formative ~Feb 26; Functions I test P2 ~Mar 22; Functions II P2 ~Apr 6 + P1 ~Apr 8) → Statistics (test ~May 3) → Calculus (investigation P2 ~May 27; cumulative year test, 40% calculus, in finals Jun 4-9) → IA proposal ~Jun 2. All projected until the teacher posts this year's diary.",
       "testFormat": "Two short papers: Paper 1 no-GDC ~32 marks/35-40 min; Paper 2 GDC ~36 marks/40 min. RV list assigned ~1 week before."
     },
     "phys": {
@@ -896,6 +844,77 @@
       "earlyDraft": "2027-05-08",
       "projected": true,
       "note": "IO delivery May 25 - Jun 9; final exams Jun 4-9."
+    },
+    {
+      "id": "math-exam-1204",
+      "subject": "math",
+      "type": "test",
+      "title": "Math · semester exam (projected)",
+      "date": "2026-12-04",
+      "ramp": "science",
+      "projected": true,
+      "note": "School exams Dec 3-8 (from the English calendar). Math slot unknown; confirm."
+    },
+    {
+      "id": "math-p3-0226",
+      "subject": "math",
+      "type": "test",
+      "title": "Math · Paper 3 investigation, formative (projected)",
+      "date": "2027-02-26",
+      "ramp": "science",
+      "projected": true,
+      "note": "Last year Feb 27 (Fri), 1 hour, formative grade."
+    },
+    {
+      "id": "math-func1-0322",
+      "subject": "math",
+      "type": "test",
+      "title": "Math · Functions I test, Paper 2 (projected)",
+      "date": "2027-03-22",
+      "ramp": "science",
+      "projected": true,
+      "note": "Last year Mar 23 (Mon). Lin/quad/exp/log/trig, composite & inverse."
+    },
+    {
+      "id": "math-func2-0406",
+      "subject": "math",
+      "type": "test",
+      "title": "Math · Functions II test, Paper 2 + Paper 1 (projected)",
+      "date": "2027-04-06",
+      "ramp": "science",
+      "projected": true,
+      "note": "Last year Apr 7 (P2) and Apr 9 (P1). Polynomials, rationals, inequalities, odd/even."
+    },
+    {
+      "id": "math-stats-0503",
+      "subject": "math",
+      "type": "test",
+      "title": "Math · Statistics test (projected)",
+      "date": "2027-05-03",
+      "ramp": "science",
+      "projected": true,
+      "note": "Last year May 4 (Mon)."
+    },
+    {
+      "id": "math-calc-0604",
+      "subject": "math",
+      "type": "test",
+      "title": "Math · cumulative year test, 40% calculus (projected)",
+      "date": "2027-06-04",
+      "ramp": "science",
+      "projected": true,
+      "note": "Last year Jun 1; this year final exams Jun 4-9. Investigation Paper 2 ~May 27 before it."
+    },
+    {
+      "id": "math-ia-0602",
+      "subject": "math",
+      "type": "report",
+      "title": "Math · IA proposal submission (projected)",
+      "date": "2027-06-02",
+      "ramp": "report",
+      "earlyDraft": "2027-05-26",
+      "projected": true,
+      "note": "IA theme/mind map/research ~May 25."
     }
   ],
   "assignments": {
