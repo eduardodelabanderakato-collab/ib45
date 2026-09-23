@@ -306,33 +306,34 @@
         "ibchem.com"
       ],
       "next": [
-        "Confirm current unit with teacher (Wed lab)",
-        "S1.4 Counting particles: the mole",
-        "S1.5 Ideal gases",
-        "R2.1 Amount of chemical change",
-        "S3.1 Periodicity",
-        "S2.1 Ionic model"
+        "S1.1 Particulate nature of matter: states, mixtures, kinetic model (Oxford p.3 + Kognity)",
+        "S1.2 The nuclear atom: isotopes, mass spectra (p.20)",
+        "S1.3 Electron configurations: emission spectra, orbitals, Aufbau (p.34)",
+        "S1.4 Counting particles by mass: the mole, empirical formula, solutions (p.63)",
+        "S1.5 Ideal gases: gas laws, pV = nRT (p.80)",
+        "S2.1 The ionic model (p.95)",
+        "S2.2 The covalent model (p.117)"
       ],
       "topics": [
         {
           "name": "S1.1 Particulate nature of matter",
-          "status": "new"
+          "status": "learning"
         },
         {
           "name": "S1.2 The nuclear atom",
-          "status": "new"
+          "status": "learning"
         },
         {
           "name": "S1.3 Electron configurations",
-          "status": "new"
+          "status": "learning"
         },
         {
           "name": "S1.4 Counting particles: the mole",
-          "status": "new"
+          "status": "learning"
         },
         {
           "name": "S1.5 Ideal gases",
-          "status": "new"
+          "status": "learning"
         },
         {
           "name": "S2.1 The ionic model",
@@ -386,7 +387,9 @@
           "name": "R3.2 Redox (electron transfer)",
           "status": "new"
         }
-      ]
+      ],
+      "teacherNote": "Follows the Oxford IB Chemistry (2023) textbook order: Structure 1 → 2 → 3 → Tools → Reactivity 1 → 2 → 3. Test Oct 9 on Structure 1 (S1.1–S1.5). Lab report due Oct 4.",
+      "textbook": "Oxford IB Chemistry 2023 (answers: oxfordsecondary.com/ib-science-support)"
     },
     "econ": {
       "name": "Economics HL",
@@ -665,6 +668,15 @@
       "ramp": "science",
       "projected": true,
       "note": "Projected from last year's diary (Oct 27, 2025) shifted ~1 week; confirm with teacher when RV List 2 is announced."
+    },
+    {
+      "id": "chem-test-1009",
+      "subject": "chem",
+      "type": "test",
+      "title": "Chem test · Structure 1",
+      "date": "2026-10-09",
+      "ramp": "science",
+      "note": "Teacher-predicted date; covers S1.1–S1.5."
     }
   ],
   "assignments": {
