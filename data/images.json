@@ -17,12 +17,6 @@
     "credit": "Wikimedia Commons",
     "page": "https://en.wikipedia.org/wiki/Monbetsu%2C_Hokkaido"
   },
-  "Stanford": {
-    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b5/Seal_of_Leland_Stanford_Junior_University.svg/960px-Seal_of_Leland_Stanford_Junior_University.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-    "title": "Stanford University",
-    "credit": "Wikimedia Commons",
-    "page": "https://en.wikipedia.org/wiki/Stanford_University"
-  },
   "Tokyo": {
     "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b2/Skyscrapers_of_Shinjuku_2009_January.jpg/1200px-Skyscrapers_of_Shinjuku_2009_January.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
     "title": "Tokyo",
@@ -40,5 +34,11 @@
     "title": "São Paulo",
     "credit": "Wikimedia Commons",
     "page": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo"
+  },
+  "Stanford": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4d/Stanford_University_Main_Quad_-_7_June_2009.jpg/1200px-Stanford_University_Main_Quad_-_7_June_2009.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "title": "Main Quad (Stanford University)",
+    "credit": "Wikimedia Commons",
+    "page": "https://en.wikipedia.org/wiki/Main_Quad_(Stanford_University)"
   }
 }

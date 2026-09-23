@@ -4,7 +4,7 @@
 const fs = require('fs'), path = require('path');
 const CACHE = path.join(__dirname, '..', 'data/images.json');
 let cache = {}; try { cache = JSON.parse(fs.readFileSync(CACHE, 'utf8')); } catch (e) {}
-const ALIAS = { 'Tokyo': 'Tokyo', 'Stanford': 'Stanford University', 'São Paulo': 'São Paulo', 'Seoul': 'Seoul' };
+const ALIAS = { 'Tokyo': 'Tokyo', 'Stanford': 'Main Quad (Stanford University)', 'São Paulo': 'São Paulo', 'Seoul': 'Seoul' };
 async function lookup(name) {
   if (cache[name]) return cache[name];
   const title = ALIAS[name] || name;
