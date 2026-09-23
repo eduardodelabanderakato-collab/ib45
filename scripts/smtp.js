@@ -20,7 +20,9 @@ async function send({ host, port = 587, user, pass, from, fromName, to, subject,
   await cmd('EHLO ib45.local', 250);
   if (port !== 465) { await cmd('STARTTLS', 220); const plain = sock; plain.removeAllListeners('data'); sock = tls.connect({ socket: plain, servername: host }); await new Promise((res, rej) => { sock.once('secureConnect', res); sock.once('error', rej); }); rd = reader(sock); await cmd('EHLO ib45.local', 250); }
   if (dryRun) { await cmd('QUIT', 221); return 'handshake ok (TLS established, no auth attempted)'; }
-  await cmd('AUTH LOGIN', 334); await cmd(b64(user), 334, 'username'); await cmd(b64(pass), 235, 'password');
+  // AUTH PLAIN first (one round trip), fall back to AUTH LOGIN
+  try { await cmd('AUTH PLAIN ' + b64('\0' + user + '\0' + pass), 235, 'auth plain'); }
+  catch (e) { await cmd('AUTH LOGIN', 334); await cmd(b64(user), 334, 'username'); await cmd(b64(pass), 235, 'password'); }
   await cmd(`MAIL FROM:<${from}>`, 250); await cmd(`RCPT TO:<${to}>`, 250); await cmd('DATA', 354);
   const r = await cmd(msg + '\r\n.', 250, 'message'); await cmd('QUIT', 221); return r.trim();
 }
