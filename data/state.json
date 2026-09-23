@@ -809,21 +809,21 @@
       },
       {
         "slot": "S1",
-        "subject": "pre",
-        "title": "Pre-learn tomorrow",
+        "subject": "phys",
+        "title": "Physics ramp −2 · timed set",
         "steps": [
-          "Math · Trig: 3D geometry + sine & cosine rules · Nikolaidis · 15 min",
-          "Econ · 2.5 PED determinants & revenue · Kognity · 15 min",
-          "English · Persepolis ch 6–11 (checkpoint tomorrow) · 3 quotes tagged"
+          "10 mixed A.2 forces questions, 35 min, timed, no notes",
+          "Mark with the scheme; every lost mark into the error log",
+          "Star the ones you were sure about and got wrong"
         ]
       },
       {
         "slot": "EVE",
-        "subject": "phys",
-        "title": "Physics ramp −2",
+        "subject": "port",
+        "title": "Português ramp −2",
         "steps": [
-          "Redo every logged A.2 error, cold",
-          "Still wrong → 3-line rule card",
+          "25-min plan-only on another cartum: tese + 3 escolhas → efeito",
+          "Read the criteria card and the 3 anti-ENEM rules once",
           "Send the nightly report"
         ]
       }
@@ -841,22 +841,22 @@
       },
       {
         "slot": "S1",
-        "subject": "pre",
-        "title": "Pre-learn tomorrow",
+        "subject": "phys",
+        "title": "Physics ramp −1 · error pass",
         "steps": [
-          "Chem · S1.5 ideal gases: finish + Kognity questions · 15 min",
-          "Physics · A.2 momentum · Kognity · 15 min",
-          "Português · reler a obra (cartum) · 15 min"
+          "Redo every logged A.2 error, cold",
+          "Still wrong → 3-line rule card",
+          "Nothing new after this"
         ]
       },
       {
         "slot": "S2",
-        "subject": "phys",
-        "title": "Physics ramp −1",
+        "subject": "port",
+        "title": "Português ramp −1 · redraft",
         "steps": [
-          "Rule cards, read once",
-          "One brain dump per A.2 subtopic",
-          "Nothing new. Stop at 18:50"
+          "Redraft only the paragraphs the teacher named, 30 min",
+          "Compare with the criteria descriptors",
+          "Read your best paragraph aloud once"
         ]
       },
       {
@@ -864,19 +864,19 @@
         "subject": "phys",
         "title": "Physics tutor",
         "steps": [
-          "Bring the A.2 error log",
+          "Bring the A.2 error log and rule cards",
           "Starred errors first",
           "No open-ended questions"
         ]
       },
       {
         "slot": "EVE",
-        "subject": "port",
-        "title": "Portuguese redraft",
+        "subject": "phys",
+        "title": "Light night",
         "steps": [
-          "Redraft only the paragraphs named, 30 min",
-          "Read the criteria card once",
-          "Nightly report · lights out 22:45"
+          "One brain dump per A.2 subtopic, from memory",
+          "Read the rule cards once",
+          "Report · lights out 22:30"
         ]
       }
     ],
