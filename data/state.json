@@ -402,103 +402,141 @@
         "The Economist (subscription) → one real-world example card per week"
       ],
       "next": [
-        "2.5 PED: determinants, revenue & PED, tax incidence (Kognity) + one Economist article on a price change → example card (what, when, a number, the mechanism)",
-        "2.5 YED: normal/inferior, primary vs manufactured vs services (Kognity)",
-        "2.6 PES & primary commodities",
-        "2.7 Government intervention: taxes, subsidies, price controls",
-        "2.7 HL calculations: revenue, expenditure, welfare loss",
-        "2.8 Externalities"
+        "2.5 PED: definition, determinants, PED & total revenue, tax incidence (Kognity) + one Economist article on a price change -> example card (what, when, a number, the mechanism)",
+        "2.5 YED: normal vs inferior, primary vs manufactured vs services; HL: PED along a linear demand curve",
+        "2.6 PES: determinants, primary commodities vs manufactured goods (includes HL sub-topics)",
+        "2.7 Role of government: indirect taxes, subsidies, price ceilings & floors; HL calculations (revenue, expenditure, welfare loss)",
+        "2.8 Market failure: externalities & common pool resources; HL calculation",
+        "2.9 Public goods; 2.10 Asymmetric information (HL); 2.11 Market power (HL); 2.12 Equity (HL)",
+        "2.4 Critique of maximizing behaviour (HL only): behavioural economics, business objectives (place per teacher)"
       ],
       "topics": [
         {
-          "name": "Scarcity, choice & the economic problem",
+          "name": "1.1-1.2 Introduction: what is economics, how economists approach the world",
           "status": "taught"
         },
         {
-          "name": "Economic models: PPC & circular flow",
+          "name": "2.1 Demand (incl. HL sub-topics)",
           "status": "taught"
         },
         {
-          "name": "Demand & its determinants",
+          "name": "2.2 Supply (incl. HL sub-topics)",
           "status": "taught"
         },
         {
-          "name": "Supply & its determinants",
+          "name": "2.3 Competitive market equilibrium",
           "status": "taught"
         },
         {
-          "name": "Market equilibrium & allocative efficiency",
-          "status": "taught"
+          "name": "2.4 Critique of maximizing behaviour (HL only)",
+          "status": "new"
         },
         {
-          "name": "Elasticities: PED & YED",
+          "name": "2.5 Elasticity of demand: PED, YED (incl. HL sub-topics)",
           "status": "learning"
         },
         {
-          "name": "Elasticity of supply (PES)",
+          "name": "2.6 Elasticity of supply (incl. HL sub-topics)",
           "status": "new"
         },
         {
-          "name": "Government intervention: taxes, subsidies & price controls",
+          "name": "2.7 Role of government in microeconomics (incl. HL calculation)",
           "status": "new"
         },
         {
-          "name": "Market failure: externalities",
+          "name": "2.8 Market failure: externalities & common pool resources (incl. HL calculation)",
           "status": "new"
         },
         {
-          "name": "Market failure: public goods & common pool resources",
+          "name": "2.9 Market failure: public goods",
           "status": "new"
         },
         {
-          "name": "Market power: monopoly & oligopoly (HL)",
+          "name": "2.10 Market failure: asymmetric information (HL)",
           "status": "new"
         },
         {
-          "name": "Behavioural economics & rational choice (HL)",
+          "name": "2.11 Market failure: market power (HL)",
           "status": "new"
         },
         {
-          "name": "Measuring economic activity: GDP & GNI",
+          "name": "2.12 The market’s inability to achieve equity (HL)",
           "status": "new"
         },
         {
-          "name": "Aggregate demand & aggregate supply",
+          "name": "3.1 Measuring economic activity",
           "status": "new"
         },
         {
-          "name": "Macroeconomic objectives: growth, unemployment & inflation",
+          "name": "3.2 AD & AS",
           "status": "new"
         },
         {
-          "name": "Inequality & poverty",
+          "name": "3.3 Macroeconomic objectives (incl. HL calculation)",
           "status": "new"
         },
         {
-          "name": "Demand-side policies: fiscal & monetary",
+          "name": "3.4 Inequality & poverty (incl. HL calculation)",
           "status": "new"
         },
         {
-          "name": "Supply-side policies",
+          "name": "3.5 Monetary policy (incl. HL sub-topics)",
           "status": "new"
         },
         {
-          "name": "International trade & comparative advantage",
+          "name": "3.6 Fiscal policy (incl. HL sub-topics)",
           "status": "new"
         },
         {
-          "name": "Trade protection: tariffs, quotas & subsidies",
+          "name": "3.7 Supply-side policies",
           "status": "new"
         },
         {
-          "name": "Exchange rates & the balance of payments",
+          "name": "4.1 Benefits of international trade (incl. HL)",
           "status": "new"
         },
         {
-          "name": "Economic development: measures & strategies",
+          "name": "4.2 Types of trade protection (incl. HL calculations)",
+          "status": "new"
+        },
+        {
+          "name": "4.3 Arguments for/against protection",
+          "status": "new"
+        },
+        {
+          "name": "4.4 Economic integration",
+          "status": "new"
+        },
+        {
+          "name": "4.5 Exchange rates (incl. HL)",
+          "status": "new"
+        },
+        {
+          "name": "4.6 Balance of payments (incl. HL)",
+          "status": "new"
+        },
+        {
+          "name": "4.7 Sustainable development (incl. HL)",
+          "status": "new"
+        },
+        {
+          "name": "4.8 Measuring development",
+          "status": "new"
+        },
+        {
+          "name": "4.9 Barriers to growth/development",
+          "status": "new"
+        },
+        {
+          "name": "4.10 Growth/development strategies",
+          "status": "new"
+        },
+        {
+          "name": "IA: portfolio of three commentaries",
           "status": "new"
         }
-      ]
+      ],
+      "teacherNote": "Class follows the IB guide order (Units 1-4). 2.1-2.3 done; 2.5 Elasticity of demand just started (23 Sep). 2.4 is HL-only and sits after 2.3 in the guide; check with teacher whether it is taught now or later."
     },
     "eng": {
       "name": "English A Lit SL",
