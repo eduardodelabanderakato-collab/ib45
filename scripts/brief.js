@@ -28,67 +28,63 @@ const intro = [`good morning.`, plan.dayType ? `it's day ${plan.dayType}.` : `no
 const priorities = (() => { const P_ = [];
   for (const c of near.filter(c => c.daysLeft <= 3)) P_.push(`<b>${esc(c.subjectShort)}</b> · ${c.daysLeft === 0 ? 'test today' : c.daysLeft === 1 ? 'test tomorrow' : `test in ${c.daysLeft} days`}: ${esc((c.task || '').replace(/^\S+ (ramp|report) -\d+: /, '')) || 'ramp'}`);
   if (flyable[0]) P_.push(`<b>${flyable[0].start}</b> · ${esc(flyable[0].title)}: ${esc(flyable[0].steps[0] || '')}`);
-  for (const c of near.filter(c => c.daysLeft > 3 && c.daysLeft <= 14)) P_.push(`<b>${esc(c.subjectShort)}</b> · ${c.daysLeft} days out: ${esc((c.task || '').replace(/^\S+ (ramp|report) -\d+: /, ''))}`);
+  for (const c of near.filter(c => c.daysLeft > 3 && c.daysLeft <= 14 && c.task)) P_.push(`<b>${esc(c.subjectShort)}</b> · ${c.daysLeft} days out: ${esc((c.task || '').replace(/^\S+ (ramp|report) -\d+: /, ''))}`);
   if (cps[0]) P_.push(`<b>Reading</b> · ${esc(cps[0].title)} ${cps[0].daysLeft === 0 ? 'today' : 'in ' + cps[0].daysLeft + ' days'}`);
   for (const m of stanford.filter(m => P.addDays(day, 7) >= m.date)) P_.push(`<b>Stanford</b> · ${esc(m.title)} · ${P.pretty(m.date)}`);
   return P_.slice(0, 5); })();
 const subject = `${edTitle} · ${plan.pretty}${flyable[0] ? ` · ${flyable[0].start} ${flyable[0].title}` : ''}${near[0] ? ` · ${near[0].subjectShort} in ${near[0].daysLeft}d` : ''}`;
 const yesterday = y ? (y.started ? `<b>Started ✓</b> · ${y.sprintsDone}/${y.sprintsPlanned} blocks flown · ${y.focusMinutes || 0} min in the air · landed in ${esc(y.currentAirport || at)}` : `<b>Not started ✗</b> · no flights logged`) : `no audit for ${P.pretty(yday)}`;
 
-// ---------- pieces (email-safe inline CSS) ----------
-const C = { ink: '#111111', dim: '#6B6B6B', line: '#EBEBEB', bg: '#F6F6F6', card: '#FFFFFF', acc: '#8C1515', hi: '#FFE8A3', box: '#FFF7E0' };
-const font = `font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Helvetica,Arial,sans-serif`;
-const mono = `font-family:'SF Mono',Menlo,Consolas,monospace`;
-const dots = `<div style="text-align:center;color:#F5A623;letter-spacing:6px;font-size:14px;padding:18px 0">····</div>`;
-const label = s => `<div style="font-size:11px;font-weight:700;letter-spacing:.14em;color:${C.acc};text-transform:uppercase;margin:0 0 6px">${esc(s)}</div>`;
-const H = s => `<div style="font-size:22px;font-weight:800;letter-spacing:-.02em;line-height:1.15;margin:0 0 12px">${esc(s)}</div>`;
-const p = s => `<p style="margin:0 0 12px;font-size:15.5px;line-height:1.55">${s}</p>`;
-const hi = s => `<span style="background:${C.hi};padding:1px 5px;border-radius:3px;font-weight:700">${esc(s)}</span>`;
-const box = s => `<div style="background:${C.box};border-left:3px solid #F5A623;padding:10px 14px;margin:8px 0 14px;font-size:14.5px;line-height:1.5">${s}</div>`;
-const blockHTML = (b) => { const f = legByStart[b.start]; if (b.kind === 'fixed') return `<p style="margin:0 0 10px;font-size:14px;color:${C.dim}"><span style="${mono};font-size:12.5px">${b.start}</span> &nbsp;${esc(b.title)} · ${b.start}–${b.end}</p>`;
-  return `<div style="margin:0 0 16px"><div style="font-size:16.5px;font-weight:700"><span style="${mono};font-size:13px;color:${C.acc};font-weight:600">${b.start}–${b.end}</span> &nbsp;${esc(b.title)}${b.where ? ` <span style="font-weight:500;color:${C.dim}">· ${esc(b.where)}</span>` : ''}</div>
-  ${f ? `<div style="font-size:13px;color:${C.dim};margin:2px 0 6px">✈️ <span style="${mono}">${f.from} → ${f.to}</span> · ${esc(f.city)} · ${f.minutes} min in the air</div>` : ''}
-  ${b.steps.map(s => `<div style="font-size:15px;line-height:1.5;padding-left:2px">○ &nbsp;${esc(s)}</div>`).join('')}</div>`; };
+// ---------- newsletter HTML (Gmail-safe: tables, solid colors, system fonts) ----------
+const C = { ink: '#1a1a1a', body: '#333333', dim: '#777777', line: '#e6e6e6', bg: '#f4f4f4', card: '#ffffff', acc: '#0b5fff', hi: '#ffe58f', warm: '#f59e0b', box: '#fff8e1', navy: '#061633' };
+const font = `font-family:Helvetica Neue,Helvetica,Arial,sans-serif`;
+const dots = `<tr><td align="center" style="padding:22px 0 18px;color:${C.warm};font-size:16px;letter-spacing:8px;${font}">····</td></tr>`;
+const label = t => `<tr><td style="padding:0 0 8px;${font};font-size:12px;font-weight:700;letter-spacing:2px;color:${C.acc};text-transform:uppercase">${esc(t)}</td></tr>`;
+const H = t => `<tr><td style="padding:0 0 12px;${font};font-size:24px;font-weight:800;line-height:1.2;color:${C.ink}">${esc(t)}</td></tr>`;
+const P_ = html => `<tr><td style="padding:0 0 14px;${font};font-size:16px;line-height:1.6;color:${C.body}">${html}</td></tr>`;
+const hi = t => `<span style="background:${C.hi};padding:2px 6px;font-weight:700;color:${C.ink}">${esc(t)}</span>`;
+const box = html => `<tr><td style="padding:0 0 16px"><table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td style="background:${C.box};border-left:4px solid ${C.warm};padding:12px 16px;${font};font-size:15px;line-height:1.55;color:${C.body}">${html}</td></tr></table></td></tr>`;
+const img = (src, alt, cap, fb) => `<tr><td style="padding:4px 0 6px"><img src="${src}"${fb ? ` data-fallback="${fb}"` : ''} width="560" alt="${esc(alt)}" style="display:block;width:100%;max-width:560px;height:auto;border:0"></td></tr>${cap ? `<tr><td align="center" style="padding:0 0 18px;${font};font-size:12px;color:${C.dim}">(${esc(cap)})</td></tr>` : ''}`;
+const photoRow = (name, cap) => { const im = IMG[name]; if (!im) return ''; const src = im.slug ? `${SITE}/photos/${im.slug}.jpg` : im.url; return img(src, name, `${cap || name} · Image: ${im.credit}`, im.url); };
+const emojiFor = b => b.kind === 'lab' ? '🧪' : b.kind === 'tutor' ? '🎓' : b.kind === 'retrieval' ? '🌙' : b.slot === 'S1' ? '📖' : b.subject === 'port' ? '🇧🇷' : b.subject === 'eng' ? '📚' : b.subject === 'math' ? '📐' : b.subject === 'phys' ? '⚛️' : b.subject === 'chem' ? '⚗️' : b.subject === 'econ' ? '📈' : '✈️';
+const blockRows = b => { const f = legByStart[b.start]; if (b.kind === 'fixed') return P_(`<span style="color:${C.dim}">${b.start}–${b.end} · ${esc(b.title)}</span>`);
+  return P_(`<b style="color:${C.ink}">${emojiFor(b)} ${b.start} · ${esc(b.title)}</b>${f ? ` <span style="color:${C.dim}">— ${esc(f.city)} in ${f.minutes} minutes</span>` : ''}<br>${b.steps.map(st => `&nbsp;&nbsp;○ ${esc(st)}`).join('<br>')}`); };
+const wd = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][d0.getUTCDay()];
+const editionNo = Math.max(1, Math.round((new Date(day + 'T12:00:00Z') - new Date('2026-09-23T12:00:00Z')) / 86400000) + 1);
+const nextDest = F.BY[it.endsAt] ? F.BY[it.endsAt].c : null;
 const sectionsList = [['✈️', `${nFlights ? `${nFlights} flight${nFlights === 1 ? '' : 's'}, ${minutesToday} min in the air` : 'No flights today'} — the itinerary`], ...near.slice(0, 2).map(c => ['🧪', `${c.subjectShort} ramp day ${c.rampDay}: ${(c.task || '').replace(/^\S+ (ramp|report) -\d+: /, '')}`]), ...(cps.length ? [['📚', `${cps[0].title} · ${cps[0].daysLeft === 0 ? 'today' : cps[0].daysLeft + ' days'}`]] : []), ...(stanford[0] ? [['🌲', `Stanford: ${stanford[0].title} · ${P.pretty(stanford[0].date)}`]] : []), ['🌙', `Tonight: hard stop 21:15, report, lights out ${state.sleep.lightsOut}`]];
-
-const html = `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>${esc(subject)}</title></head>
-<body style="margin:0;background:${C.bg};${font};color:${C.ink}">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:${C.bg}"><tr><td align="center" style="padding:24px 12px">
-<table role="presentation" width="620" cellpadding="0" cellspacing="0" style="max-width:620px;width:100%;background:${C.card};border-radius:14px;overflow:hidden">
-<tr><td style="background:#061633;background-image:radial-gradient(circle at 50% 30%,#0e3a7a 0%,#061633 60%,#03091c 100%);padding:26px 28px;text-align:center"><img src="${SITE}/hologram-figure.png" height="150" alt="" style="height:150px;width:auto;display:block;margin:0 auto 10px"><div style="font-size:38px;font-weight:800;color:#EAF2FF;letter-spacing:-.03em;line-height:1">Life</div><div style="margin-top:8px;font-size:11px;letter-spacing:.14em;color:#7fd8ff;text-transform:uppercase;font-weight:600">Eduardo · IB 45 · Class of 2032</div></td></tr>
-<tr><td style="padding:26px 28px 0">
-  <div style="text-align:center;font-size:11px;letter-spacing:.14em;color:${C.dim};text-transform:uppercase;font-weight:600">${esc(P.prettyLong ? '' : '')}${dateLine} &nbsp;•&nbsp; reading time: 2 minutes</div>
-  <div style="text-align:center;font-size:26px;font-weight:800;letter-spacing:-.02em;margin:18px 0 10px">${esc(edTitle)}</div>
-  ${p(esc(intro))}
-  ${dots}
-  ${label('priorities')}
-  <ol style="margin:0 0 4px;padding-left:22px;font-size:15.5px;line-height:1.7">${priorities.map(x => `<li>${x}</li>`).join('')}</ol>
-  ${dots}
-  ${label('quick takes')}
-  <table role="presentation" cellpadding="0" cellspacing="0" style="font-size:15px;line-height:1.7">
-  <tr><td>${hi('Yesterday:')} ${yesterday}</td></tr>
-  <tr><td>${hi('Position:')} <span style="${mono}">${esc(at)}</span> · ${esc(city)} · ${(t.kmTotal || 0).toLocaleString('en-US')} km flown so far</td></tr>
-  <tr><td>${hi('This week:')} started ${wk.daysStarted} of ${wk.schoolDaysSoFar} school days</td></tr>
-  ${near[0] ? `<tr><td>${hi('Next test:')} ${esc(near[0].title)} · ${near[0].daysLeft === 0 ? 'today' : near[0].daysLeft === 1 ? 'tomorrow' : `in ${near[0].daysLeft} days`}</td></tr>` : ''}
-  ${cps.length ? `<tr><td>${hi('Reading:')} ${esc(cps[0].title)} · ${cps[0].daysLeft === 0 ? 'today' : `${cps[0].daysLeft} days`}</td></tr>` : ''}
-  </table>
-  ${dots}
-  ${label("in today's edition")}
-  <div style="font-size:15px;line-height:1.8">${sectionsList.map(([e, s]) => `${e} &nbsp;${esc(s)}<br>`).join('')}</div>
-  ${dots}
-  <img src="${SITE}/map.png?d=${day}" width="564" alt="Route map" style="width:100%;height:auto;border-radius:10px;border:1px solid ${C.line};display:block">
-  <div style="text-align:center;font-size:12px;color:${C.dim};margin:6px 0 20px">(Route so far: ${esc((t.visited || []).join(' → '))} · ${(t.kmTotal || 0).toLocaleString('en-US')} km · ${Math.round((t.minutesTotal || 0) / 60 * 10) / 10} h)</div>
-  ${photo(F.BY[it.endsAt] ? F.BY[it.endsAt].c : '', `Tonight you land in ${F.BY[it.endsAt] ? F.BY[it.endsAt].c : it.endsAt}`)}
-  ${label('today')}${H(nFlights ? `${['No', 'One', 'Two', 'Three', 'Four', 'Five'][nFlights] || nFlights} flight${nFlights === 1 ? '' : 's'}, ${minutesToday} minutes in the air` : 'A day on the ground')}
-  ${plan.blocks.map(blockHTML).join('')}
-  ${box(`<b>Under the hood…</b> the audit reads your Focus Flight log at 21:20. Only flights count; a block with no flight is a missed block.`)}
-  ${near.length ? dots + label('ramps') + H(near.length === 1 ? `${near[0].subjectShort}: day ${near[0].rampDay} of the ramp` : `${near.length} tests inside the 14-day window`) + near.map(c => p(`<b>${esc(c.title)}</b> · ${c.daysLeft === 0 ? 'today' : c.daysLeft === 1 ? 'tomorrow' : `${c.daysLeft} days`}${c.task ? `<br>${esc(c.task.replace(/^\S+ (ramp|report) -\d+: /, ''))}` : ''}`)).join('') + box(`<b>Remembering:</b> a test announced only two weeks out is a finishing sprint, not a learning sprint. The base keeps running underneath.`) : ''}
-  ${cds.length > near.length ? dots + label('countdowns') + `<div style="font-size:15px;line-height:1.8">${cds.slice(0, 6).map(c => `<b style="${mono};font-size:13px;color:${c.daysLeft <= 3 ? C.acc : C.ink}">${String(c.daysLeft).padStart(2, ' ')}d</b> &nbsp;${esc(c.title)}<br>`).join('')}</div>` : ''}
-  ${stanford.length ? dots + label('stanford · class of 2032') + photo('Stanford', 'Main Quad, Stanford University') + H(`${P.addDays(day, 0) <= '2027-11-01' ? Math.round((new Date('2027-11-01T12:00:00Z') - new Date(day + 'T12:00:00Z')) / 86400000) : 0} days to Restrictive Early Action`) + `<div style="font-size:15px;line-height:1.8">${stanford.map(m => `<b style="${mono};font-size:13px">${m.date.slice(5)}</b> &nbsp;${esc(m.title)} <span style="color:${C.dim};font-size:13px">· ${esc(m.owner)}</span><br>`).join('')}</div>` : ''}
-  ${dots}${label('tonight')}${p(`<b>21:15</b> hard stop. <b>Report</b> in the app or the chat: blocks flown, errors added and closed, retrieval, one line on what the plan got wrong. <b>${esc(state.sleep.lightsOut)}</b> lights out.`)}
-  <div style="text-align:center;padding:10px 0 26px"><a href="${APP_URL}" style="display:inline-block;background:${C.acc};color:#fff;text-decoration:none;font-weight:700;font-size:14px;padding:12px 22px;border-radius:10px">Open Life</a></div>
-</td></tr>
-<tr><td style="background:${C.bg};padding:16px 28px;text-align:center;font-size:12px;color:${C.dim};line-height:1.6">Sent every morning at 06:45 from your own plan. Changes, tests, holidays: tell Claude in the IB45 chat.<br>${esc(dateLine)} · edition ${Math.max(1, Math.round((new Date(day + 'T12:00:00Z') - new Date('2026-09-23T12:00:00Z')) / 86400000) + 1)}</td></tr>
+const html = `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(subject)}</title></head>
+<body style="margin:0;padding:0;background:${C.bg}">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:${C.bg}"><tr><td align="center" style="padding:20px 10px">
+<table role="presentation" width="600" cellpadding="0" cellspacing="0" style="width:600px;max-width:100%;background:${C.card}">
+<tr><td style="padding:0"><img src="${SITE}/banner.png?d=${day}" width="600" alt="Life" style="display:block;width:100%;max-width:600px;height:auto;border:0"></td></tr>
+<tr><td style="padding:22px 20px 0"><table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+<tr><td align="center" style="padding:0 0 16px;${font};font-size:12px;letter-spacing:2px;color:${C.dim};text-transform:uppercase">${esc(wd)}, ${d0.getUTCDate()} ${MONTHS[d0.getUTCMonth()].charAt(0) + MONTHS[d0.getUTCMonth()].slice(1).toLowerCase()} ${d0.getUTCFullYear()} &nbsp;•&nbsp; reading time: 2 minutes</td></tr>
+<tr><td align="center" style="padding:0 0 12px;${font};font-size:28px;font-weight:800;color:${C.ink};letter-spacing:-.5px">${esc(edTitle)}</td></tr>
+${P_(esc(intro))}
+${dots}
+${label('priorities')}
+${priorities.map((x, i) => P_(`${hi(String(i + 1) + '.')} &nbsp;${x}`)).join('')}
+${dots}
+${label("in today's edition")}
+${P_(sectionsList.map(([e, tt]) => `${e} &nbsp;${esc(tt)}`).join('<br>'))}
+${dots}
+${label('today')}
+${H(nFlights ? `${['No', 'One', 'Two', 'Three', 'Four', 'Five'][nFlights] || nFlights} flight${nFlights === 1 ? '' : 's'}, ${minutesToday} minutes in the air${nextDest ? `, landing in ${nextDest}` : ''}` : 'A day on the ground')}
+${nextDest ? photoRow(nextDest, `Tonight you land in ${nextDest}`) : ''}
+${P_(`${y ? (y.started ? `Yesterday you flew <b>${y.sprintsDone} of ${y.sprintsPlanned}</b> blocks, ${y.focusMinutes || 0} minutes in the air, and landed in ${esc(y.currentAirport || at)}.` : `Yesterday no flights were logged.`) : `No audit yet for ${P.pretty(yday)}.`} You're in <b>${esc(city)}</b>${t.kmTotal ? `, ${(t.kmTotal).toLocaleString('en-US')} km into the tour` : ''}. Started <b>${wk.daysStarted} of ${wk.schoolDaysSoFar}</b> school days this week.`)}
+${plan.blocks.map(blockRows).join('')}
+${box(`<b>Under the hood…</b> the audit reads your Focus Flight log at 21:20. Only flights count. A block with no flight is a missed block.`)}
+${near.length ? dots + label('ramps') + H(near.length === 1 ? `${near[0].subjectShort}: day ${near[0].rampDay} of the ramp` : `${near.length} tests inside the 14-day window`) + near.map(c => P_(`<b>${esc(c.title)}</b> · ${c.daysLeft === 0 ? 'today' : c.daysLeft === 1 ? 'tomorrow' : `in ${c.daysLeft} days`}${c.task ? `<br>${esc(c.task.replace(/^\S+ (ramp|report) -\d+: /, ''))}` : ''}`)).join('') + box(`<b>Remembering:</b> a test announced two weeks out is a finishing sprint, not a learning sprint. The base keeps running underneath.`) : ''}
+${cds.length > near.length ? dots + label('countdowns') + P_(cds.slice(0, 6).map(c => `<b style="color:${c.daysLeft <= 3 ? '#c0392b' : C.ink}">${c.daysLeft}d</b> &nbsp;${esc(c.title)}`).join('<br>')) : ''}
+${stanford.length ? dots + label('stanford · class of 2032') + H(`${Math.round((new Date('2027-11-01T12:00:00Z') - new Date(day + 'T12:00:00Z')) / 86400000)} days to Restrictive Early Action`) + photoRow('Stanford', 'Main Quad, Stanford University') + P_(stanford.map(m => `<b>${m.date.slice(5)}</b> &nbsp;${esc(m.title)} <span style="color:${C.dim}">· ${esc(m.owner)}</span>`).join('<br>')) : ''}
+${cps.length ? dots + label('reading') + P_(`📚 <b>${esc(cps[0].title)}</b> · ${cps[0].daysLeft === 0 ? 'today' : `in ${cps[0].daysLeft} days`}`) : ''}
+${dots}
+${label('tonight')}
+${P_(`<b>21:15</b> hard stop. <b>Report</b> in Life or the chat: blocks flown, errors added and closed, retrieval, one line on what the plan got wrong. <b>${esc(state.sleep.lightsOut)}</b> lights out.`)}
+<tr><td align="center" style="padding:8px 0 28px"><a href="${APP_URL}" style="display:inline-block;background:${C.navy};color:#ffffff;text-decoration:none;${font};font-weight:700;font-size:15px;padding:13px 24px">Open Life</a></td></tr>
+</table></td></tr>
+<tr><td style="background:${C.bg};padding:18px 20px;${font};font-size:12px;line-height:1.6;color:${C.dim};text-align:center">Life · edition ${editionNo} · sent every morning at 06:45 from your own plan.<br>Tests, holidays, changes: tell Claude in the IB45 chat.</td></tr>
 </table></td></tr></table></body></html>`;
 const text = `LIFE · ${dateLine}\n${edTitle}\n\n${intro}\n\nQUICK TAKES\nYesterday: ${yesterday.replace(/<[^>]+>/g, '')}\nPosition: ${at} · ${city}\nThis week: started ${wk.daysStarted} of ${wk.schoolDaysSoFar}\n${near[0] ? `Next test: ${near[0].title} in ${near[0].daysLeft}d\n` : ''}\nTODAY\n` + plan.blocks.map(b => { const f = legByStart[b.start]; return `${b.start}–${b.end}  ${b.title}${f ? `  ✈ ${f.from}→${f.to} ${f.minutes}m` : ''}` + (b.kind === 'fixed' ? '' : '\n' + b.steps.map(s => `   ○ ${s}`).join('\n')); }).join('\n') + (near.length ? `\n\nRAMPS\n` + near.map(c => `${c.title} · ${c.daysLeft}d · ${(c.task || '').replace(/^\S+ (ramp|report) -\d+: /, '')}`).join('\n') : '') + (stanford.length ? `\n\nSTANFORD\n` + stanford.map(m => `${m.date}  ${m.title}`).join('\n') : '') + `\n\nTONIGHT: hard stop 21:15 · report · lights out ${state.sleep.lightsOut}\n${APP_URL}\n`;
 fs.mkdirSync(outDir, { recursive: true }); fs.writeFileSync(path.join(outDir, `brief-${day}.html`), html); fs.writeFileSync(path.join(outDir, `brief-${day}.txt`), text);
