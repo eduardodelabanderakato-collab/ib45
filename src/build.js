@@ -44,11 +44,18 @@ async function main() {
     await page.screenshot({ path: path.join(OUT, `wp-${name}.png`), fullPage: false });
     await page.close();
   }
+  try { require('child_process').execFileSync('node', [path.join(ROOT, 'scripts/news.js')], { stdio: 'ignore' }); } catch (e) {}
   // Email banner (image, so Gmail keeps the look)
   try { const holo = fs.existsSync(path.join(ROOT, 'app/assets/hologram-figure.png')) ? 'data:image/png;base64,' + fs.readFileSync(path.join(ROOT, 'app/assets/hologram-figure.png')).toString('base64') : '';
     const bp = await browser.newPage({ viewport: { width: 1200, height: 260 }, deviceScaleFactor: 1 });
     await bp.setContent(`<!doctype html><html><head><meta charset="utf-8"><link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@700;800&display=block" rel="stylesheet"><style>html,body{margin:0;width:1200px;height:260px;overflow:hidden}body{background:radial-gradient(800px 320px at 50% 0%,#0f3f85 0%,#061633 60%,#03091c 100%);font-family:'Inter Tight',Inter,-apple-system,sans-serif;color:#EAF2FF;position:relative}.bits{position:absolute;inset:0;font:600 14px Menlo,monospace;color:rgba(120,200,255,.3)}.bits span{position:absolute}.w{position:absolute;left:0;right:0;top:58px;text-align:center}.w h1{margin:0;font-size:96px;font-weight:800;letter-spacing:-.05em;line-height:.9}.w p{margin:10px 0 0;font-size:15px;letter-spacing:.24em;text-transform:uppercase;color:#7fd8ff;font-weight:700}.h{position:absolute;right:140px;top:14px;height:232px;filter:drop-shadow(0 0 22px rgba(95,212,255,.6))}.h2{position:absolute;left:140px;top:14px;height:232px;filter:drop-shadow(0 0 22px rgba(95,212,255,.6));transform:scaleX(-1)}</style></head><body><div class="bits">${Array.from({length:50},()=>`<span style="left:${Math.random()*1200}px;top:${Math.random()*260}px;opacity:${(0.2+Math.random()*0.6).toFixed(2)}">${Math.random()<.5?'0':'1'}</span>`).join('')}</div>${holo?`<img class="h" src="${holo}">`:''}<div class="w"><h1>Life</h1><p>Eduardo · IB 45 · Class of 2032</p></div></body></html>`, { waitUntil: 'networkidle' });
-    await bp.evaluate(() => document.fonts.ready); await bp.waitForTimeout(300); await bp.screenshot({ path: path.join(OUT, 'banner.png') }); await bp.close();
+    await bp.evaluate(() => document.fonts.ready); await bp.waitForTimeout(300); await bp.screenshot({ path: path.join(OUT, 'banner.png') });
+    // animated version: bits drift + hologram flicker → banner.gif (ffmpeg present locally and on ubuntu runners)
+    try { const fdir = path.join(OUT, '_frames'); fs.mkdirSync(fdir, { recursive: true });
+      for (let i = 0; i < 16; i++) { await bp.evaluate((i) => { const bits = document.querySelectorAll('.bits span'); bits.forEach((b, k) => { const y = (parseFloat(b.style.top) - 3 + (k % 3)) ; b.style.top = (y < -20 ? 280 : y) + 'px'; b.style.opacity = (0.15 + 0.6 * Math.abs(Math.sin((i + k) / 3))).toFixed(2); }); const h = document.querySelector('.h'); if (h) { h.style.opacity = (0.82 + 0.18 * Math.abs(Math.sin(i / 2.2))).toFixed(2); h.style.filter = `drop-shadow(0 0 ${18 + 10 * Math.abs(Math.sin(i / 2))}px rgba(95,212,255,.65))`; } }, i); await bp.screenshot({ path: path.join(fdir, `f${String(i).padStart(2, '0')}.png`) }); }
+      const { execFileSync } = require('child_process'); execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-framerate', '6', '-i', path.join(fdir, 'f%02d.png'), '-vf', 'scale=900:-1:flags=lanczos,split[s0][s1];[s0]palettegen=max_colors=128[p];[s1][p]paletteuse=dither=bayer:bayer_scale=3', '-loop', '0', path.join(OUT, 'banner.gif')]); fs.rmSync(fdir, { recursive: true, force: true });
+    } catch (e) { console.warn('banner.gif skipped:', e.message); try { fs.copyFileSync(path.join(OUT, 'banner.png'), path.join(OUT, 'banner.gif')); } catch (e2) {} }
+    await bp.close();
   } catch (e) { console.warn('banner skipped:', e.message); }
   // Route map for the briefing email (visited airports + current position)
   try {
@@ -59,7 +66,7 @@ async function main() {
     await mp.waitForTimeout(400); await mp.screenshot({ path: path.join(OUT, 'map.png') }); await mp.close();
   } catch (e) { console.warn('map skipped:', e.message); }
   try { const { execFileSync } = require('child_process'); const F = require('./flights.js'); const t = state.tour || { at: 'HND' }; const it = F.itinerary(t.at || 'HND', plan.blocks.filter(b => ['sprint', 'retrieval'].includes(b.kind)));
-    const names = [...new Set([...it.legs.filter(l => l.flight).map(l => l.flight.city), F.BY[it.endsAt] ? F.BY[it.endsAt].c : '', 'Stanford'])].filter(Boolean);
+    const names = [...new Set([...it.legs.filter(l => l.flight).map(l => l.flight.city), F.BY[it.endsAt] ? F.BY[it.endsAt].c : '', 'Stanford', 'Artificial intelligence'])].filter(Boolean);
     execFileSync('node', [path.join(ROOT, 'scripts/images.js'), ...names, '--download', path.join(OUT, 'photos')], { stdio: 'ignore' }); } catch (e) { console.warn('photos skipped:', e.message); }
   try { const { execFileSync } = require('child_process'); const r = JSON.parse(execFileSync('node', [path.join(ROOT, 'scripts/brief.js'), iso, '--out', OUT]).toString()); fs.copyFileSync(r.html, path.join(OUT, 'brief.html')); } catch (e) { console.warn('brief skipped:', e.message); }
   // Life app (static): regenerate 14 days of plan seeds from the current position, then build app/index.html into the site root

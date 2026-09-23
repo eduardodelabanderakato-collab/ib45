@@ -15,6 +15,7 @@ const yday = P.addDays(day, -1); const y = (state.log || []).find(r => r.date ==
 const cds = plan.countdowns.filter(c => c.type !== 'checkpoint'); const near = cds.filter(c => c.daysLeft <= 14); const cps = plan.countdowns.filter(c => c.type === 'checkpoint').slice(0, 1);
 const stanfordAll = JSON.parse(fs.readFileSync(path.join(ROOT, 'app/seed/stanford.json'), 'utf8')).milestones; const stanford = stanfordAll.filter(m => m.date >= day && P.addDays(day, 21) >= m.date).slice(0, 3);
 let IMG = {}; try { IMG = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/images.json'), 'utf8')); } catch (e) {}
+let NEWS = { ai: null, economist: [] }; try { NEWS = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/news.json'), 'utf8')); } catch (e) {}
 let BR = { reading: {}, tests: {} }; try { BR = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/briefs.json'), 'utf8')); } catch (e) {}
 const nextBrief = (BR.reading.eng || []).find(b => b.by >= day); const portBrief = (BR.reading.port || []).find(b => b.by >= day);
 const focus = state.focus && state.focus.until >= day ? state.focus.text : null;
@@ -22,6 +23,11 @@ const FACE = { phys: ['Isaac Newton', 'Newton, who wrote the rules you are being
 const LINKS = { phys: ['Kognity · A.2', 'https://app.kognity.com/'], chem: ['Kognity · Structure 1', 'https://app.kognity.com/'], math: ['Nikolaidis · Trigonometry notes', 'https://www.christosnikolaidis.com/en/'], econ: ['EconplusDal · PED', 'https://www.youtube.com/@EconplusDal/search?query=price%20elasticity%20of%20demand'], eng: ['Persepolis · quote bank rules', APP_URL + '#subjects'], port: ['Critérios A–D · Prova 1', APP_URL + '#subjects'], sat: ['Bluebook', 'https://bluebook.app.collegeboard.org/'] };
 const link = (id) => LINKS[id] ? `<a href="${LINKS[id][1]}" style="color:#0b7fb0;text-decoration:underline;font-weight:700">${esc(LINKS[id][0])}</a>` : '';
 const tomorrowISO = P.addDays(day, 1); const tPlan = P.planFor(state, tomorrowISO); const tFirst = tPlan.blocks.find(b => ['sprint', 'retrieval'].includes(b.kind));
+const NOTES = [
+  () => `${wk.daysStarted ? `You started ${wk.daysStarted} of ${wk.schoolDaysSoFar} days this week.` : `Nothing flown yet this week.`} ${nFlights ? `Today has ${nFlights} leg${nFlights === 1 ? '' : 's'}; the first one is the whole battle.` : `No legs today; rest is part of the plan.`}`,
+  () => near[0] ? `${near[0].subjectShort} is ${near[0].daysLeft === 0 ? 'today' : `${near[0].daysLeft} day${near[0].daysLeft === 1 ? '' : 's'} out`}. Ramp day ${near[0].rampDay}: ${near[0].daysLeft <= 1 ? 'nothing new, only what is already yours.' : 'close the weak topics, nothing else.'}` : `Nothing due inside two weeks. This is where the lead is built.`,
+  () => `${(t.kmTotal || 0).toLocaleString('en-US')} km flown so far, ${reaDays} days to Stanford. Every block is a leg; the map only moves when you fly.`
+]; 
 const reaDays = Math.round((new Date('2027-11-01T12:00:00Z') - new Date(day + 'T12:00:00Z')) / 86400000);
 
 const photo = (name, cap) => { const im = IMG[name]; if (!im) return ''; const src = im.slug ? `${SITE}/photos/${im.slug}.jpg` : im.url; return im ? `<img src="${src}" data-fallback="${im.url}" width="564" alt="${esc(name)}" style="width:100%;height:auto;max-height:320px;object-fit:cover;border-radius:10px;display:block"><div style="text-align:center;font-size:12px;color:#6B6B6B;margin:6px 0 16px">(${esc(cap || name)} · Image: ${esc(im.credit)})</div>` : ''; };
@@ -67,30 +73,28 @@ const wd = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'S
 const editionNo = Math.max(1, Math.round((new Date(day + 'T12:00:00Z') - new Date('2026-09-23T12:00:00Z')) / 86400000) + 1);
 const nextDest = F.BY[it.endsAt] ? F.BY[it.endsAt].c : null;
 const sectionsList = [['✈️', `${nFlights ? `${nFlights} flight${nFlights === 1 ? '' : 's'}, ${minutesToday} min in the air` : 'No flights today'} — the itinerary`], ...near.slice(0, 2).map(c => ['🧪', `${c.subjectShort} ramp day ${c.rampDay}: ${(c.task || '').replace(/^\S+ (ramp|report) -\d+: /, '')}`]), ...(cps.length ? [['📚', `${cps[0].title} · ${cps[0].daysLeft === 0 ? 'today' : cps[0].daysLeft + ' days'}`]] : []), ...(stanford[0] ? [['🌲', `Stanford: ${stanford[0].title} · ${P.pretty(stanford[0].date)}`]] : []), ['🌙', `Tonight: hard stop 21:15, report, lights out ${state.sleep.lightsOut}`]];
+const captainNote = NOTES[editionNo % NOTES.length]();
 const html = `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(subject)}</title></head>
 <body style="margin:0;padding:0;background:${C.bg}">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:${C.bg}"><tr><td align="center" style="padding:0">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="width:100%;max-width:600px;background:${C.card}">
-<tr><td style="padding:0"><img src="${SITE}/banner.png?d=${day}" width="100%" alt="Life" style="display:block;width:100%;height:auto;border:0"></td></tr>
+<tr><td style="padding:0"><img src="${SITE}/banner.gif?d=${day}" width="100%" alt="Life" style="display:block;width:100%;height:auto;border:0"></td></tr>
 <tr><td style="padding:24px 18px 0"><table role="presentation" width="100%" cellpadding="0" cellspacing="0">
 <tr><td align="center" style="padding:0 0 18px;${font};font-size:12px;letter-spacing:2px;color:${C.dim};text-transform:uppercase;line-height:1.5">${esc(wd)}, ${d0.getUTCDate()} ${MONTHS[d0.getUTCMonth()].charAt(0) + MONTHS[d0.getUTCMonth()].slice(1).toLowerCase()} ${d0.getUTCFullYear()} &nbsp;•&nbsp; reading time: 2 minutes</td></tr>
 <tr><td align="center" style="padding:0 0 14px;${font};font-size:36px;font-weight:800;color:${C.ink};letter-spacing:-.8px;line-height:1.1">${esc(edTitle)}</td></tr>
 <tr><td style="padding:0 0 16px"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-top:1px solid ${C.line};border-bottom:1px solid ${C.line}"><tr>
 ${[[`${wk.daysStarted}/${wk.schoolDaysSoFar}`, 'started this week'], [`${(t.kmTotal || 0).toLocaleString('en-US')}`, 'km flown'], [near[0] ? `${near[0].daysLeft}d` : '—', near[0] ? esc(near[0].subjectShort) + ' test' : 'no test'], [`${reaDays}d`, 'to Stanford REA']].map(([v, l]) => `<td align="center" style="padding:12px 2px;${font}"><div style="font-size:20px;font-weight:800;color:${C.ink}">${v}</div><div style="font-size:10px;letter-spacing:.8px;text-transform:uppercase;color:${C.dim}">${l}</div></td>`).join('')}
 </tr></table></td></tr>
-${P_(esc(intro))}
-${focus ? box(`<b>Focus of the week.</b> ${esc(focus)}`) : ''}
+${box(`<b>Captain's note.</b> ${esc(captainNote)}`)}
+${focus ? P_(`<b>Focus of the week:</b> ${esc(focus.replace(/^This week's focus: /, ''))}`) : ''}
 ${dots}
 ${label('priorities')}
 ${priorities.map((x, i) => P_(`${hi(String(i + 1) + '.')} &nbsp;${x}`)).join('')}
 ${dots}
-${label("in today's edition")}
-${P_(sectionsList.slice(0, 4).map(([e, tt]) => `${e} &nbsp;${esc(tt)}`).join('<br>'))}
-${dots}
 ${label('today')}
 ${H(nFlights ? `${['No', 'One', 'Two', 'Three', 'Four', 'Five'][nFlights] || nFlights} flight${nFlights === 1 ? '' : 's'}, ${minutesToday} minutes in the air${nextDest ? `, landing in ${nextDest}` : ''}` : 'A day on the ground')}
 ${nextDest ? photoRow(nextDest, `Tonight you land in ${nextDest}`) : ''}
-${P_(`<b>Why it matters.</b> ${near[0] && near[0].daysLeft <= 3 ? `The ${esc(near[0].subjectShort)} test is ${near[0].daysLeft === 0 ? 'today' : near[0].daysLeft === 1 ? 'tomorrow' : 'in ' + near[0].daysLeft + ' days'}; the blocks today are the last edits before it.` : `Pre-learning today is what makes the classes tomorrow a review instead of a first look.`} Sprint 1 is what counts as a day started.${state.studyGuides ? ` <b>Study guides</b> live in your school Drive, by category; the first five minutes of the first block update them.` : ''}`)}
+${P_(`<b>Why it matters.</b> ${near[0] && near[0].daysLeft <= 3 ? `${esc(near[0].subjectShort)} is ${near[0].daysLeft === 0 ? 'today' : near[0].daysLeft === 1 ? 'tomorrow' : 'in ' + near[0].daysLeft + ' days'}. Today is the last edit.` : `Today's pre-learning turns tomorrow's classes into a review.`}${state.studyGuides ? ' First five minutes: the study guide in Drive.' : ''}`)}
 ${flightPlan}
 ${photoStrip}
 ${P_(`${y ? (y.started ? `Yesterday you flew <b>${y.sprintsDone} of ${y.sprintsPlanned}</b> blocks, ${y.focusMinutes || 0} minutes in the air, and landed in ${esc(y.currentAirport || at)}.` : `Yesterday no flights were logged.`) : `No audit yet for ${P.pretty(yday)}.`} You're in <b>${esc(city)}</b>${t.kmTotal ? `, ${(t.kmTotal).toLocaleString('en-US')} km into the tour` : ''}. Started <b>${wk.daysStarted} of ${wk.schoolDaysSoFar}</b> school days this week.`)}
@@ -101,6 +105,8 @@ ${cds.length > near.length ? dots + label('countdowns') + P_(cds.slice(0, 6).map
 ${stanford.length ? dots + label('stanford · class of 2032') + H(`${Math.round((new Date('2027-11-01T12:00:00Z') - new Date(day + 'T12:00:00Z')) / 86400000)} days to Restrictive Early Action`) + photoRow('Stanford', 'Main Quad, Stanford University') + P_(stanford.map(m => `<b>${m.date.slice(5)}</b> &nbsp;${esc(m.title)} <span style="color:${C.dim}">· ${esc(m.owner)}</span>`).join('<br>')) : ''}
 ${nextBrief ? dots + label('reading · persepolis') + H(`Chapters ${nextBrief.chapters} by ${P.pretty(nextBrief.by)}`) + photoRow('Marjane Satrapi', 'Marjane Satrapi, author of Persepolis') + P_(`<b>${esc(nextBrief.titles)}</b>`) + P_(`<b>What to expect.</b> ${esc(nextBrief.expect)}`) + P_(`<b>Watch for.</b> ${esc(nextBrief.watch)}`) + P_(`<b>Two questions to read with.</b> ${esc(nextBrief.questions)}`) + box(`<b>Global issues to tag:</b> ${esc(nextBrief.globalIssues)}<br><b>Quotes to look for:</b> ${esc(nextBrief.quotes)}`) : ''}
 ${portBrief && near.find(c => c.subject === 'port') ? dots + label('português · prova 1') + H(portBrief.titles) + P_(`<b>O que esperar.</b> ${esc(portBrief.expect)}`) + P_(`<b>Observar.</b> ${esc(portBrief.watch)}`) + box(`${esc(portBrief.quotes)}`) : ''}
+${NEWS.ai ? dots + label('one good thing in ai') + photoRow('Artificial intelligence', 'Today in AI') + P_(`<a href="${NEWS.ai.url}" style="color:${C.ink};text-decoration:none;font-weight:800;font-size:20px;line-height:1.3">${esc(NEWS.ai.title)}</a><br><span style="color:${C.dim};font-size:14px">${esc(NEWS.ai.source)} · ${NEWS.ai.points} points on Hacker News · <a href="${NEWS.ai.hn}" style="color:${C.acc}">discussion</a></span>`) : ''}
+${NEWS.economist && NEWS.economist.length ? dots + label('the economist · finance') + NEWS.economist.map(e => P_(`<a href="${e.url}" style="color:${C.ink};text-decoration:none;font-weight:800;font-size:18px;line-height:1.3">${esc(e.title)}</a>${e.blurb ? `<br><span style="color:${C.dim};font-size:14px">${esc(e.blurb)}</span>` : ''}`)).join('') + box(`<b>Econ move:</b> pick one of these, write the four-fact example card (what, when, a number, the mechanism). That is Paper 1 ammunition.`) : ''}
 ${dots}
 ${label('read tonight')}
 ${P_(`📚 <b>School:</b> ${P.readingTonight(state, day) ? esc(P.readingTonight(state, day).replace('Read tonight: ', '')) : 'nothing due'}${leisure ? `<br>🌙 <b>Before bed, if the night allows:</b> ${esc(leisure.title)}${leisure.author ? ' · ' + esc(leisure.author) : ''} · ~${leisure.pages || 20} pages` : ''}`)}
