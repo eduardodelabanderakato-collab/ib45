@@ -596,7 +596,8 @@
         "Criteria card"
       ],
       "next": [
-        "Ler a obra 15-20 páginas; 3 citações no banco, com questão global"
+        "Cartum: análise verbal-visual (Duke / Carol Ito) — banco de recursos: enquadramento, traço, balões, ironia, intertexto",
+        "Ler a próxima obra (a confirmar com a professora)"
       ],
       "topics": [
         {
@@ -633,8 +634,8 @@
         }
       ],
       "work": {
-        "title": "cartum (confirm which work/author)",
-        "note": "Eduardo said 'cartum' — ask what exactly and what Friday's test covers."
+        "title": "Cartum (Duke, Carol Ito) — Paper 1 guided analysis",
+        "note": "Fri Sep 25 test: unseen cartum; question: 'Como a autora combina os elementos verbais e visuais para construir significados no texto?' Eduardo says it is sorted (essay sent, redraft Thu)."
       }
     },
     "sat": {
@@ -658,9 +659,10 @@
       "id": "port-test-0925",
       "subject": "port",
       "type": "test",
-      "title": "Portuguese test",
+      "title": "Português · Paper 1 (cartum)",
       "date": "2026-09-25",
-      "ramp": "language"
+      "ramp": "language",
+      "note": "Guided analysis of an unseen cartum (Duke / Carol Ito). Question: verbal + visual elements → meaning."
     },
     {
       "id": "phys-test-0925",
