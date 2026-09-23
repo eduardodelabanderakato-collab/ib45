@@ -1,0 +1,44 @@
+{
+  "Hanamaki": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/%E8%8A%B1%E5%B7%BB%E6%B8%A9%E6%B3%89_%E3%83%90%E3%83%A9%E5%9C%92%E3%81%A8%E3%83%9B%E3%83%86%E3%83%AB3%E9%A4%A8.jpg/1200px-%E8%8A%B1%E5%B7%BB%E6%B8%A9%E6%B3%89_%E3%83%90%E3%83%A9%E5%9C%92%E3%81%A8%E3%83%9B%E3%83%86%E3%83%AB3%E9%A4%A8.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "title": "Hanamaki, Iwate",
+    "credit": "Wikimedia Commons",
+    "page": "https://en.wikipedia.org/wiki/Hanamaki%2C_Iwate"
+  },
+  "Sapporo": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/5/54/SapporoCity_Skylines2020.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+    "title": "Sapporo",
+    "credit": "Wikimedia Commons",
+    "page": "https://en.wikipedia.org/wiki/Sapporo"
+  },
+  "Monbetsu": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/d/d0/Monbetsu_panorama.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+    "title": "Monbetsu, Hokkaido",
+    "credit": "Wikimedia Commons",
+    "page": "https://en.wikipedia.org/wiki/Monbetsu%2C_Hokkaido"
+  },
+  "Stanford": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b5/Seal_of_Leland_Stanford_Junior_University.svg/960px-Seal_of_Leland_Stanford_Junior_University.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "title": "Stanford University",
+    "credit": "Wikimedia Commons",
+    "page": "https://en.wikipedia.org/wiki/Stanford_University"
+  },
+  "Tokyo": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b2/Skyscrapers_of_Shinjuku_2009_January.jpg/1200px-Skyscrapers_of_Shinjuku_2009_January.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "title": "Tokyo",
+    "credit": "Wikimedia Commons",
+    "page": "https://en.wikipedia.org/wiki/Tokyo"
+  },
+  "Seoul": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/30/%EC%A4%91%ED%99%94%EC%A0%84%EC%9D%98_%EB%82%AE.jpg/1200px-%EC%A4%91%ED%99%94%EC%A0%84%EC%9D%98_%EB%82%AE.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "title": "Seoul",
+    "credit": "Wikimedia Commons",
+    "page": "https://en.wikipedia.org/wiki/Seoul"
+  },
+  "São Paulo": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/7/73/Marginal_Pinheiros_e_Jockey_Club.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+    "title": "São Paulo",
+    "credit": "Wikimedia Commons",
+    "page": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo"
+  }
+}

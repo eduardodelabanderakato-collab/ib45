@@ -32,4 +32,6 @@ console.log(`${plan.pretty}: ${verdict}`);
 if (missed.length) console.log(`Missed: ${missed.join(' · ')}`);
 if (first) console.log(`Tomorrow's first flight: ${first.start} ${first.title} — ${first.steps[0]}`);
 fs.mkdirSync(path.join(ROOT, 'app/out'), { recursive: true }); fs.writeFileSync(path.join(ROOT, 'app/out', `audit-${day}.json`), JSON.stringify(entry));
+try { const F2 = require(path.join(ROOT, 'src/flights.js')); const t2 = state.tour || {}; const codes = [...new Set([...(F2.TOUR), ...(t2.visited || [])])]; const coords = Object.fromEntries(codes.filter(c => F2.BY[c]).map(c => [c, { la: F2.BY[c].la, lo: F2.BY[c].lo, c: F2.BY[c].c }]));
+  fs.writeFileSync(path.join(ROOT, 'app/out', 'tour.json'), JSON.stringify({ at: t2.at, home: 'GRU', visited: t2.visited || [], kmTotal: t2.kmTotal || 0, minutesTotal: t2.minutesTotal || 0, cities: new Set(t2.visited || []).size, waypoints: F2.TOUR, coords })); } catch (e) {}
 console.log(JSON.stringify({ entry, missed, auditFile: path.join(ROOT, 'app/out', `audit-${day}.json`), tomorrowFirst: first ? { start: first.start, title: first.title, step: first.steps[0] } : null }));

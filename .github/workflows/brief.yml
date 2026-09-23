@@ -10,6 +10,8 @@ jobs:
       - uses: actions/setup-node@v4
         with: { node-version: 22, cache: npm }
       - run: npm ci
+      - name: Resolve photos for today's destinations
+        run: node -e "const P=require('./src/plan.js'),F=require('./src/flights.js');const st=require('./data/state.json');const d=new Intl.DateTimeFormat('en-CA',{timeZone:st.tz}).format(new Date());const p=P.planFor(st,d);const at=(st.tour&&st.tour.at)||'HND';const it=F.itinerary(at,p.blocks.filter(b=>['sprint','retrieval'].includes(b.kind)));const names=[...new Set([...it.legs.filter(l=>l.flight).map(l=>l.flight.city),F.BY[it.endsAt]?F.BY[it.endsAt].c:'','Stanford'])].filter(Boolean);require('child_process').execFileSync('node',['scripts/images.js',...names],{stdio:'inherit'})"
       - run: node scripts/send-brief.js
         env:
           SMTP_HOST: ${{ secrets.SMTP_HOST }}
@@ -17,4 +19,4 @@ jobs:
           SMTP_USER: ${{ secrets.SMTP_USER }}
           SMTP_PASS: ${{ secrets.SMTP_PASS }}
           MAIL_TO: ${{ secrets.MAIL_TO }}
-          MAIL_FROM_NAME: IB45 Morning Briefing
+          MAIL_FROM_NAME: Flight Deck
