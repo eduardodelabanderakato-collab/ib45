@@ -996,7 +996,25 @@
       }
     ]
   },
-  "log": [],
+  "log": [
+    {
+      "date": "2026-09-22",
+      "started": true,
+      "flown": {
+        "S1": "GMP→HND 104m",
+        "S2": "GMP→HND 104m",
+        "S3": "GMP→HND 104m"
+      },
+      "sprintsDone": 3,
+      "sprintsPlanned": 4,
+      "focusMinutes": 104,
+      "flights": [
+        "17:37 GMP→HND 104m"
+      ],
+      "currentAirport": "HND",
+      "source": "focusflight"
+    }
+  ],
   "currentAirport": "HND",
   "tour": {
     "at": "HND",
@@ -1005,7 +1023,7 @@
       "GMP",
       "HND"
     ],
-    "kmTotal": 1180,
+    "kmTotal": 2360,
     "minutesTotal": 104,
     "legs": [
       {
