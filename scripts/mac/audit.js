@@ -22,7 +22,7 @@ if (!dry) {
   const F = require(path.join(ROOT, 'src/flights.js')); const t = state.tour || (state.tour = { at: 'HND', visited: ['HND'], kmTotal: 0, minutesTotal: 0, legs: [] });
   t.legs = (t.legs || []).filter(l => l.date !== day);
   for (const f of flights) { if (!f.from || !f.to) continue; const a = F.BY[f.from], b = F.BY[f.to]; const kmv = a && b ? Math.round(F.km(a, b)) : 0; t.legs.push({ date: day, from: f.from, to: f.to, km: kmv, min: f.minutes || 0 }); if (t.visited[t.visited.length - 1] !== f.to) t.visited.push(f.to); }
-  t.kmTotal = t.legs.reduce((x, l) => x + l.km, 0) + 1180; t.minutesTotal = t.legs.reduce((x, l) => x + l.min, 0); t.at = log.currentAirport || t.at;
+  t.kmTotal = t.legs.reduce((x, l) => x + l.km, 0); t.minutesTotal = t.legs.reduce((x, l) => x + l.min, 0); t.at = log.currentAirport || t.at;
   fs.writeFileSync(SP, JSON.stringify(state, null, 2));
 }
 const tomorrow = P.addDays(day, 1); const tp = P.planFor(state, tomorrow); const first = tp.blocks.find(b => ['sprint', 'retrieval'].includes(b.kind));
