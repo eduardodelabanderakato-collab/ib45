@@ -60,5 +60,26 @@
     "title": "Marjane Satrapi",
     "credit": "Wikimedia Commons",
     "slug": "marjane-satrapi"
+  },
+  "Dmitri Mendeleev": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/a/af/Dmitri_Mendeleev.jpg",
+    "title": "Dmitri Mendeleev",
+    "credit": "Wikimedia Commons",
+    "page": "https://en.wikipedia.org/wiki/Dmitri_Mendeleev",
+    "slug": "dmitri-mendeleev"
+  },
+  "Leonhard Euler": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f9/Leonhard_Euler_-_Jakob_Emanuel_Handmann_%28Kunstmuseum_Basel%29.jpg/330px-Leonhard_Euler_-_Jakob_Emanuel_Handmann_%28Kunstmuseum_Basel%29.jpg",
+    "title": "Leonhard Euler",
+    "credit": "Wikimedia Commons",
+    "page": "https://en.wikipedia.org/wiki/Leonhard_Euler",
+    "slug": "leonhard-euler"
+  },
+  "Adam Smith": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/4/43/Adam_Smith_The_Muir_portrait.jpg",
+    "title": "Adam Smith",
+    "credit": "Wikimedia Commons",
+    "page": "https://en.wikipedia.org/wiki/Adam_Smith",
+    "slug": "adam-smith"
   }
 }
