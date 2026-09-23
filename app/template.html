@@ -22,7 +22,7 @@ nav.rail{position:sticky;top:0;height:100vh;padding:22px 16px calc(16px + env(sa
 .tab{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:14px;color:var(--dim);font-weight:500;cursor:pointer;border:0;background:transparent;font:inherit;text-align:left;width:100%}
 .tab svg{width:20px;height:20px;flex:0 0 auto}.tab.on{background:var(--glass);color:var(--ink);box-shadow:inset 0 1px 0 rgba(160,220,255,.18)}.tab:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .railfoot{margin-top:auto;font-size:12px;color:var(--dim);padding:8px}
-main{padding:26px 28px 40px;max-width:1100px;width:100%}
+main{padding:26px 28px 120px;max-width:1100px;width:100%}
 .view{display:none}.view.on{display:block}
 h1{font-family:var(--display);font-weight:600;font-size:30px;letter-spacing:-.035em;margin:0;line-height:1.05;text-wrap:balance}
 .sub{color:var(--dim);font-weight:500;margin-top:6px;font-size:14px}
@@ -85,6 +85,9 @@ input,select,textarea{font:inherit;color:var(--ink);background:var(--glass2);bor
   .blk.now .t{font-size:24px}h1{font-size:26px}.emblem h1{font-size:28px}
   .ms{grid-template-columns:20px 1fr;grid-template-areas:"ck t" "ck meta";gap:4px 10px}.ms .t{grid-area:t}.ms .d{grid-area:meta}.ms .cat{grid-area:meta;justify-self:end}
 }
+/* overview */
+.week{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}.dayc{padding:10px 12px;min-height:120px}.dayc.today{outline:1px solid var(--accent)}.dh{font-weight:600;font-size:13px;display:flex;justify-content:space-between;margin-bottom:6px}.dh span{color:var(--dim);font-weight:500}.dr{display:grid;grid-template-columns:40px 1fr;gap:6px;font-size:12px;line-height:1.3;padding:2px 0;color:var(--ink)}.dr .mono{color:var(--accent);font-size:11px}
+@media (max-width:860px){.week{grid-template-columns:1fr 1fr}}
 /* hologram guide */
 .holo{position:fixed;right:22px;bottom:22px;z-index:6;display:flex;flex-direction:column;align-items:center;cursor:pointer;user-select:none}
 .holo img{height:300px;width:auto;filter:drop-shadow(0 0 18px rgba(95,212,255,.55));animation:hover 4.5s ease-in-out infinite}
@@ -103,6 +106,7 @@ input,select,textarea{font:inherit;color:var(--ink);background:var(--glass2);bor
 <nav class="rail" id="rail"></nav>
 <main>
   <section class="view" id="v-deck"></section>
+  <section class="view" id="v-all"></section>
   <section class="view" id="v-tour"></section>
   <section class="view" id="v-subjects"></section>
   <section class="view" id="v-stanford"></section>
@@ -118,13 +122,14 @@ input,select,textarea{font:inherit;color:var(--ink);background:var(--glass2);bor
 const SEED = /*__SEED__*/{};
 const APP = { name: "__TITLE__", student: "Eduardo", initials: "EK", classOf: "Class of 2032", avatar: null, holo: null };
 const ICONS = {
+  all: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>',
   deck: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18M12 3l3 9-3 9"/></svg>',
   tour: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>',
   subjects: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 19V5a2 2 0 0 1 2-2h12v16H6a2 2 0 0 0-2 2z"/><path d="M4 19a2 2 0 0 0 2 2h12"/></svg>',
   stanford: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M6 10.5V16c0 1.5 3 3 6 3s6-1.5 6-3v-5.5"/></svg>',
   contract: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/></svg>'
 };
-const TABS = [['deck','Deck'],['tour','Tour'],['subjects','Subjects'],['stanford','Stanford'],['contract','Contract']];
+const TABS = [['deck','Deck'],['all','Overview'],['tour','Tour'],['subjects','Subjects'],['stanford','Stanford'],['contract','Contract']];
 const $ = s => document.querySelector(s); const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const pad = n => String(n).padStart(2,'0');
 const todayISO = () => { const d = new Date(); return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`; };
@@ -136,7 +141,7 @@ const pretty = iso => new Date(iso+'T12:00:00').toLocaleDateString('en-GB',{week
 
 // ---------- state ----------
 const S = { date: todayISO(), plan: null, day: null, audit: null, subjects: SEED.subjects, assessments: SEED.assessments, tour: SEED.tour, stanford: SEED.stanford, stanfordDone: {}, contract: null, errors: [], week: [], db: null, uid: null, canWrite: null, view: (location.hash||'#deck').slice(1) };
-S.plan = (SEED.plans||{})[S.date] || null;
+S.plan = (SEED.plans||{})[S.date] || null; S.plans = Object.assign({}, SEED.plans||{});
 let toastT; function toast(m){ const t=$('#toast'); t.textContent=m; t.classList.add('on'); clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove('on'),1800); }
 
 // ---------- nav ----------
@@ -220,6 +225,20 @@ function weekRates(){
 }
 S.auditWeek=[];
 
+// ---------- overview ----------
+function renderAll_(){
+  const v=$('#v-all'); const wk=weekRates(); const days=[]; for(let i=0;i<7;i++){ const d=addDays(S.date,i); days.push([d,S.plans[d]||null]); }
+  const tests=(S.assessments?.items||[]).filter(a=>a.date>=S.date&&a.type!=='checkpoint').sort((a,b)=>a.date<b.date?-1:1);
+  const cps=(S.assessments?.items||[]).filter(a=>a.date>=S.date&&a.type==='checkpoint').sort((a,b)=>a.date<b.date?-1:1).slice(0,3);
+  const t=S.tour||{}; const c=S.contract||{}; const ms=(S.stanford?.milestones||[]).filter(m=>!S.stanfordDone[m.id]).slice(0,5);
+  v.innerHTML=`<h1>Everything</h1><div class="sub">${esc(pretty(S.date))} · ${esc(S.plan?.phase||'')} · in <span class="mono">${esc(t.at||'HND')}</span> · started ${wk.daysStarted}/${wk.schoolDaysSoFar} · ${t.kmTotal?Math.round(t.kmTotal).toLocaleString():0} km flown</div>
+  <h2>The next seven days</h2><div class="week">${days.map(([d,p])=>`<div class="g dayc ${d===S.date?'today':''}"><div class="dh">${esc(pretty(d))}<span>${p?esc(p.dayLabel):''}</span></div>${p?p.blocks.filter(b=>b.kind!=='fixed').map(b=>`<div class="dr"><span class="mono">${b.start}</span><span>${esc(b.title)}</span></div>`).join(''):'<div class="dr muted">Not planned yet</div>'}</div>`).join('')}</div>
+  <div class="grid2" style="margin-top:14px"><div><h2 style="margin-top:0">Every test and deadline</h2><div class="g card" style="padding:6px 20px">${tests.map(a=>{const dl=daysBetween(S.date,a.date); return `<div class="ms"><span class="mono" style="min-width:36px;color:${dl<=3?'var(--bad)':dl<=14?'var(--warn)':'var(--dim)'}">${dl}d</span><span class="d">${esc(a.date.slice(5))}</span><span class="t">${esc(a.title)}</span><span class="cat">${esc(a.subject)}</span></div>`;}).join('')||'<div class="muted small">Nothing announced.</div>'}</div>
+  <h2>Reading</h2><div class="g card" style="padding:6px 20px">${cps.map(a=>`<div class="ms"><span class="mono" style="min-width:36px">${daysBetween(S.date,a.date)}d</span><span class="d">${esc(a.date.slice(5))}</span><span class="t">${esc(a.title)}</span><span class="cat">eng</span></div>`).join('')||'<div class="muted small">—</div>'}</div></div>
+  <div><h2 style="margin-top:0">Subjects</h2><div class="g card" style="padding:8px 20px">${(S.subjects?.subjects||[]).map(s=>`<div class="rd" style="display:grid;grid-template-columns:84px 1fr 60px;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)"><b style="font-size:14px">${esc(s.short)}</b><div class="bar" style="--c:${s.color}"><i style="width:${s.topicsTotal?Math.round(100*s.topicsTaught/s.topicsTotal):0}%"></i></div><span class="grade">${s.grade??'–'} → <b>7</b></span></div>`).join('')}</div>
+  <h2>Stanford · next five</h2><div class="g card" style="padding:6px 20px">${ms.map(m=>`<div class="ms"><span class="mono" style="min-width:36px">${daysBetween(S.date,m.date)}d</span><span class="d">${esc(m.date.slice(2))}</span><span class="t">${esc(m.title)}</span><span class="cat">${esc(m.owner)}</span></div>`).join('')}</div>
+  <h2>Contract</h2><div class="g card">${c.signedAt?`<div><span class="pill ok">Signed ${esc(c.signedAt.slice(0,10))}</span> · witness <b>${esc(c.witness||'—')}</b> · stake <b>${esc(c.stake||'—')}</b></div>`:'<div class="muted">Unsigned. Go to Contract.</div>'}</div></div></div>`;
+}
 // ---------- tour ----------
 let mapObj=null;
 function renderTour(){
@@ -285,12 +304,12 @@ function renderContract(){
 function holoLines(){
   const L=[]; if(!S.plan) return ['Tell Claude what today looks like and I\'ll fill this in.'];
   const nm=nowMin(); const open=firstOpenBlock(); const wk=weekRates();
-  if(open){ const st=blockStatus(open); const mins=toMin(open.start)-nm; if(st.started&&!st.complete) L.push(`<b>In the air.</b> ${open.title}: tick every step to land.`); else if(mins>0&&mins<=90) L.push(`<b>${mins} min</b> to wheels up. ${open.title}${open.flight?` · ${open.flight.from}→${open.flight.to}`:''}. First: ${open.steps[0]||''}`); else if(st.cur) L.push(`<b>Now:</b> ${open.title}. Hit Take off and go.`); else if(mins>90) L.push(`Next flight <b>${open.start}</b>, ${open.title}. Until then, nothing is owed.`); }
+  if(open){ const st=blockStatus(open); const mins=toMin(open.start)-nm; if(st.started&&!st.complete) L.push(`<b>We're airborne.</b> ${open.title}. Tick each step and we land.`); else if(mins>0&&mins<=90) L.push(`<b>${mins} minutes</b> to wheels up. ${open.title}${open.flight?` · ${open.flight.from} to ${open.flight.to}`:''}. First item: ${open.steps[0]||''}`); else if(st.cur) L.push(`<b>Cleared for takeoff.</b> ${open.title}. Press Take off when you're seated.`); else if(mins>90) L.push(`Next departure <b>${open.start}</b>, ${open.title}. Until then, nothing is owed.`); }
   const due=(S.plan.countdowns||[]).filter(c=>c.type!=='checkpoint'&&c.daysLeft<=3); for(const c of due) L.push(c.daysLeft===0?`<b>${c.title}</b> is today. Trust the ramp.`:c.daysLeft===1?`<b>${c.title}</b> tomorrow. Nothing new tonight, only what's already yours.`:`<b>${c.title}</b> in ${c.daysLeft} days · ramp day ${-c.daysLeft}.`);
   if(nm>=21*60+10&&!(S.day&&S.day.report)) L.unshift('<b>The day is open.</b> Close it with the report before lights out.');
   const ms=(S.stanford?.milestones||[]).filter(m=>!S.stanfordDone[m.id]&&daysBetween(S.date,m.date)>=0&&daysBetween(S.date,m.date)<=10)[0]; if(ms) L.push(`Stanford: <b>${ms.title}</b> · ${daysBetween(S.date,ms.date)} days.`);
   if(wk.schoolDaysSoFar>0) L.push(`Started <b>${wk.daysStarted}/${wk.schoolDaysSoFar}</b> this week. Sprint 1 is what counts.`);
-  return L.length?L:['All clear. Fly the next leg when it comes.'];
+  return L.length?L:['Skies are clear. We fly the next leg when it comes.'];
 }
 let holoIdx=0, holoDismissed=false;
 function renderHolo(){ const img=$('#holoimg'); if(APP.holo) img.src=APP.holo; else $('#holo').hidden=true; const b=$('#bubble'); if(holoDismissed||!$('#ask').hidden){ b.hidden=true; return; } const lines=holoLines(); b.innerHTML=`<span class="x" id="bx">×</span>${lines[holoIdx%lines.length]}`; b.hidden=false; $('#bx').addEventListener('click',e=>{ e.stopPropagation(); holoDismissed=true; b.hidden=true; }); }
@@ -298,15 +317,15 @@ setInterval(()=>{ holoIdx++; if(!holoDismissed) renderHolo(); }, 20000);
 $('#holo').addEventListener('click',()=>openAsk());
 function ctxForClaude(){ const p=S.plan||{}; return { date:S.date, day:p.dayLabel, phase:p.phase, blocks:(p.blocks||[]).map(b=>({time:`${b.start}-${b.end}`,title:b.title,steps:b.steps,flight:b.flight?`${b.flight.from}→${b.flight.to} ${b.flight.minutes}min`:null,status:b.kind==='fixed'?'fixed':(blockStatus(b).complete?'landed':blockStatus(b).started?'in the air':'not started')})), countdowns:(p.countdowns||[]).slice(0,8).map(c=>`${c.title}: ${c.daysLeft}d${c.task?' · '+c.task:''}`), week:weekRates(), subjects:(S.subjects?.subjects||[]).map(s=>`${s.short}: grade ${s.grade}→7, ${s.topicsTaught}/${s.topicsTotal} topics, next: ${s.next[0]}`), stanfordNext:(S.stanford?.milestones||[]).filter(m=>!S.stanfordDone[m.id]).slice(0,5).map(m=>`${m.date} ${m.title}`), rules:['Sprint 1 counts as a day started','phone out of the room','pre-learn tomorrow','error log with fix rules','drafts early to teachers','hard stop 21:15, lights out 22:45'] }; }
 const askLog=[];
-function openAsk(){ const a=$('#ask'); a.hidden=false; $('#bubble').hidden=true; a.innerHTML=`<div style="display:flex;justify-content:space-between;align-items:center"><b style="font-family:var(--display);font-size:16px">Ask him</b><span style="cursor:pointer;color:var(--dim)" id="askx">×</span></div><div class="log" id="asklog">${askLog.map(m=>`<div class="${m.role==='user'?'me':'him'}">${esc(m.content)}</div>`).join('')||'<div class="him">I know today\'s plan, the countdowns, your subjects and the Stanford track. Ask me anything about what to do.</div>'}</div><form id="askf"><input id="askq" placeholder="What should I do first tonight?" autocomplete="off"><button class="btn" type="submit">Ask</button></form>`;
+function openAsk(){ const a=$('#ask'); a.hidden=false; $('#bubble').hidden=true; a.innerHTML=`<div style="display:flex;justify-content:space-between;align-items:center"><b style="font-family:var(--display);font-size:16px">Ask him</b><span style="cursor:pointer;color:var(--dim)" id="askx">×</span></div><div class="log" id="asklog">${askLog.map(m=>`<div class="${m.role==='user'?'me':'him'}">${esc(m.content)}</div>`).join('')||'<div class="him">Captain speaking. I have today\'s plan, the countdowns, your subjects and the Stanford track. What do you need?</div>'}</div><form id="askf"><input id="askq" placeholder="What should I do first tonight?" autocomplete="off"><button class="btn" type="submit">Ask</button></form>`;
   $('#askx').addEventListener('click',()=>{ a.hidden=true; holoDismissed=false; renderHolo(); }); $('#askq').focus();
   $('#askf').addEventListener('submit',async e=>{ e.preventDefault(); const q=$('#askq').value.trim(); if(!q) return; $('#askq').value=''; askLog.push({role:'user',content:q}); const log=$('#asklog'); log.insertAdjacentHTML('beforeend',`<div class="me">${esc(q)}</div><div class="him" id="pending">…</div>`); log.scrollTop=log.scrollHeight;
     const sample=await claude.use('sample'); const pend=$('#pending'); if(!sample){ pend.textContent='I can only answer when the page is opened on claude.ai, signed in.'; return; }
-    const sys=`You are Eduardo's hologram guide inside his IB 45 / Stanford study app. Be brief (max 4 sentences), concrete, warm but blunt. Never invent facts beyond the context; if unsure, say what to check with Claude in the IB45 chat. Context JSON: ${JSON.stringify(ctxForClaude())}`;
+    const sys=`You are Eduardo's hologram guide inside his app 'Life' (IB 45, then Stanford). Voice: a calm airline captain. Unhurried, precise, reassuring, short sentences, light aviation language (wheels up, on the ramp, cleared). Max 4 sentences, always concrete. Never invent facts beyond the context; if unsure, say what to check with Claude in the IB45 chat. Context JSON: ${JSON.stringify(ctxForClaude())}`;
     try{ const turns=[{role:'user',content:sys+'\n\nConversation so far:\n'+askLog.slice(-6).map(m=>`${m.role}: ${m.content}`).join('\n')+'\n\nAnswer the last user message.'}]; const r=await sample(turns,{modelTier:'default',onText:({text})=>{ pend.textContent=text; log.scrollTop=log.scrollHeight; }}); pend.textContent=r.text; pend.id=''; askLog.push({role:'assistant',content:r.text}); }catch(err){ pend.textContent=err.code==='not_granted'?'You declined; ask Claude in the chat instead.':'Could not answer right now.'; } });
 }
 
-function renderAll(){ renderNav(); document.querySelectorAll('.view').forEach(x=>x.classList.remove('on')); const el=$('#v-'+S.view)||$('#v-deck'); el.classList.add('on'); ({deck:renderDeck,tour:renderTour,subjects:renderSubjects,stanford:renderStanford,contract:renderContract}[S.view]||renderDeck)(); const rf=$('#railfoot'); if(rf) rf.textContent=`${pretty(S.date)} · ${S.db?'synced':'offline'}`; }
+function renderAll(){ renderNav(); document.querySelectorAll('.view').forEach(x=>x.classList.remove('on')); const el=$('#v-'+S.view)||$('#v-deck'); el.classList.add('on'); ({deck:renderDeck,all:renderAll_,tour:renderTour,subjects:renderSubjects,stanford:renderStanford,contract:renderContract}[S.view]||renderDeck)(); const rf=$('#railfoot'); if(rf) rf.textContent=`${pretty(S.date)} · ${S.db?'synced':'offline'}`; }
 renderAll(); renderHolo();
 setInterval(()=>{ if(S.view==='deck') renderDeck(); renderHolo(); }, 60000);
 
@@ -316,6 +335,7 @@ setInterval(()=>{ if(S.view==='deck') renderDeck(); renderHolo(); }, 60000);
   try{ const user=await claude.use('user'); if(user){ S.uid=await user.id(); const cw=await user.can('data.write'); S.canWrite=cw; } }catch(e){}
   const sub=(ref, fn)=>ref.onSnapshot(snap=>{ fn(snap); renderAll(); renderHolo(); }, err=>console.warn('db', err));
   sub(db.doc('plan/'+S.date), s=>{ if(s.exists) S.plan=s.data(); });
+  sub(db.collection('plan').where('date','>=',S.date).limit(14), s=>{ for(const d of s.docs){ const p=d.data(); S.plans[p.date]=p; } });
   sub(db.doc('days/'+S.date), s=>{ if(s.exists){ const ex=(S.day&&S.day.expanded)||{}; S.day=Object.assign({},s.data(),{expanded:ex}); } });
   sub(db.doc('audit/'+S.date), s=>{ S.audit=s.exists?s.data():null; });
   for(const k of ['subjects','assessments','tour','stanford']) sub(db.doc('state/'+k), s=>{ if(s.exists) S[k]=s.data(); });
