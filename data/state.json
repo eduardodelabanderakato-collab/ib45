@@ -407,8 +407,7 @@
         "2.6 PES: determinants, primary commodities vs manufactured goods (includes HL sub-topics)",
         "2.7 Role of government: indirect taxes, subsidies, price ceilings & floors; HL calculations (revenue, expenditure, welfare loss)",
         "2.8 Market failure: externalities & common pool resources; HL calculation",
-        "2.9 Public goods; 2.10 Asymmetric information (HL); 2.11 Market power (HL); 2.12 Equity (HL)",
-        "2.4 Critique of maximizing behaviour (HL only): behavioural economics, business objectives (place per teacher)"
+        "2.9 Public goods; 2.10 Asymmetric information (HL); 2.11 Market power (HL); 2.12 Equity (HL)"
       ],
       "topics": [
         {
@@ -429,7 +428,7 @@
         },
         {
           "name": "2.4 Critique of maximizing behaviour (HL only)",
-          "status": "new"
+          "status": "taught"
         },
         {
           "name": "2.5 Elasticity of demand: PED, YED (incl. HL sub-topics)",
@@ -536,17 +535,19 @@
           "status": "new"
         }
       ],
-      "teacherNote": "Class follows the IB guide order (Units 1-4). 2.1-2.3 done; 2.5 Elasticity of demand just started (23 Sep). 2.4 is HL-only and sits after 2.3 in the guide; check with teacher whether it is taught now or later."
+      "teacherNote": "Class follows the IB guide order, HL content included (no skipping). 2.1-2.4 done; 2.5 Elasticity of demand just started (23 Sep)."
     },
     "eng": {
-      "name": "English A Lit SL",
+      "name": "English A Language & Literature SL",
       "short": "English",
       "color": "#db2777",
       "kind": "language",
       "grade": 6,
       "resources": [
-        "Set works",
-        "Criteria card"
+        "Persepolis (Satrapi)",
+        "Wilfred Owen poetry packet",
+        "Visual rhetoric notes (photography, political cartoons)",
+        "Criteria card (Paper 1, Paper 2, IO)"
       ],
       "next": [
         "Persepolis ch 6–11 (checkpoint Thu 24) · 3 quotes, each tagged with a global issue",
@@ -558,35 +559,59 @@
       ],
       "topics": [
         {
-          "name": "Paper 1: guided analysis of unseen prose",
+          "name": "Wilfred Owen poetry: close reading, motifs, structure",
+          "status": "taught"
+        },
+        {
+          "name": "Mini IO on Owen (process, outline, delivery)",
+          "status": "taught"
+        },
+        {
+          "name": "Visual rhetoric: photography",
+          "status": "taught"
+        },
+        {
+          "name": "Visual rhetoric: political cartoons + Paper 1 practice",
+          "status": "taught"
+        },
+        {
+          "name": "Persepolis: four lenses, tracking document, checkpoints",
+          "status": "learning"
+        },
+        {
+          "name": "Persepolis + Owen / visual connections; summative (Oct 23)",
           "status": "new"
         },
         {
-          "name": "Paper 1: guided analysis of unseen poetry",
+          "name": "Political speeches (non-literary): rhetoric & Paper 1",
           "status": "new"
         },
         {
-          "name": "Paper 1: thesis & structure under time",
+          "name": "1984 (Orwell): reading, macro + micro scene analysis",
           "status": "new"
         },
         {
-          "name": "Paper 2: comparative essay planning",
+          "name": "Paper 1 practice + semester exam (Dec 3)",
           "status": "new"
         },
         {
-          "name": "Paper 2: works — themes & evidence bank",
+          "name": "1984 graded discussion + Paper 2 (Feb 4)",
           "status": "new"
         },
         {
-          "name": "Individual Oral: global issue & extract choice",
+          "name": "Film study + mini IO on film (Mar 11)",
           "status": "new"
         },
         {
-          "name": "Individual Oral: 10-minute delivery practice",
+          "name": "Stand-up comedy / music videos; creative project",
           "status": "new"
         },
         {
-          "name": "Literary devices & assessment criteria",
+          "name": "Antigone (Sophocles) + Paper 2 (Apr 27)",
+          "status": "new"
+        },
+        {
+          "name": "Individual Oral: extracts, outline, draft (May 13), delivery (May 25-Jun 9)",
           "status": "new"
         }
       ],
@@ -622,7 +647,8 @@
             "2026-10-08"
           ]
         ]
-      }
+      },
+      "teacherNote": "Course calendar (Mr. Campbell, A period) saved in docs/research/english-langlit-calendar-2026-27.pdf. Pace may shift; dates from it are marked projected until the teacher confirms. Done so far: Wilfred Owen poetry + mini IO, visual rhetoric (photography, political cartoons, Paper 1 practice). Now: Persepolis, checkpoints through Oct 8, summative Fri Oct 23. Then political speeches (Oct 27-Nov 12), 1984 (from Nov 13, finish over the holidays), Paper 1 practice late Nov, semester exams Dec 3-8 (Paper 1 on Dec 3). Semester 2: 1984 Paper 2 (Feb 4), film study, mini IO on film (Mar 11), stand-up/music videos, creative project, Antigone (Apr) with Paper 2 (Apr 27), IO process May (first draft May 13, delivery May 25-Jun 9), final exams Jun 4-9."
     },
     "port": {
       "name": "Portuguese A Lit SL",
@@ -809,6 +835,67 @@
       "title": "Persepolis ch 34-38 checkpoint",
       "date": "2026-10-08",
       "ramp": "none"
+    },
+    {
+      "id": "eng-summ-1023",
+      "subject": "eng",
+      "type": "test",
+      "title": "English · Persepolis summative (projected)",
+      "date": "2026-10-23",
+      "ramp": "language",
+      "projected": true,
+      "note": "From the course calendar: prep Oct 19 & 21, summative Fri Oct 23. Confirm format with Mr. Campbell (likely Paper 1-style or essay on Persepolis + Owen/visual connections)."
+    },
+    {
+      "id": "eng-exam-1203",
+      "subject": "eng",
+      "type": "test",
+      "title": "English · semester exam (Paper 1) (projected)",
+      "date": "2026-12-03",
+      "ramp": "language",
+      "projected": true,
+      "note": "Semester exams Dec 3-8; English Paper 1 on Dec 3 per the calendar. Paper 1 practice Nov 25, 27, Dec 1."
+    },
+    {
+      "id": "eng-p2-0204",
+      "subject": "eng",
+      "type": "test",
+      "title": "English · 1984 Paper 2 (projected)",
+      "date": "2027-02-04",
+      "ramp": "language",
+      "projected": true,
+      "note": "Holiday homework: finish 1984 by Jan 25. Graded discussion Feb 2, Paper 2 Feb 4."
+    },
+    {
+      "id": "eng-io-film-0311",
+      "subject": "eng",
+      "type": "test",
+      "title": "English · mini IO on film (projected)",
+      "date": "2027-03-11",
+      "ramp": "language",
+      "projected": true,
+      "note": "Prep Mar 9, delivery Mar 11."
+    },
+    {
+      "id": "eng-p2-0427",
+      "subject": "eng",
+      "type": "test",
+      "title": "English · Antigone Paper 2 (projected)",
+      "date": "2027-04-27",
+      "ramp": "language",
+      "projected": true,
+      "note": "Antigone Apr 2-23 with episode quizzes; Paper 2 Apr 27."
+    },
+    {
+      "id": "eng-io-draft-0513",
+      "subject": "eng",
+      "type": "report",
+      "title": "English · IO first draft for feedback (projected)",
+      "date": "2027-05-13",
+      "ramp": "report",
+      "earlyDraft": "2027-05-08",
+      "projected": true,
+      "note": "IO delivery May 25 - Jun 9; final exams Jun 4-9."
     }
   ],
   "assignments": {
