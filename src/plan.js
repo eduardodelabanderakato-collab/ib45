@@ -105,7 +105,10 @@ function rampTask(a, rampDay, state) {
     return R[String(rampDay)] ? `${s} report ${rampDay}: ${R[String(rampDay)]}` : null;
   }
   const S = { '-14': 'diagnose cold: 10-12 mixed questions timed, score by topic, rank red/amber/green', '-13': 'red topics: re-explain from memory, 30 min problems, log errors', '-12': 'red topics: problems + error log', '-11': 'red topics: problems + error log', '-10': 'red + one amber topic interleaved', '-9': 'red + one amber topic interleaved', '-8': 'mixed set across all topics, strict mark scheme', '-7': 'mixed set across all topics', '-6': 'mixed set, weighted to red', '-5': 'mixed set, timed', '-4': 'full timed past paper under exam conditions', '-3': 'mark it; every lost mark into the error log', '-2': 'error-only pass: redo every logged error cold; still wrong -> 3-line rule card', '-1': 'rule cards + one brain dump per topic. Stop by 21:00.' };
-  return S[String(rampDay)] ? `${s} ramp ${rampDay}: ${S[String(rampDay)]}` : null;
+  // Math: the paper format is rarely known in advance, so every math ramp trains both papers.
+  const M = { '-14': 'diagnose cold: 6 Paper 1 (no GDC) + 6 Paper 2 (GDC) questions, timed; rank topics red/amber/green', '-8': 'Paper 1 mixed set, no calculator, strict mark scheme', '-7': 'Paper 2 mixed set with the GDC, strict mark scheme', '-5': 'mixed set, timed: half without calculator, half with', '-4': 'full timed paper: Paper 1 (40 min) then Paper 2 (40 min), exam conditions' };
+  const line = (a.subject === 'math' && M[String(rampDay)]) || S[String(rampDay)];
+  return line ? `${s} ramp ${rampDay}: ${line}` : null;
 }
 
 function countdowns(state, iso) {
