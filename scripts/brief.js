@@ -103,7 +103,8 @@ ${nextBrief ? dots + label('reading · persepolis') + H(`Chapters ${nextBrief.ch
 ${portBrief && near.find(c => c.subject === 'port') ? dots + label('português · prova 1') + H(portBrief.titles) + P_(`<b>O que esperar.</b> ${esc(portBrief.expect)}`) + P_(`<b>Observar.</b> ${esc(portBrief.watch)}`) + box(`${esc(portBrief.quotes)}`) : ''}
 ${dots}
 ${label('read tonight')}
-${P_(`📚 <b>School:</b> ${P.readingTonight(state, day) ? esc(P.readingTonight(state, day).replace('Read tonight: ', '')) : 'nothing due'}${leisure ? `<br>🌙 <b>Before bed:</b> ${esc(leisure.title)}${leisure.author ? ' · ' + esc(leisure.author) : ''} · ${leisure.pages || 20} pages` : ''}`)}
+${P_(`📚 <b>School:</b> ${P.readingTonight(state, day) ? esc(P.readingTonight(state, day).replace('Read tonight: ', '')) : 'nothing due'}${leisure ? `<br>🌙 <b>Before bed, if the night allows:</b> ${esc(leisure.title)}${leisure.author ? ' · ' + esc(leisure.author) : ''} · ~${leisure.pages || 20} pages` : ''}`)}
+${leisure && leisure.author && IMG[leisure.author] ? photoRow(leisure.author, `${leisure.author}, ${leisure.title}`) : ''}
 ${dots}
 ${label('tonight')}
 ${P_(`<b>21:15</b> hard stop. <b>Report</b> in Life or the chat: blocks flown, errors added and closed, retrieval, one line on what the plan got wrong.<b>${esc(state.sleep.lightsOut)}</b> lights out.`)}
