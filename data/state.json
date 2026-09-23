@@ -306,30 +306,28 @@
         "ibchem.com"
       ],
       "next": [
-        "S1.1 Particulate nature of matter: states, mixtures, kinetic model (Oxford p.3 + Kognity)",
-        "S1.2 The nuclear atom: isotopes, mass spectra (p.20)",
-        "S1.3 Electron configurations: emission spectra, orbitals, Aufbau (p.34)",
-        "S1.4 Counting particles by mass: the mole, empirical formula, solutions (p.63)",
-        "S1.5 Ideal gases: gas laws, pV = nRT (p.80)",
+        "S1.5 Ideal gases: finish pV = nRT, real vs ideal (Oxford p.80 + Kognity questions)",
         "S2.1 The ionic model (p.95)",
-        "S2.2 The covalent model (p.117)"
+        "S2.2 The covalent model: Lewis, VSEPR, polarity (p.117)",
+        "S2.3 The metallic model (p.187)",
+        "S2.4 From models to materials (p.197)"
       ],
       "topics": [
         {
           "name": "S1.1 Particulate nature of matter",
-          "status": "learning"
+          "status": "taught"
         },
         {
           "name": "S1.2 The nuclear atom",
-          "status": "learning"
+          "status": "taught"
         },
         {
           "name": "S1.3 Electron configurations",
-          "status": "learning"
+          "status": "taught"
         },
         {
           "name": "S1.4 Counting particles: the mole",
-          "status": "learning"
+          "status": "taught"
         },
         {
           "name": "S1.5 Ideal gases",
@@ -403,13 +401,12 @@
         "Revision Village"
       ],
       "next": [
-        "2.5 Elasticities: PED & YED (Kognity, all sections)",
+        "2.5 PED: determinants, revenue & PED, tax incidence (Kognity, ahead of class)",
+        "2.5 YED: normal/inferior, primary vs manufactured vs services (Kognity)",
         "2.6 PES & primary commodities",
         "2.7 Government intervention: taxes, subsidies, price controls",
         "2.7 HL calculations: revenue, expenditure, welfare loss",
-        "2.8 Externalities",
-        "2.9 Public goods",
-        "2.10 Asymmetric information (HL)"
+        "2.8 Externalities"
       ],
       "topics": [
         {
@@ -513,7 +510,12 @@
         "Criteria card"
       ],
       "next": [
-        "Read set work 15-20 pages; 3 quotes into bank, tagged with a global issue"
+        "Persepolis ch 6–11 (checkpoint Thu 24) · 3 quotes, each tagged with a global issue",
+        "Persepolis ch 12–17 (checkpoint Mon 28) · 3 quotes tagged",
+        "Persepolis ch 18–23 (checkpoint Wed 30) · 3 quotes tagged",
+        "Persepolis ch 24–28 (checkpoint Fri Oct 2) · 3 quotes tagged",
+        "Persepolis ch 29–33 (checkpoint Tue Oct 6) · 3 quotes tagged",
+        "Persepolis ch 34–38 (checkpoint Thu Oct 8) · 3 quotes tagged"
       ],
       "topics": [
         {
@@ -548,7 +550,40 @@
           "name": "Literary devices & assessment criteria",
           "status": "new"
         }
-      ]
+      ],
+      "work": {
+        "title": "Persepolis (Satrapi)",
+        "checkpoints": [
+          [
+            "1-5",
+            "2026-09-22"
+          ],
+          [
+            "6-11",
+            "2026-09-24"
+          ],
+          [
+            "12-17",
+            "2026-09-28"
+          ],
+          [
+            "18-23",
+            "2026-09-30"
+          ],
+          [
+            "24-28",
+            "2026-10-02"
+          ],
+          [
+            "29-33",
+            "2026-10-06"
+          ],
+          [
+            "34-38",
+            "2026-10-08"
+          ]
+        ]
+      }
     },
     "port": {
       "name": "Portuguese A Lit SL",
@@ -596,7 +631,11 @@
           "name": "Recursos literários e critérios de avaliação",
           "status": "new"
         }
-      ]
+      ],
+      "work": {
+        "title": "cartum (confirm which work/author)",
+        "note": "Eduardo said 'cartum' — ask what exactly and what Friday's test covers."
+      }
     },
     "sat": {
       "name": "SAT",
@@ -677,6 +716,54 @@
       "date": "2026-10-09",
       "ramp": "science",
       "note": "Teacher-predicted date; covers S1.1–S1.5."
+    },
+    {
+      "id": "eng-cp-2026-09-24",
+      "subject": "eng",
+      "type": "checkpoint",
+      "title": "Persepolis ch 6-11 checkpoint",
+      "date": "2026-09-24",
+      "ramp": "none"
+    },
+    {
+      "id": "eng-cp-2026-09-28",
+      "subject": "eng",
+      "type": "checkpoint",
+      "title": "Persepolis ch 12-17 checkpoint",
+      "date": "2026-09-28",
+      "ramp": "none"
+    },
+    {
+      "id": "eng-cp-2026-09-30",
+      "subject": "eng",
+      "type": "checkpoint",
+      "title": "Persepolis ch 18-23 checkpoint",
+      "date": "2026-09-30",
+      "ramp": "none"
+    },
+    {
+      "id": "eng-cp-2026-10-02",
+      "subject": "eng",
+      "type": "checkpoint",
+      "title": "Persepolis ch 24-28 checkpoint",
+      "date": "2026-10-02",
+      "ramp": "none"
+    },
+    {
+      "id": "eng-cp-2026-10-06",
+      "subject": "eng",
+      "type": "checkpoint",
+      "title": "Persepolis ch 29-33 checkpoint",
+      "date": "2026-10-06",
+      "ramp": "none"
+    },
+    {
+      "id": "eng-cp-2026-10-08",
+      "subject": "eng",
+      "type": "checkpoint",
+      "title": "Persepolis ch 34-38 checkpoint",
+      "date": "2026-10-08",
+      "ramp": "none"
     }
   ],
   "assignments": {

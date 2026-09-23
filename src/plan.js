@@ -94,6 +94,7 @@ function preLearnTask(state, iso) {
 }
 
 function rampTask(a, rampDay, state) {
+  if (a.ramp === 'none') return null;
   const s = state.subjects[a.subject].short;
   if (a.ramp === 'language') {
     const L = { '-14': 'confirm format & criteria with teacher; copy top-band descriptors onto a card', '-13': 'study one top-band exemplar against the criteria', '-12': 'timed essay 1; send tonight with the 4-line note', '-8': 'feedback in: log it, redraft the named paragraphs', '-7': 'resend redraft: "did this fix it?"', '-6': 'mark an exemplar with the criteria', '-5': 'timed essay 2 applying the fix rules; send tonight', '-4': 'quote-bank / device-to-effect drill', '-3': 'feedback 2: log, redraft one paragraph', '-2': '25-min plan-only on a fresh question', '-1': 'read your best redraft + descriptor card. Nothing new. Early night.' };
