@@ -45,16 +45,15 @@
         "Haese"
       ],
       "next": [
-        "Trig 3.1–3.3: sine & cosine rules, 3D geometry, bearings",
-        "Trig 3.4–3.5: radians, arcs & sectors, unit circle, exact values",
-        "Trig 3.6–3.8: identities, trig functions & graphs, trig equations",
-        "Trig 3.9–3.11 (HL): reciprocal & inverse trig, compound & double angle",
-        "Functions 2.1–2.11: domain/range, composite & inverse, transformations",
-        "Functions 2.12–2.16 (HL): polynomials, rational, modulus, inequalities",
-        "Statistics 4.1–4.9: data, probability, binomial & normal",
-        "Calculus 5.1–5.11: limits, differentiation, integration intro",
-        "Binomial expansion 1.9–1.10",
-        "Proofs 1.6 & 1.15: induction, contradiction, counterexample"
+        "3D geometry: distance, midpoint, surface area & volume of solids (Hodder/Nikolaidis 3.1)",
+        "Sine rule & cosine rule, area of a triangle (3.2)",
+        "Applications of 3D geometry: bearings, angles of elevation (3.3)",
+        "Arcs & sectors, radians (3.4)",
+        "Unit circle & exact values (3.5)",
+        "Trigonometric equations (3.8)",
+        "Trigonometric functions & graphs (3.7)",
+        "Identities (3.6) · HL: reciprocal & inverse trig, compound & double angle (3.9–3.11)",
+        "Functions: linear/quadratic, composition, inverse, transformations (Sem 2 per diary)"
       ],
       "topics": [
         {
@@ -172,7 +171,9 @@
         "Calc AB",
         "Bin. Exp.",
         "Proofs"
-      ]
+      ],
+      "teacherNote": "Teacher's 2025-26 diary (docs/research/math-class-diary-2025-26.pdf): Trig/Geometry Part A = 3D geometry → sine/cosine rule → applications → arcs & sectors → RV List 1; Part B = unit circle → trig equations → trig functions → RV List 2 → Test Paper 1 (~32 marks/35-40 min, no GDC) + Paper 2 (~36 marks/40 min). Last year the trig test fell on Oct 27. Tests are preceded by an RV (Revision Village) list. Sem 2: Functions → Stats → Calculus → cumulative year-end test (40% calc) → IA proposal.",
+      "testFormat": "Two short papers: Paper 1 no-GDC ~32 marks/35-40 min; Paper 2 GDC ~36 marks/40 min. RV list assigned ~1 week before."
     },
     "phys": {
       "name": "Physics HL",
@@ -654,6 +655,16 @@
       "date": "2026-09-18",
       "ramp": "science",
       "result": null
+    },
+    {
+      "id": "math-trig-test-proj",
+      "subject": "math",
+      "type": "test",
+      "title": "Math test · Trig & Geometry (PROJECTED, confirm)",
+      "date": "2026-11-03",
+      "ramp": "science",
+      "projected": true,
+      "note": "Projected from last year's diary (Oct 27, 2025) shifted ~1 week; confirm with teacher when RV List 2 is announced."
     }
   ],
   "assignments": {
@@ -867,5 +878,6 @@
       }
     ]
   },
-  "log": []
+  "log": [],
+  "currentAirport": "HND"
 }
