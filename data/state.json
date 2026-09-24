@@ -1157,18 +1157,34 @@
       ],
       "currentAirport": "HND",
       "source": "focusflight"
+    },
+    {
+      "date": "2026-09-23",
+      "started": true,
+      "flown": {
+        "S1": "HND→HNA 49m"
+      },
+      "sprintsDone": 1,
+      "sprintsPlanned": 2,
+      "focusMinutes": 49,
+      "flights": [
+        "18:49 HND→HNA 49m"
+      ],
+      "currentAirport": "HNA",
+      "source": "focusflight"
     }
   ],
-  "currentAirport": "HND",
+  "currentAirport": "HNA",
   "tour": {
-    "at": "HND",
+    "at": "HNA",
     "visited": [
       "GRU",
       "GMP",
-      "HND"
+      "HND",
+      "HNA"
     ],
-    "kmTotal": 1180,
-    "minutesTotal": 104,
+    "kmTotal": 1627,
+    "minutesTotal": 153,
     "legs": [
       {
         "date": "2026-09-22",
@@ -1176,6 +1192,13 @@
         "to": "HND",
         "km": 1180,
         "min": 104
+      },
+      {
+        "date": "2026-09-23",
+        "from": "HND",
+        "to": "HNA",
+        "km": 447,
+        "min": 49
       }
     ]
   },
