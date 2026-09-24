@@ -66,7 +66,7 @@ async function main() {
     await mp.waitForTimeout(400); await mp.screenshot({ path: path.join(OUT, 'map.png') }); await mp.close();
   } catch (e) { console.warn('map skipped:', e.message); }
   try { const { execFileSync } = require('child_process'); const F = require('./flights.js'); const t = state.tour || { at: 'HND' }; const it = F.itinerary(t.at || 'HND', plan.blocks.filter(b => ['sprint', 'retrieval'].includes(b.kind)));
-    const names = require(path.join(ROOT, 'scripts/photo-names.js')).photoNames(state, day);
+    const names = require(path.join(ROOT, 'scripts/photo-names.js')).photoNames(state, iso);
     execFileSync('node', [path.join(ROOT, 'scripts/images.js'), ...names, '--download', path.join(OUT, 'photos')], { stdio: 'ignore' }); } catch (e) { console.warn('photos skipped:', e.message); }
   try { const { execFileSync } = require('child_process'); const r = JSON.parse(execFileSync('node', [path.join(ROOT, 'scripts/brief.js'), iso, '--out', OUT]).toString()); fs.copyFileSync(r.html, path.join(OUT, 'brief.html')); } catch (e) { console.warn('brief skipped:', e.message); }
   // Life app (static): regenerate 14 days of plan seeds from the current position, then build app/index.html into the site root
