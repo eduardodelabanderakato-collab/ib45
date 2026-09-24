@@ -2,6 +2,8 @@ name: morning-briefing
 on:
   schedule: [{ cron: '45 9 * * *' }]   # 06:45 America/Sao_Paulo
   workflow_dispatch:
+    inputs:
+      force: { description: 'send even if an edition already went out today', type: boolean, default: false }
 jobs:
   send:
     runs-on: ubuntu-latest
@@ -12,6 +14,7 @@ jobs:
         run: |
           since="$(date -u +%Y-%m-%d)T09:00:00Z"
           n=$(gh api "repos/${{ github.repository }}/actions/workflows/brief.yml/runs?status=success&created=>=$since&per_page=5" --jq '.total_count')
+          if [ "${{ github.event.inputs.force }}" = "true" ]; then n=0; fi
           echo "already_sent=$([ "${n:-0}" -gt 0 ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
           echo "successful runs since $since: ${n:-0}"
       - uses: actions/checkout@v4
@@ -23,7 +26,7 @@ jobs:
         if: steps.dedupe.outputs.already_sent != 'true'
       - name: Resolve photos for today's destinations
         if: steps.dedupe.outputs.already_sent != 'true'
-        run: node -e "const P=require('./src/plan.js'),F=require('./src/flights.js');const st=require('./data/state.json');const d=new Intl.DateTimeFormat('en-CA',{timeZone:st.tz}).format(new Date());const p=P.planFor(st,d);const at=(st.tour&&st.tour.at)||'HND';const it=F.itinerary(at,p.blocks.filter(b=>['sprint','retrieval'].includes(b.kind)));const names=[...new Set([...it.legs.filter(l=>l.flight).map(l=>l.flight.city),F.BY[it.endsAt]?F.BY[it.endsAt].c:'','Stanford','Artificial intelligence'])].filter(Boolean);require('child_process').execFileSync('node',['scripts/images.js',...names],{stdio:'inherit'})"
+        run: node scripts/photo-names.js | tr '\n' '\0' | xargs -0 node scripts/images.js
       - run: node scripts/news.js
         if: steps.dedupe.outputs.already_sent != 'true'
       - run: node scripts/send-brief.js
