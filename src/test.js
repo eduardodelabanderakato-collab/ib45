@@ -98,3 +98,14 @@ test('build: writes html and three PNGs at exact sizes', async () => {
   assert.deepEqual(dims('wp-ipad.png'), [2752, 2752]);
   assert.deepEqual(dims('wp-mac.png'), [2560, 1664]);
 });
+
+test('no planned leg is shorter than Focus Flight\'s 30-minute minimum', () => {
+  const F = require('./flights.js');
+  for (const from of ['HND', 'HNA', 'SDJ', 'GMP', 'GRU']) for (const m of [20, 26, 30, 45, 90]) {
+    const d = F.pickDestination(from, m, F.nextWaypoint(from));
+    assert.ok(d, `${from} ${m}`); assert.ok(d.minutes >= 30, `${from} ${m}min -> ${d.c} ${d.minutes}min`);
+  }
+  const it = F.itinerary('HNA', [{ start: '20:45', end: '21:11', kind: 'sprint' }]);
+  assert.ok(it.legs[0].flight && it.legs[0].flight.minutes >= 30);
+});
+

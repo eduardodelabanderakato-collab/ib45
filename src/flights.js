@@ -4,6 +4,7 @@
 const AIRPORTS = require('../data/airports.json');
 const BY = Object.fromEntries(AIRPORTS.map(a => [a.i, a]));
 const OVERHEAD = 15.4, KM_PER_MIN = 13.38;
+const MIN_FLIGHT = 30; // Focus Flight refuses flights shorter than 30 minutes (learned 2026-09-23: Hanamaki -> Sendai rejected)
 const rad = d => d * Math.PI / 180;
 function km(a, b) { const R = 6371; const dLa = rad(b.la - a.la), dLo = rad(b.lo - a.lo); const h = Math.sin(dLa / 2) ** 2 + Math.cos(rad(a.la)) * Math.cos(rad(b.la)) * Math.sin(dLo / 2) ** 2; return 2 * R * Math.asin(Math.sqrt(h)); }
 function bearing(a, b) { const y = Math.sin(rad(b.lo - a.lo)) * Math.cos(rad(b.la)); const x = Math.cos(rad(a.la)) * Math.sin(rad(b.la)) - Math.sin(rad(a.la)) * Math.cos(rad(b.la)) * Math.cos(rad(b.lo - a.lo)); return (Math.atan2(y, x) * 180 / Math.PI + 360) % 360; }
@@ -18,12 +19,13 @@ const TOUR = ['HND', 'CTS', 'ANC', 'YVR', 'SEA', 'SFO', 'LAX', 'LAS', 'DEN', 'OR
 function pickDestination(fromIATA, minutes, toward) {
   const from = BY[fromIATA]; if (!from) return null;
   const goal = BY[toward] || BY['GRU'];
+  minutes = Math.max(minutes, MIN_FLIGHT);
   const target = kmFor(minutes); const goalDist = km(from, goal); const goalBear = bearing(from, goal);
-  if (goalDist <= target * 1.12 && goalDist >= target * 0.6) return { ...goal, km: Math.round(goalDist), minutes: minutesFor(goalDist), waypoint: true };
+  if (goalDist <= target * 1.12 && goalDist >= target * 0.6 && minutesFor(goalDist) >= MIN_FLIGHT) return { ...goal, km: Math.round(goalDist), minutes: minutesFor(goalDist), waypoint: true };
   let best = null;
   for (const a of AIRPORTS) {
     if (a.i === fromIATA) continue;
-    const d = km(from, a); if (d < target * 0.85 || d > target * 1.15) continue;
+    const d = km(from, a); if (d < target * 0.85 || d > target * 1.15 || minutesFor(d) < MIN_FLIGHT) continue;
     let db = Math.abs(bearing(from, a) - goalBear); if (db > 180) db = 360 - db;
     if (db > 60) continue;
     const score = Math.abs(d - target) / target + db / 90 + (a.t === 3 ? 0 : 0.35);
@@ -32,7 +34,7 @@ function pickDestination(fromIATA, minutes, toward) {
   if (best) return best;
   // Fallbacks, widening progressively: any bearing, then medium airports, then ±40% distance.
   for (const [tol, minType] of [[0.2, 3], [0.2, 2], [0.4, 3], [0.4, 2], [0.7, 2]]) {
-    for (const a of AIRPORTS) { if (a.t < minType || a.i === fromIATA) continue; const d = km(from, a); const s = Math.abs(d - target) / target; if (s <= tol && (!best || s < best.score)) best = { ...a, km: Math.round(d), minutes: minutesFor(d), score: s }; }
+    for (const a of AIRPORTS) { if (a.t < minType || a.i === fromIATA) continue; const d = km(from, a); if (minutesFor(d) < MIN_FLIGHT) continue; const s = Math.abs(d - target) / target; if (s <= tol && (!best || s < best.score)) best = { ...a, km: Math.round(d), minutes: minutesFor(d), score: s }; }
     if (best) return best;
   }
   return null;
@@ -52,11 +54,11 @@ function itinerary(fromIATA, blocks) {
   for (const b of blocks) {
     const mins = (h => (+h[1].slice(0, 2)) * 60 + (+h[1].slice(3)) - ((+h[0].slice(0, 2)) * 60 + (+h[0].slice(3))))([b.start, b.end]);
     if (mins < 20) { legs.push({ ...b, flight: null }); continue; }
-    const dest = pickDestination(at, mins, nextWaypoint(at));
+    const dest = pickDestination(at, Math.max(mins, MIN_FLIGHT), nextWaypoint(at)); // a short block still flies the 30-minute minimum
     legs.push({ ...b, flight: dest ? { from: at, to: dest.i, city: dest.c, km: dest.km, minutes: dest.minutes, waypoint: !!dest.waypoint } : null });
     if (dest) at = dest.i;
   }
   return { legs, endsAt: at };
 }
 
-module.exports = { AIRPORTS, BY, km, bearing, minutesFor, kmFor, pickDestination, nextWaypoint, itinerary, TOUR };
+module.exports = { AIRPORTS, BY, km, bearing, minutesFor, kmFor, pickDestination, nextWaypoint, itinerary, TOUR, MIN_FLIGHT };

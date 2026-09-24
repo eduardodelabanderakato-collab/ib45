@@ -88,5 +88,12 @@
     "credit": "Wikimedia Commons",
     "page": "https://en.wikipedia.org/wiki/Supercomputer",
     "slug": "artificial-intelligence"
+  },
+  "Niigata": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fd/Niigata_from_Bandaijima_Building_20200906_P4.jpg/330px-Niigata_from_Bandaijima_Building_20200906_P4.jpg",
+    "title": "Niigata (city)",
+    "credit": "Wikimedia Commons",
+    "page": "https://en.wikipedia.org/wiki/Niigata_(city)",
+    "slug": "niigata"
   }
 }
