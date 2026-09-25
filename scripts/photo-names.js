@@ -5,7 +5,7 @@ const ROOT = path.join(__dirname, '..');
 const P = require(path.join(ROOT, 'src/plan.js')), F = require(path.join(ROOT, 'src/flights.js'));
 function photoNames(state, day) {
   const p = P.planFor(state, day); const at = (state.tour && state.tour.at) || 'HND';
-  const it = F.itinerary(at, p.blocks.filter(b => ['sprint', 'retrieval'].includes(b.kind)));
+  const it = F.itinerary(at, p.blocks.filter(b => ['sprint', 'retrieval'].includes(b.kind)), (state.tour && state.tour.visited) || []);
   const faces = ['Isaac Newton', 'Dmitri Mendeleev', 'Leonhard Euler', 'Adam Smith', 'Marjane Satrapi', 'Machado de Assis'];
   const leisure = (state.leisure || []).map(l => l.author).filter(Boolean);
   return [...new Set([...it.legs.filter(l => l.flight).map(l => l.flight.city), F.BY[it.endsAt] ? F.BY[it.endsAt].c : '', 'Stanford', 'Artificial intelligence', ...faces, ...leisure])].filter(Boolean);

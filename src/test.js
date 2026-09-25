@@ -102,10 +102,25 @@ test('build: writes html and three PNGs at exact sizes', async () => {
 test('no planned leg is shorter than Focus Flight\'s 30-minute minimum', () => {
   const F = require('./flights.js');
   for (const from of ['HND', 'HNA', 'SDJ', 'GMP', 'GRU']) for (const m of [20, 26, 30, 45, 90]) {
-    const d = F.pickDestination(from, m, F.nextWaypoint(from));
-    assert.ok(d, `${from} ${m}`); assert.ok(d.minutes >= 30, `${from} ${m}min -> ${d.c} ${d.minutes}min`);
+    const it = F.itinerary(from, [{ start: '16:00', end: `${String(16 + Math.floor(m / 60)).padStart(2, '0')}:${String(m % 60).padStart(2, '0')}` }], []);
+    for (const l of it.legs) if (l.flight) assert.ok(l.flight.minutes >= 30, `${from} ${m}min -> ${l.flight.city} ${l.flight.minutes}min`);
   }
   const it = F.itinerary('HNA', [{ start: '20:45', end: '21:11', kind: 'sprint' }]);
   assert.ok(it.legs[0].flight && it.legs[0].flight.minutes >= 30);
+});
+
+test('every leg makes progress toward home and the tour ends at GRU', () => {
+  const F = require('./flights.js');
+  let at = 'RIS', seen = ['GRU', 'GMP', 'HND', 'HNA', 'CTS', 'UUS', 'RIS'];
+  const day = [{ start: '16:20', end: '17:10' }, { start: '17:20', end: '18:10' }, { start: '18:30', end: '19:20' }];
+  const wk = [{ start: '09:00', end: '10:30' }, { start: '10:45', end: '12:00' }];
+  let arrived = false;
+  for (let d = 0; d < 120 && !arrived; d++) {
+    const it = F.itinerary(at, d % 7 >= 5 ? wk : day, seen);
+    for (const l of it.legs) if (l.flight && !l.flight.continued) { assert.ok(l.flight.minutes >= 30); seen.push(l.flight.to); }
+    at = it.endsAt; arrived = at === 'GRU';
+  }
+  assert.ok(arrived, 'never reached GRU');
+  const home = F.itinerary('GRU', day, seen); assert.ok(home.legs.every(l => !l.flight), 'keeps flying after home');
 });
 

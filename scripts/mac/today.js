@@ -11,7 +11,7 @@ let at = state.currentAirport || 'HND';
 try { at = JSON.parse(execFileSync('node', [path.join(__dirname, 'ff-log.js'), day]).toString()).currentAirport || at; } catch (e) {}
 const plan = P.planFor(state, day);
 const flyable = plan.blocks.filter(b => ['sprint', 'retrieval'].includes(b.kind));
-const it = F.itinerary(at, flyable); const legByStart = Object.fromEntries(it.legs.map(l => [l.start, l.flight]));
+const it = F.itinerary(at, flyable, (state.tour && state.tour.visited) || []); const legByStart = Object.fromEntries(it.legs.map(l => [l.start, l.flight]));
 const out = { date: day, label: `${plan.prettyLong} · ${plan.dayLabel}`, phase: plan.phase, at, endsAt: it.endsAt, countdowns: plan.countdowns.filter(c => c.daysLeft <= 14).map(c => `${c.title}: ${c.daysLeft}d`), blocks: plan.blocks.map(b => ({ start: b.start, end: b.end, title: b.title, kind: b.kind, steps: b.steps, flight: legByStart[b.start] || null })) };
 if (json) { console.log(JSON.stringify(out, null, 2)); process.exit(0); }
 console.log(`${out.label} · ${out.phase} · you are in ${at}`);

@@ -10,7 +10,7 @@ const outDir = args.includes('--out') ? args[args.indexOf('--out') + 1] : path.j
 const APP_URL = 'https://eduardodelabanderakato-collab.github.io/ib45/'; const SITE = 'https://eduardodelabanderakato-collab.github.io/ib45';
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const plan = P.planFor(state, day); const t = state.tour || {}; const at = t.at || state.currentAirport || 'HND'; const city = F.BY[at] ? F.BY[at].c : at;
-const flyable = plan.blocks.filter(b => ['sprint', 'retrieval'].includes(b.kind)); const it = F.itinerary(at, flyable); const legByStart = Object.fromEntries(it.legs.map(l => [l.start, l.flight]));
+const flyable = plan.blocks.filter(b => ['sprint', 'retrieval'].includes(b.kind)); const it = F.itinerary(at, flyable, (state.tour && state.tour.visited) || []); const legByStart = Object.fromEntries(it.legs.map(l => [l.start, l.flight]));
 const yday = P.addDays(day, -1); const y = (state.log || []).find(r => r.date === yday);
 const cds = plan.countdowns.filter(c => c.type !== 'checkpoint'); const near = cds.filter(c => c.daysLeft <= 14); const cps = plan.countdowns.filter(c => c.type === 'checkpoint').slice(0, 1);
 const stanfordAll = JSON.parse(fs.readFileSync(path.join(ROOT, 'app/seed/stanford.json'), 'utf8')).milestones; const stanford = stanfordAll.filter(m => m.date >= day && P.addDays(day, 7) >= m.date).slice(0, 3);

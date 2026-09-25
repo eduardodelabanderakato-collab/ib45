@@ -11,54 +11,80 @@ function bearing(a, b) { const y = Math.sin(rad(b.lo - a.lo)) * Math.cos(rad(b.l
 const minutesFor = d => Math.round(OVERHEAD + d / KM_PER_MIN);
 const kmFor = m => Math.max(0, (m - OVERHEAD) * KM_PER_MIN);
 
-// The IB45 World Tour: Tokyo → home to São Paulo by the December break, eastward, every continent.
-const TOUR = ['HND', 'CTS', 'ANC', 'YVR', 'SEA', 'SFO', 'LAX', 'LAS', 'DEN', 'ORD', 'YYZ', 'JFK', 'BOS', 'KEF', 'DUB', 'LHR', 'AMS', 'CPH', 'OSL', 'ARN', 'HEL', 'WAW', 'BER', 'PRG', 'VIE', 'ZRH', 'MXP', 'FCO', 'ATH', 'IST', 'TLV', 'CAI', 'DXB', 'DEL', 'BOM', 'CMB', 'BKK', 'SIN', 'CGK', 'PER', 'MEL', 'SYD', 'AKL', 'NAN', 'PPT', 'SCL', 'EZE', 'GIG', 'GRU'];
+// The IB45 World Tour, v2 (2026-09-25): WESTWARD, home to São Paulo by the December break.
+// v1 went east and asked for a 5,500 km Pacific crossing that 45-minute blocks can never fly, so the picker circled Hokkaido.
+// Waypoints are the story; the picker fills the gaps with real airports so that EVERY leg makes progress toward the next waypoint.
+// The Atlantic (Cape Verde -> Fernando de Noronha, ~2,100 km, ~175 min) is the one leg that needs the two Saturday blocks joined.
+const TOUR = ['VVO', 'HRB', 'SHE', 'PEK', 'XIY', 'CTU', 'KMG', 'HAN', 'DAD', 'SGN', 'BKK', 'KUL', 'SIN', 'RGN', 'CCU', 'HYD', 'BOM', 'KHI', 'MCT', 'DXB', 'IKA', 'IST', 'ATH', 'FCO', 'ZRH', 'MUC', 'BER', 'CPH', 'AMS', 'LHR', 'CDG', 'MAD', 'LIS', 'CMN', 'LPA', 'DSS', 'RAI', 'VXE', 'FEN', 'REC', 'SSA', 'GIG', 'GRU'];
+const HOME = 'GRU';
+const SLACK = 1.1; // a leg may run 10% past the block; Focus Flight keeps counting
 
-// Pick the destination for a flight of `minutes` from `fromIATA`, heading along the tour toward `toward` (next waypoint).
-// Prefers large airports (type 3) whose flight time is within ±12% of the target and whose bearing is within 60° of the goal.
-function pickDestination(fromIATA, minutes, toward) {
+// Next waypoint = first tour stop not yet visited (home is always allowed last).
+// Skipped waypoints are forfeited (never fly backwards), and a waypoint closer than a legal flight counts as reached.
+function nextWaypoint(currentIATA, visited) {
+  const v = new Set(visited || []); const cur = BY[currentIATA];
+  let progress = -1; TOUR.forEach((w, i) => { if (w !== HOME && v.has(w)) progress = Math.max(progress, i); });
+  for (let i = progress + 1; i < TOUR.length; i++) { const w = TOUR[i]; if (w === HOME) return w; if (v.has(w) || w === currentIATA) continue; if (cur && BY[w] && minutesFor(km(cur, BY[w])) < MIN_FLIGHT) continue; return w; }
+  return HOME;
+}
+
+// Pick the destination for a block of `minutes` from `fromIATA`. Rules, in order:
+// 1. the furthest tour waypoint reachable inside the block (waypoints are the story);
+// 2. otherwise the airport that makes the most progress toward the next waypoint, mostly forward (>= 60% of km flown), big airports preferred;
+// 3. otherwise the same with a looser forward rule; 4. otherwise null (the itinerary will try to join blocks, then hold).
+function pickDestination(fromIATA, minutes, toward, visited) {
   const from = BY[fromIATA]; if (!from) return null;
-  const goal = BY[toward] || BY['GRU'];
-  minutes = Math.max(minutes, MIN_FLIGHT);
-  const target = kmFor(minutes); const goalDist = km(from, goal); const goalBear = bearing(from, goal);
-  if (goalDist <= target * 1.12 && goalDist >= target * 0.6 && minutesFor(goalDist) >= MIN_FLIGHT) return { ...goal, km: Math.round(goalDist), minutes: minutesFor(goalDist), waypoint: true };
-  let best = null;
-  for (const a of AIRPORTS) {
-    if (a.i === fromIATA) continue;
-    const d = km(from, a); if (d < target * 0.85 || d > target * 1.15 || minutesFor(d) < MIN_FLIGHT) continue;
-    let db = Math.abs(bearing(from, a) - goalBear); if (db > 180) db = 360 - db;
-    if (db > 60) continue;
-    const score = Math.abs(d - target) / target + db / 90 + (a.t === 3 ? 0 : 0.35);
-    if (!best || score < best.score) best = { ...a, km: Math.round(d), minutes: minutesFor(d), score };
-  }
-  if (best) return best;
-  // Fallbacks, widening progressively: any bearing, then medium airports, then ±40% distance.
-  for (const [tol, minType] of [[0.2, 3], [0.2, 2], [0.4, 3], [0.4, 2], [0.7, 2]]) {
-    for (const a of AIRPORTS) { if (a.t < minType || a.i === fromIATA) continue; const d = km(from, a); if (minutesFor(d) < MIN_FLIGHT) continue; const s = Math.abs(d - target) / target; if (s <= tol && (!best || s < best.score)) best = { ...a, km: Math.round(d), minutes: minutesFor(d), score: s }; }
+  const v = new Set(visited || []); const capKm = kmFor(Math.max(minutes, MIN_FLIGHT) * SLACK);
+  const goal = BY[toward] || BY[HOME]; const gi = TOUR.indexOf(toward);
+  const land = (a, d, extra) => ({ ...a, km: Math.round(d), minutes: minutesFor(d), ...extra });
+  // 1. furthest reachable waypoint from `toward` onward (never skipping more than the natural order allows)
+  // the first tour waypoint (in order) reachable inside the block wins: more cities, never overshooting the story
+  for (let i = Math.max(gi, 0); i < TOUR.length; i++) { const w = BY[TOUR[i]]; if (!w || (v.has(TOUR[i]) && TOUR[i] !== HOME) || TOUR[i] === fromIATA) continue; const d = km(from, w); if (d <= capKm && minutesFor(d) >= MIN_FLIGHT) return land(w, d, { waypoint: true }); }
+  // 2./3. best progress toward the goal
+  const dg = km(from, goal);
+  for (const forwardRatio of [0.6, 0.3]) {
+    let best = null;
+    for (const a of AIRPORTS) {
+      if (a.i === fromIATA || v.has(a.i)) continue;
+      const d = km(from, a); if (d > capKm || minutesFor(d) < MIN_FLIGHT) continue;
+      const progress = dg - km(a, goal); if (progress < forwardRatio * d) continue;
+      const score = progress + (a.t === 3 ? 80 : 0);
+      if (!best || score > best.score) best = land(a, d, { score });
+    }
     if (best) return best;
   }
   return null;
 }
 
-function nextWaypoint(currentIATA) {
-  const i = TOUR.indexOf(currentIATA); if (i >= 0) return TOUR[Math.min(i + 1, TOUR.length - 1)];
-  // Off-route: head to the nearest tour waypoint ahead by tour order.
-  const cur = BY[currentIATA]; if (!cur) return TOUR[1];
-  let best = TOUR[1], bd = Infinity; for (const w of TOUR) { const d = km(cur, BY[w]); if (d < bd) { bd = d; best = w; } }
+// Holding pattern: the nearest unvisited airport inside the block, any direction, used only when no forward leg exists (ocean ahead).
+function holdingLeg(fromIATA, minutes, visited) {
+  const from = BY[fromIATA]; if (!from) return null; const v = new Set(visited || []); const capKm = kmFor(Math.max(minutes, MIN_FLIGHT) * SLACK);
+  let best = null; for (const revisit of [false, true]) { for (const a of AIRPORTS) { if (a.i === fromIATA || (!revisit && v.has(a.i))) continue; const d = km(from, a); if (d > capKm || minutesFor(d) < MIN_FLIGHT) continue; if (!best || d < best.km) best = { ...a, km: Math.round(d), minutes: minutesFor(d), hold: true }; } if (best) break; }
   return best;
 }
 
-// Plan a day's flights: blocks (with start/end HH:MM) → destinations chained from `fromIATA`.
-function itinerary(fromIATA, blocks) {
-  let at = fromIATA; const legs = [];
-  for (const b of blocks) {
-    const mins = (h => (+h[1].slice(0, 2)) * 60 + (+h[1].slice(3)) - ((+h[0].slice(0, 2)) * 60 + (+h[0].slice(3))))([b.start, b.end]);
-    if (mins < 20) { legs.push({ ...b, flight: null }); continue; }
-    const dest = pickDestination(at, Math.max(mins, MIN_FLIGHT), nextWaypoint(at)); // a short block still flies the 30-minute minimum
-    legs.push({ ...b, flight: dest ? { from: at, to: dest.i, city: dest.c, km: dest.km, minutes: dest.minutes, waypoint: !!dest.waypoint } : null });
-    if (dest) at = dest.i;
+const mins = b => (+b.end.slice(0, 2)) * 60 + (+b.end.slice(3)) - ((+b.start.slice(0, 2)) * 60 + (+b.start.slice(3)));
+const gap = (a, b) => (+b.start.slice(0, 2)) * 60 + (+b.start.slice(3)) - ((+a.end.slice(0, 2)) * 60 + (+a.end.slice(3)));
+// Plan the day's legs from `fromIATA`. `visited` (state.tour.visited) keeps legs from looping back.
+function itinerary(fromIATA, blocks, visited) {
+  let at = fromIATA; const legs = []; const seen = [...(visited || [])];
+  for (let k = 0; k < blocks.length; k++) {
+    const b = blocks[k]; const m = mins(b);
+    if (m < 20 || at === HOME) { legs.push({ ...b, flight: null, home: at === HOME }); continue; }
+    let dest = pickDestination(at, m, nextWaypoint(at, seen), seen); let joined = false;
+    // Ocean ahead: try joining this block with the next one (Saturday SAT1 + SAT2 become one long leg).
+    if (!dest && blocks[k + 1] && gap(b, blocks[k + 1]) <= 20) { const both = m + gap(b, blocks[k + 1]) + mins(blocks[k + 1]); dest = pickDestination(at, both, nextWaypoint(at, seen), seen); joined = !!dest; }
+    if (!dest) dest = holdingLeg(at, m, seen);
+    const flight = dest ? { from: at, to: dest.i, city: dest.c, km: dest.km, minutes: dest.minutes, waypoint: !!dest.waypoint, hold: !!dest.hold, joined } : null;
+    legs.push({ ...b, flight });
+    if (dest) { at = dest.i; seen.push(dest.i); }
+    if (joined) { // the second block continues the long leg; if enough of it is left after landing, fly one more short leg
+      const left = m + gap(b, blocks[k + 1]) + mins(blocks[k + 1]) - dest.minutes; let extra = null;
+      if (left >= MIN_FLIGHT && at !== HOME) { extra = pickDestination(at, left, nextWaypoint(at, seen), seen) || holdingLeg(at, left, seen); }
+      legs.push({ ...blocks[k + 1], flight: extra ? { from: at, to: extra.i, city: extra.c, km: extra.km, minutes: extra.minutes, waypoint: !!extra.waypoint, hold: !!extra.hold, afterLongLeg: true } : { ...flight, continued: true } });
+      if (extra) { at = extra.i; seen.push(extra.i); } k++;
+    }
   }
   return { legs, endsAt: at };
 }
-
-module.exports = { AIRPORTS, BY, km, bearing, minutesFor, kmFor, pickDestination, nextWaypoint, itinerary, TOUR, MIN_FLIGHT };
+module.exports = { AIRPORTS, BY, km, bearing, minutesFor, kmFor, pickDestination, nextWaypoint, holdingLeg, itinerary, TOUR, HOME, MIN_FLIGHT };
