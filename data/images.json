@@ -123,5 +123,180 @@
     "credit": "Wikimedia Commons",
     "page": "https://en.wikipedia.org/wiki/Isaac_Asimov",
     "slug": "isaac-asimov"
+  },
+  "Vladivostok": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/62/Vladivostok._GUM_Department_Store_P8070703_2200.jpg/330px-Vladivostok._GUM_Department_Store_P8070703_2200.jpg",
+    "title": "Vladivostok",
+    "credit": "Wikimedia Commons",
+    "page": "https://en.wikipedia.org/wiki/Vladivostok",
+    "slug": "vladivostok"
+  },
+  "Mudanjiang": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/4/4f/Night_of_mudanjiang%2C_china.jpg",
+    "title": "Mudanjiang",
+    "credit": "Wikimedia Commons",
+    "page": "https://en.wikipedia.org/wiki/Mudanjiang",
+    "slug": "mudanjiang"
+  },
+  "Stanford Hoover Tower": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1e/Hoover_Tower_Stanford_January_2013.jpg/330px-Hoover_Tower_Stanford_January_2013.jpg",
+    "title": "Hoover Tower",
+    "credit": "Wikimedia Commons",
+    "page": "https://en.wikipedia.org/wiki/Hoover_Tower",
+    "slug": "stanford-hoover-tower"
+  },
+  "Stanford Memorial Church": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a6/Stanford_Memorial_Church_%282025%29-L1007381.jpg/330px-Stanford_Memorial_Church_%282025%29-L1007381.jpg",
+    "title": "Stanford Memorial Church",
+    "credit": "Wikimedia Commons",
+    "page": "https://en.wikipedia.org/wiki/Stanford_Memorial_Church",
+    "slug": "stanford-memorial-church"
+  },
+  "Stanford Dish": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/98/Radio_telescope_The_Dish.jpg/330px-Radio_telescope_The_Dish.jpg",
+    "title": "Stanford Dish (Stanford Radio Telescope)",
+    "credit": "Wikimedia Commons",
+    "page": "https://en.wikipedia.org/wiki/Stanford_Dish_(Stanford_Radio_Telescope)",
+    "slug": "stanford-dish"
+  },
+  "AI robot": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/34/Valkyrie-robot-3.jpg/330px-Valkyrie-robot-3.jpg",
+    "title": "Humanoid robot",
+    "credit": "Wikimedia Commons",
+    "page": "https://en.wikipedia.org/wiki/Humanoid_robot",
+    "slug": "ai-robot"
+  },
+  "AI data center": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/57/Data_Center_of_CNPC.jpg/330px-Data_Center_of_CNPC.jpg",
+    "title": "Data center",
+    "credit": "Wikimedia Commons",
+    "page": "https://en.wikipedia.org/wiki/Data_center",
+    "slug": "ai-data-center"
+  },
+  "AI chip": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cd/Generic_block_diagram_of_a_GPU.svg/960px-Generic_block_diagram_of_a_GPU.svg.png",
+    "title": "Graphics processing unit",
+    "credit": "Wikimedia Commons",
+    "page": "https://en.wikipedia.org/wiki/Graphics_processing_unit",
+    "slug": "ai-chip"
+  },
+  "Albert Einstein": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/28/Albert_Einstein_Head_cleaned.jpg/330px-Albert_Einstein_Head_cleaned.jpg",
+    "title": "Albert Einstein",
+    "credit": "Wikimedia Commons",
+    "page": "https://en.wikipedia.org/wiki/Albert_Einstein",
+    "slug": "albert-einstein"
+  },
+  "Marie Curie": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/c/c8/Marie_Curie_c._1920s.jpg",
+    "title": "Marie Curie",
+    "credit": "Wikimedia Commons",
+    "page": "https://en.wikipedia.org/wiki/Marie_Curie",
+    "slug": "marie-curie"
+  },
+  "Sophocles": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/1/19/Sophocles_pushkin.jpg",
+    "title": "Sophocles",
+    "credit": "Wikimedia Commons",
+    "page": "https://en.wikipedia.org/wiki/Sophocles",
+    "slug": "sophocles"
+  },
+  "Richard Feynman": {
+    "url": "https://upload.wikimedia.org/wikipedia/en/4/42/Richard_Feynman_Nobel.jpg",
+    "title": "Richard Feynman",
+    "credit": "Wikimedia Commons",
+    "page": "https://en.wikipedia.org/wiki/Richard_Feynman",
+    "slug": "richard-feynman"
+  },
+  "Emmy Noether": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/b/b5/Emmy_Noether_%283x4_cropped%29.jpg",
+    "title": "Emmy Noether",
+    "credit": "Wikimedia Commons",
+    "page": "https://en.wikipedia.org/wiki/Emmy_Noether",
+    "slug": "emmy-noether"
+  },
+  "Antoine Lavoisier": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/d/d8/David_-_Portrait_of_Monsieur_Lavoisier_%28cropped%292.jpg",
+    "title": "Antoine Lavoisier",
+    "credit": "Wikimedia Commons",
+    "page": "https://en.wikipedia.org/wiki/Antoine_Lavoisier",
+    "slug": "antoine-lavoisier"
+  },
+  "Linus Pauling": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/5/53/Linus_Pauling_in_the_1940s.jpg",
+    "title": "Linus Pauling",
+    "credit": "Wikimedia Commons",
+    "page": "https://en.wikipedia.org/wiki/Linus_Pauling",
+    "slug": "linus-pauling"
+  },
+  "Carl Friedrich Gauss": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/e/ec/Carl_Friedrich_Gauss_1840_by_Jensen.jpg",
+    "title": "Carl Friedrich Gauss",
+    "credit": "Wikimedia Commons",
+    "page": "https://en.wikipedia.org/wiki/Carl_Friedrich_Gauss",
+    "slug": "carl-friedrich-gauss"
+  },
+  "Srinivasa Ramanujan": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/d/d0/Srinivasa_Ramanujan-Add._MS_a94_version2_%28cropped%29.jpg",
+    "title": "Srinivasa Ramanujan",
+    "credit": "Wikimedia Commons",
+    "page": "https://en.wikipedia.org/wiki/Srinivasa_Ramanujan",
+    "slug": "srinivasa-ramanujan"
+  },
+  "John Maynard Keynes": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/5/5f/John_Maynard_Keynes_%281929%29.jpg",
+    "title": "John Maynard Keynes",
+    "credit": "Wikimedia Commons",
+    "page": "https://en.wikipedia.org/wiki/John_Maynard_Keynes",
+    "slug": "john-maynard-keynes"
+  },
+  "Elinor Ostrom": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/6/65/Nobel_Prize_2009-Press_Conference_KVA-30.jpg",
+    "title": "Elinor Ostrom",
+    "credit": "Wikimedia Commons",
+    "page": "https://en.wikipedia.org/wiki/Elinor_Ostrom",
+    "slug": "elinor-ostrom"
+  },
+  "Alfred Marshall": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/0/09/Alfred_Marshall_1891.jpg",
+    "title": "Alfred Marshall",
+    "credit": "Wikimedia Commons",
+    "page": "https://en.wikipedia.org/wiki/Alfred_Marshall",
+    "slug": "alfred-marshall"
+  },
+  "George Orwell": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/7/7e/George_Orwell_press_photo.jpg",
+    "title": "George Orwell",
+    "credit": "Wikimedia Commons",
+    "page": "https://en.wikipedia.org/wiki/George_Orwell",
+    "slug": "george-orwell"
+  },
+  "Wilfred Owen": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Wilfred_Owen_%C3%A0_l%27Arrouaise.jpg",
+    "title": "Wilfred Owen",
+    "credit": "Wikimedia Commons",
+    "page": "https://en.wikipedia.org/wiki/Wilfred_Owen",
+    "slug": "wilfred-owen"
+  },
+  "Clarice Lispector": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/7/75/Clarice_Lispector_%28cropped%29.jpg",
+    "title": "Clarice Lispector",
+    "credit": "Wikimedia Commons",
+    "page": "https://en.wikipedia.org/wiki/Clarice_Lispector",
+    "slug": "clarice-lispector"
+  },
+  "Carlos Drummond de Andrade": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/0/0c/Carlos_Drummond_de_Andrade%2C_1970.jpg",
+    "title": "Carlos Drummond de Andrade",
+    "credit": "Wikimedia Commons",
+    "page": "https://en.wikipedia.org/wiki/Carlos_Drummond_de_Andrade",
+    "slug": "carlos-drummond-de-andrade"
+  },
+  "Guimarães Rosa": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/9/99/Guimar%C3%A3es_Rosa%2C_anos_1960.jpg",
+    "title": "João Guimarães Rosa",
+    "credit": "Wikimedia Commons",
+    "page": "https://en.wikipedia.org/wiki/Jo%C3%A3o_Guimar%C3%A3es_Rosa",
+    "slug": "guimaraes-rosa"
   }
 }
