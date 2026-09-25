@@ -58,7 +58,7 @@ function pickDestination(fromIATA, minutes, toward, visited) {
 
 // Holding pattern: the nearest unvisited airport inside the block, any direction, used only when no forward leg exists (ocean ahead).
 function holdingLeg(fromIATA, minutes, visited) {
-  const from = BY[fromIATA]; if (!from) return null; const v = new Set(visited || []); const capKm = kmFor(Math.max(minutes, MIN_FLIGHT) * SLACK);
+  const from = BY[fromIATA]; if (!from) return null; const v = new Set(visited || []); const capKm = Math.max(kmFor(Math.max(minutes, MIN_FLIGHT) * SLACK), kmFor(45)); // a hold may run to 45 min so a short block still has a legal flight
   let best = null; for (const revisit of [false, true]) { for (const a of AIRPORTS) { if (a.i === fromIATA || (!revisit && v.has(a.i))) continue; const d = km(from, a); if (d > capKm || minutesFor(d) < MIN_FLIGHT) continue; if (!best || d < best.km) best = { ...a, km: Math.round(d), minutes: minutesFor(d), hold: true }; } if (best) break; }
   return best;
 }
