@@ -1175,27 +1175,38 @@
     },
     {
       "date": "2026-09-24",
-      "started": false,
-      "flown": {},
-      "sprintsDone": 0,
+      "started": true,
+      "flown": {
+        "S1": "HNA→CTS 44m",
+        "S2": "CTS→UUS 50m",
+        "EVE": "UUS→RIS 32m"
+      },
+      "sprintsDone": 3,
       "sprintsPlanned": 3,
-      "focusMinutes": 0,
-      "flights": [],
-      "currentAirport": "HNA",
+      "focusMinutes": 126,
+      "flights": [
+        "16:54 HNA→CTS 44m",
+        "17:59 CTS→UUS 50m",
+        "20:56 UUS→RIS 32m"
+      ],
+      "currentAirport": "RIS",
       "source": "focusflight"
     }
   ],
-  "currentAirport": "HNA",
+  "currentAirport": "RIS",
   "tour": {
-    "at": "HNA",
+    "at": "RIS",
     "visited": [
       "GRU",
       "GMP",
       "HND",
-      "HNA"
+      "HNA",
+      "CTS",
+      "UUS",
+      "RIS"
     ],
-    "kmTotal": 1627,
-    "minutesTotal": 153,
+    "kmTotal": 2684,
+    "minutesTotal": 279,
     "legs": [
       {
         "date": "2026-09-22",
@@ -1210,6 +1221,27 @@
         "to": "HNA",
         "km": 447,
         "min": 49
+      },
+      {
+        "date": "2026-09-24",
+        "from": "HNA",
+        "to": "CTS",
+        "km": 375,
+        "min": 44
+      },
+      {
+        "date": "2026-09-24",
+        "from": "CTS",
+        "to": "UUS",
+        "km": 464,
+        "min": 50
+      },
+      {
+        "date": "2026-09-24",
+        "from": "UUS",
+        "to": "RIS",
+        "km": 218,
+        "min": 32
       }
     ]
   },
