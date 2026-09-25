@@ -1,6 +1,8 @@
 name: publish
 on:
-  push: { branches: [main] }
+  push:
+    branches: [main]
+    paths-ignore: ['.trigger/**']
   schedule: [{ cron: '30 8 * * *' }]   # 05:30 America/Sao_Paulo
   workflow_dispatch:
 permissions: { contents: read, pages: write, id-token: write }

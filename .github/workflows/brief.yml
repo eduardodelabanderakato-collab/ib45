@@ -1,6 +1,14 @@
 name: morning-briefing
 on:
-  schedule: [{ cron: '45 9 * * *' }]   # 06:45 America/Sao_Paulo
+  # GitHub's cron has been firing ~5 h late on this repo. Several attempts + the dedupe step below = first one that fires sends, the rest skip.
+  schedule:
+    - { cron: '41 9 * * *' }   # 06:41 America/Sao_Paulo
+    - { cron: '53 9 * * *' }   # 06:53
+    - { cron: '7 10 * * *' }   # 07:07
+    - { cron: '23 10 * * *' }  # 07:23
+  push:
+    branches: [main]
+    paths: ['.trigger/brief']  # touched by an external scheduler (cloud routine) to send on time
   workflow_dispatch:
     inputs:
       force: { description: 'send even if an edition already went out today', type: boolean, default: false }
