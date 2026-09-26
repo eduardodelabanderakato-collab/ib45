@@ -1191,6 +1191,17 @@
       ],
       "currentAirport": "RIS",
       "source": "focusflight"
+    },
+    {
+      "date": "2026-09-26",
+      "started": false,
+      "flown": {},
+      "sprintsDone": 0,
+      "sprintsPlanned": 2,
+      "focusMinutes": 0,
+      "flights": [],
+      "currentAirport": "RIS",
+      "source": "focusflight"
     }
   ],
   "currentAirport": "RIS",
