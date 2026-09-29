@@ -1205,19 +1205,23 @@
     },
     {
       "date": "2026-09-28",
-      "started": false,
-      "flown": {},
-      "sprintsDone": 0,
+      "started": true,
+      "flown": {
+        "S2": "RIS→GMP 126m"
+      },
+      "sprintsDone": 1,
       "sprintsPlanned": 3,
-      "focusMinutes": 0,
-      "flights": [],
-      "currentAirport": "RIS",
+      "focusMinutes": 126,
+      "flights": [
+        "17:57 RIS→GMP 126m"
+      ],
+      "currentAirport": "GMP",
       "source": "focusflight"
     }
   ],
-  "currentAirport": "RIS",
+  "currentAirport": "GMP",
   "tour": {
-    "at": "RIS",
+    "at": "GMP",
     "visited": [
       "GRU",
       "GMP",
@@ -1225,10 +1229,11 @@
       "HNA",
       "CTS",
       "UUS",
-      "RIS"
+      "RIS",
+      "GMP"
     ],
-    "kmTotal": 2684,
-    "minutesTotal": 279,
+    "kmTotal": 4154,
+    "minutesTotal": 405,
     "legs": [
       {
         "date": "2026-09-22",
@@ -1264,6 +1269,13 @@
         "to": "RIS",
         "km": 218,
         "min": 32
+      },
+      {
+        "date": "2026-09-28",
+        "from": "RIS",
+        "to": "GMP",
+        "km": 1470,
+        "min": 126
       }
     ]
   },
