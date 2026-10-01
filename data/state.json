@@ -1217,6 +1217,17 @@
       ],
       "currentAirport": "GMP",
       "source": "focusflight"
+    },
+    {
+      "date": "2026-09-29",
+      "started": false,
+      "flown": {},
+      "sprintsDone": 0,
+      "sprintsPlanned": 4,
+      "focusMinutes": 0,
+      "flights": [],
+      "currentAirport": "GMP",
+      "source": "focusflight"
     }
   ],
   "currentAirport": "GMP",
